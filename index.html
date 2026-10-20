@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kubo Studio — Des logiciels simples pour la vraie vie</title>
+<meta name="description" content="Kubo Studio crée des applications simples : MonKiosk pour gérer votre commerce, Pécule pour vos finances personnelles.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 29 9.5v13L16 30 3 22.5v-13z' fill='%23E2603F'/%3E%3Cpath d='M16 16 29 9.5M16 16 3 9.5M16 16v14' stroke='%23fff' stroke-width='2' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF6F1;
+    --surface: #FFFFFF;
+    --ink: #1D1B2E;
+    --muted: #615E72;
+    --line: #E9E2D8;
+    --brick: #E2603F;
+    --brick-dark: #C24A2C;
+    --brick-soft: #FBE6DE;
+    --teal: #2F7D72;
+    --teal-soft: #DDEFEB;
+    --radius: 20px;
+    --display: "Bricolage Grotesque", system-ui, sans-serif;
+    --body: "Inter", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; }
+  a { color: inherit; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+  /* nav */
+  header { position: sticky; top: 0; z-index: 10; background: rgba(250,246,241,.88); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 800; font-size: 22px; text-decoration: none; letter-spacing: -.02em; }
+  .logo svg { width: 30px; height: 30px; }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-links a { text-decoration: none; font-weight: 500; color: var(--muted); }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links .btn { color: #fff; }
+  @media (max-width: 640px) { .nav-links a:not(.btn) { display: none; } }
+
+  /* buttons */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 22px; border-radius: 999px; font: 600 16px var(--body); text-decoration: none; border: 0; cursor: pointer; transition: transform .15s, background .15s; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--brick); color: #fff; }
+  .btn-primary:hover { background: var(--brick-dark); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+  .btn-small { padding: 9px 18px; font-size: 15px; }
+  .btn[disabled] { opacity: .6; cursor: default; transform: none; }
+
+  /* hero */
+  .hero { padding: 96px 0 80px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 48px; align-items: center; }
+  .eyebrow { display: inline-block; font-weight: 600; font-size: 14px; color: var(--brick-dark); background: var(--brick-soft); padding: 6px 14px; border-radius: 999px; margin-bottom: 22px; }
+  h1, h2, h3 { font-family: var(--display); letter-spacing: -.025em; line-height: 1.08; margin: 0; }
+  h1 { font-size: clamp(42px, 6.4vw, 72px); font-weight: 800; }
+  h1 em { font-style: normal; color: var(--brick); }
+  .lead { font-size: 20px; color: var(--muted); max-width: 540px; margin: 24px 0 36px; }
+  .actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .cubes { position: relative; aspect-ratio: 1; max-width: 380px; justify-self: center; width: 100%; }
+  .cubes svg { width: 100%; height: 100%; }
+  @media (max-width: 860px) { .hero { grid-template-columns: 1fr; padding: 64px 0 56px; } .cubes { max-width: 240px; order: -1; } }
+
+  /* sections */
+  section { padding: 88px 0; }
+  .section-head { max-width: 640px; margin-bottom: 48px; }
+  .section-head h2 { font-size: clamp(32px, 4.4vw, 48px); font-weight: 800; }
+  .section-head p { color: var(--muted); font-size: 19px; margin: 16px 0 0; }
+
+  /* apps */
+  .apps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .app { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 36px; display: flex; flex-direction: column; }
+  .app-icon { width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; font-family: var(--display); font-weight: 800; font-size: 26px; color: #fff; margin-bottom: 22px; }
+  .app-tag { font-size: 14px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
+  .app h3 { font-size: 32px; font-weight: 800; margin-bottom: 14px; }
+  .app p { color: var(--muted); margin: 0 0 22px; }
+  .app ul { list-style: none; padding: 0; margin: 0 0 30px; display: grid; gap: 10px; }
+  .app li { display: flex; gap: 10px; align-items: flex-start; }
+  .app li::before { content: ""; flex: none; width: 20px; height: 20px; margin-top: 3px; border-radius: 6px; background: var(--check-bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3 3 7-7' stroke='%231D1B2E' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat; }
+  .app .actions { margin-top: auto; }
+  .app.kiosk { --check-bg: var(--brick-soft); } .app.kiosk .app-icon { background: var(--brick); }
+  .app.pecule { --check-bg: var(--teal-soft); } .app.pecule .app-icon { background: var(--teal); }
+  .soon { grid-column: 1 / -1; border: 1.5px dashed #CFC6B8; border-radius: var(--radius); padding: 28px 36px; display: flex; align-items: center; gap: 20px; color: var(--muted); }
+  .soon strong { color: var(--ink); font-family: var(--display); font-size: 20px; display: block; }
+  @media (max-width: 800px) { .apps { grid-template-columns: 1fr; } .app { padding: 28px; } .soon { padding: 24px; } }
+
+  /* pricing */
+  .pricing-band { background: var(--ink); color: #fff; border-radius: 32px; padding: 80px 48px; }
+  .pricing-band .section-head p { color: #B9B6C9; }
+  .plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+  .plan { background: #2A2840; border: 1px solid #3A3854; border-radius: var(--radius); padding: 30px; display: flex; flex-direction: column; min-width: 0; }
+  .plan.featured { background: #fff; color: var(--ink); border-color: #fff; }
+  .plan-name { font-family: var(--display); font-weight: 700; font-size: 24px; overflow-wrap: anywhere; }
+  .plan-desc { color: #B9B6C9; font-size: 15px; margin: 8px 0 22px; }
+  .plan.featured .plan-desc { color: var(--muted); }
+  .price { font-family: var(--display); font-weight: 800; font-size: 46px; line-height: 1; }
+  .cadence { font-size: 16px; color: #B9B6C9; font-family: var(--body); font-weight: 500; margin-left: 4px; }
+  .plan.featured .cadence { color: var(--muted); }
+  .fee { font-size: 14px; color: #B9B6C9; margin-top: 6px; }
+  .trial { display: inline-block; margin-top: 14px; font-size: 13px; font-weight: 600; background: var(--brick-soft); color: var(--brick-dark); padding: 4px 12px; border-radius: 999px; }
+  .plan ul { list-style: none; padding: 0; margin: 24px 0 28px; display: grid; gap: 10px; font-size: 15px; }
+  .plan li { padding-left: 24px; position: relative; }
+  .plan li::before { content: "✓"; position: absolute; left: 0; color: var(--brick); font-weight: 700; }
+  .plan .cta { margin-top: auto; }
+  .plan .cta .btn { width: 100%; }
+  .plan .err { color: #FFB4A2; font-size: 14px; margin-top: 10px; }
+  .plan.featured .err { color: var(--brick-dark); }
+  .skeleton { min-height: 360px; background: linear-gradient(90deg, #2A2840 25%, #34324D 50%, #2A2840 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+  @keyframes shimmer { to { background-position: -200% 0; } }
+  .note { color: #B9B6C9; font-size: 15px; margin-top: 28px; }
+  @media (max-width: 640px) { .pricing-band { padding: 56px 20px; border-radius: 24px; } section { padding: 64px 0; } }
+
+  /* about + footer */
+  .about { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .about p { color: var(--muted); font-size: 19px; margin: 0 0 16px; }
+  .langs { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+  .langs span { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 16px; font-weight: 500; font-size: 15px; }
+  @media (max-width: 800px) { .about { grid-template-columns: 1fr; gap: 24px; } }
+  footer { border-top: 1px solid var(--line); padding: 36px 0; color: var(--muted); font-size: 15px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo" aria-label="Kubo Studio, accueil">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 29 9.5v13L16 30 3 22.5v-13z" fill="#E2603F"/><path d="M16 16 29 9.5M16 16 3 9.5M16 16v14" stroke="#fff" stroke-width="2" fill="none"/></svg>
+      Kubo Studio
+    </a>
+    <nav class="nav-links">
+      <a href="#apps">Nos apps</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#studio">Le studio</a>
+      <a href="#tarifs" class="btn btn-primary btn-small">Commencer</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div>
+      <span class="eyebrow">Fait à Toulouse</span>
+      <h1>Des logiciels <em>simples</em>, pour la vraie vie.</h1>
+      <p class="lead">Kubo Studio crée des applications claires et faciles à prendre en main — pour gérer votre commerce ou vos finances, sans prise de tête.</p>
+      <div class="actions">
+        <a href="#apps" class="btn btn-primary">Découvrir les apps</a>
+        <a href="#tarifs" class="btn btn-ghost">Voir les tarifs</a>
+      </div>
+    </div>
+    <div class="cubes" aria-hidden="true">
+      <svg viewBox="0 0 300 300">
+        <g transform="translate(150 70)">
+          <path d="M0 0 60 34.6v69.3L0 138.6-60 103.9V34.6z" fill="#E2603F"/>
+          <path d="M0 0 60 34.6 0 69.3-60 34.6z" fill="#F08A6E"/>
+          <path d="M0 69.3 60 34.6v69.3L0 138.6z" fill="#C24A2C"/>
+        </g>
+        <g transform="translate(78 150)">
+          <path d="M0 0 48 27.7v55.4L0 110.9-48 83.1V27.7z" fill="#2F7D72"/>
+          <path d="M0 0 48 27.7 0 55.4-48 27.7z" fill="#4FA396"/>
+          <path d="M0 55.4 48 27.7v55.4L0 110.9z" fill="#23615A"/>
+        </g>
+        <g transform="translate(222 168)">
+          <path d="M0 0 36 20.8v41.6L0 83.1-36 62.4V20.8z" fill="#1D1B2E"/>
+          <path d="M0 0 36 20.8 0 41.6-36 20.8z" fill="#3A3854"/>
+          <path d="M0 41.6 36 20.8v41.6L0 83.1z" fill="#121120"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <section id="apps">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Nos applications</h2>
+        <p>Chaque app Kubo est une brique : elle fait une chose, et elle la fait bien.</p>
+      </div>
+      <div class="apps">
+        <article class="app kiosk">
+          <div class="app-icon">M</div>
+          <div class="app-tag">Pour les commerçants</div>
+          <h3>MonKiosk</h3>
+          <p>L'outil de gestion tout-en-un pour les petits commerces. Plannings de l'équipe, organisation de la boutique : tout est au même endroit.</p>
+          <ul>
+            <li>Plannings d'équipe faits en quelques minutes</li>
+            <li>Sur ordinateur et sur téléphone</li>
+            <li>Un compte par commerce, synchronisé partout</li>
+          </ul>
+          <div class="actions">
+            <a href="#tarifs" class="btn btn-primary">Essayer MonKiosk</a>
+          </div>
+        </article>
+        <article class="app pecule">
+          <div class="app-icon">P</div>
+          <div class="app-tag">Pour vous</div>
+          <h3>Pécule</h3>
+          <p>L'application de finances personnelles pour Windows. Suivez votre argent simplement, sans tableur compliqué.</p>
+          <ul>
+            <li>Gratuite à télécharger</li>
+            <li>Installée sur votre ordinateur</li>
+            <li>Une version Pro pour aller plus loin</li>
+          </ul>
+          <div class="actions">
+            <a href="https://github.com/zyg-off/Pecule/releases" class="btn btn-primary" target="_blank" rel="noopener">Télécharger gratuitement</a>
+            <a href="#tarifs" class="btn btn-ghost">Pécule Pro</a>
+          </div>
+        </article>
+        <div class="soon">
+          <svg width="36" height="36" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 29 9.5v13L16 30 3 22.5v-13z" fill="none" stroke="#CFC6B8" stroke-width="2" stroke-dasharray="4 3"/></svg>
+          <div><strong>D'autres apps arrivent</strong>Le studio grandit : de nouvelles briques rejoindront bientôt la famille Kubo.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tarifs">
+    <div class="wrap">
+      <div class="pricing-band">
+        <div class="section-head">
+          <h2>Des tarifs clairs</h2>
+          <p>Sans engagement : vous pouvez annuler votre abonnement quand vous voulez.</p>
+        </div>
+        <div class="plans" id="plans"></div>
+        <p class="note">Pécule reste gratuit à télécharger. Le paiement est sécurisé par Polar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="studio">
+    <div class="wrap about">
+      <div class="section-head" style="margin:0">
+        <h2>Un petit studio, des outils utiles</h2>
+      </div>
+      <div>
+        <p>Kubo Studio est né à Toulouse d'une idée simple : les logiciels du quotidien devraient être faciles à utiliser, même quand on n'est pas un expert.</p>
+        <p>Chaque application est pensée à partir de vrais besoins — ceux des commerçants, des équipes et de chacun d'entre nous.</p>
+        <div class="langs"><span>Français</span><span>English</span><span>Português</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Kubo Studio · Toulouse</span>
+    <span>MonKiosk · Pécule</span>
+  </div>
+</footer>
+
+<script>
+  // ---- Liens de paiement Polar : colle ici les liens "Checkout Link" de chaque produit ----
+  const PLANS = [
+    {
+      id: "monkiosk",
+      name: "MonKiosk",
+      description: "L'outil de gestion tout-en-un pour les petits commerces, sur PC et téléphone.",
+      price: "14,90 €",
+      billing: "/ mois",
+      trialDays: 14,
+      perks: ["Plannings d'équipe simplifiés", "Gestion de la boutique au même endroit", "Sur ordinateur et téléphone", "Données synchronisées entre appareils"],
+      checkoutUrl: ""
+    },
+    {
+      id: "pecule-pro",
+      name: "Pécule Pro",
+      description: "Toutes les fonctions avancées de Pécule, l'app de finances personnelles.",
+      price: "2,99 €",
+      billing: "/ mois",
+      trialDays: null,
+      perks: ["Fonctions avancées de Pécule", "Nouvelles fonctions Pro en priorité", "Soutien direct au développement"],
+      checkoutUrl: ""
+    }
+  ];
+
+  const esc = (s) => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const el = document.getElementById("plans");
+  el.innerHTML = PLANS.map((p, i) => {
+    const label = p.trialDays ? "Commencer l'essai gratuit" : "S'abonner";
+    const cta = p.checkoutUrl
+      ? `<a class="btn btn-primary" href="${esc(p.checkoutUrl)}">${label}</a>`
+      : `<button class="btn btn-primary" disabled>Bientôt disponible</button>`;
+    return `<article class="plan${i === 0 ? " featured" : ""}">
+      <div class="plan-name">${esc(p.name)}</div>
+      <div class="plan-desc">${esc(p.description)}</div>
+      <div><span class="price">${esc(p.price)}</span><span class="cadence">${esc(p.billing)}</span></div>
+      ${p.trialDays ? `<div><span class="trial">${p.trialDays} jours d'essai gratuit</span></div>` : ""}
+      <ul>${p.perks.map(k => `<li>${esc(k)}</li>`).join("")}</ul>
+      <div class="cta">${cta}</div>
+    </article>`;
+  }).join("");
+</script>
+</body>
+</html>

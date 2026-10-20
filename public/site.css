@@ -154,8 +154,9 @@ section { padding: 96px 0; }
 .browser-bar i:nth-child(1) { background: #F0846A; } .browser-bar i:nth-child(2) { background: #F2C25C; } .browser-bar i:nth-child(3) { background: #7CC9A0; }
 .browser-bar .url { margin-left: 10px; flex: 1; max-width: 340px; background: #fff; border-radius: 8px; padding: 3px 12px; font-size: 13px; color: var(--muted); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .browser img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top left; }
-.phone { width: 230px; border-radius: 38px; padding: 9px; background: var(--ink); box-shadow: 0 30px 70px rgba(29,27,46,.28); }
-.phone img { border-radius: 30px; width: 100%; aspect-ratio: 390 / 844; object-fit: cover; object-position: top; }
+.phone { width: 230px; flex: none; align-self: flex-start; border-radius: 38px; padding: 9px; background: var(--ink); box-shadow: 0 30px 70px rgba(29,27,46,.28); }
+.phone .screen { display: block; border-radius: 30px; overflow: hidden; background: #F2F4F7; padding: 18px 6px 0; }
+.phone img { width: 100%; height: auto; aspect-ratio: 390 / 844; object-fit: cover; object-position: top; }
 .float { animation: floaty 6s ease-in-out infinite; }
 @keyframes floaty { 50% { transform: translateY(-10px); } }
 .zoomable { cursor: zoom-in; }
@@ -247,7 +248,7 @@ section { padding: 96px 0; }
 .split ul.checks li strong { color: var(--ink); }
 .split ul.checks li::before { content: ""; position: absolute; left: 0; top: 3px; width: 20px; height: 20px; border-radius: 50%; background: var(--brick) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.2 2.2 4.8-4.8' stroke='%23fff' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat; }
 .pecule-theme .split ul.checks li::before { background-color: var(--mint-dark); }
-.phones { display: flex; justify-content: center; gap: 22px; }
+.phones { display: flex; justify-content: center; align-items: flex-start; gap: 22px; }
 .phones .phone:nth-child(2) { margin-top: 60px; }
 @media (max-width: 900px) { .split { grid-template-columns: 1fr; gap: 36px; } .split.reverse > :first-child { order: 0; } .phones .phone { width: 46%; } .phones .phone:nth-child(2) { margin-top: 36px; } }
 

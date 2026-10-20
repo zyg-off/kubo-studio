@@ -17,219 +17,388 @@
     --muted: #615E72;
     --line: #E9E2D8;
     --brick: #E2603F;
-    --brick-dark: #C24A2C;
+    --brick-light: #EB9079;
+    --brick-dark: #B94F34;
     --brick-soft: #FBE6DE;
     --teal: #2F7D72;
     --teal-soft: #DDEFEB;
     --radius: 20px;
     --display: "Bricolage Grotesque", system-ui, sans-serif;
     --body: "Inter", system-ui, sans-serif;
+    --ease: cubic-bezier(.2, .8, .2, 1);
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; overflow-x: hidden; }
   a { color: inherit; }
   .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+  :focus-visible { outline: 3px solid var(--brick); outline-offset: 3px; border-radius: 8px; }
 
-  /* nav */
-  header { position: sticky; top: 0; z-index: 10; background: rgba(250,246,241,.88); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  /* ---------- header ---------- */
+  header { position: sticky; top: 0; z-index: 20; background: rgba(250,246,241,.85); backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: border-color .3s, box-shadow .3s; }
+  header.scrolled { border-color: var(--line); box-shadow: 0 6px 24px rgba(29,27,46,.06); }
   .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
   .logo { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 800; font-size: 22px; text-decoration: none; letter-spacing: -.02em; }
-  .logo svg { width: 30px; height: 30px; }
-  .nav-links { display: flex; gap: 28px; align-items: center; }
-  .nav-links a { text-decoration: none; font-weight: 500; color: var(--muted); }
-  .nav-links a:hover { color: var(--ink); }
-  .nav-links .btn { color: #fff; }
-  @media (max-width: 640px) { .nav-links a:not(.btn) { display: none; } }
+  .logo svg { width: 32px; height: 32px; transition: transform .6s var(--ease); }
+  .logo:hover svg { transform: rotate(-12deg) scale(1.08); }
+  .nav-links { display: flex; gap: 6px; align-items: center; }
+  .nav-links a:not(.btn) { text-decoration: none; font-weight: 500; color: var(--muted); padding: 8px 14px; border-radius: 999px; transition: background .2s, color .2s; }
+  .nav-links a:not(.btn):hover, .nav-links a.active { color: var(--ink); background: rgba(29,27,46,.06); }
+  .menu-btn { display: none; width: 44px; height: 44px; border: 0; background: transparent; border-radius: 12px; cursor: pointer; color: var(--ink); }
+  .menu-btn:hover { background: rgba(29,27,46,.06); }
+  @media (max-width: 760px) {
+    .menu-btn { display: grid; place-items: center; }
+    .nav-links { position: absolute; top: 68px; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 4px; padding: 12px 20px 20px; background: var(--bg); border-bottom: 1px solid var(--line); box-shadow: 0 16px 32px rgba(29,27,46,.08); transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s var(--ease); }
+    .nav-links.open { opacity: 1; transform: none; pointer-events: auto; }
+    .nav-links a:not(.btn) { padding: 12px 14px; }
+    .nav-links .btn { margin-top: 8px; }
+  }
 
-  /* buttons */
-  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 22px; border-radius: 999px; font: 600 16px var(--body); text-decoration: none; border: 0; cursor: pointer; transition: transform .15s, background .15s; }
-  .btn:hover { transform: translateY(-1px); }
-  .btn-primary { background: var(--brick); color: #fff; }
-  .btn-primary:hover { background: var(--brick-dark); }
-  .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
-  .btn-small { padding: 9px 18px; font-size: 15px; }
-  .btn[disabled] { opacity: .6; cursor: default; transform: none; }
+  /* ---------- buttons ---------- */
+  .btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 12px 24px; border-radius: 999px; font: 600 16px var(--body); text-decoration: none; border: 0; cursor: pointer; overflow: hidden; isolation: isolate; transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .25s, color .25s; }
+  .btn .arrow { width: 18px; height: 18px; transition: transform .3s var(--ease); flex: none; }
+  .btn:hover .arrow { transform: translateX(4px); }
+  .btn:active { transform: scale(.97); }
+  .btn-primary { background: var(--brick); color: #fff; box-shadow: 0 6px 18px rgba(226,96,63,.28); }
+  .btn-primary:hover { background: var(--brick-dark); box-shadow: 0 10px 28px rgba(226,96,63,.38); transform: translateY(-2px); }
+  .btn-dark { background: var(--ink); color: #fff; }
+  .btn-dark:hover { background: #33304d; transform: translateY(-2px); }
+  .btn-ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
+  .btn-ghost:hover { background: var(--ink); color: #fff; transform: translateY(-2px); }
+  .btn-light { background: #fff; color: var(--ink); }
+  .btn-light:hover { background: var(--brick-soft); transform: translateY(-2px); }
+  .btn-small { min-height: 42px; padding: 9px 18px; font-size: 15px; }
+  .btn-block { width: 100%; }
+  .btn .shine { position: absolute; inset: 0; z-index: -1; background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%); transform: translateX(-120%); transition: transform .7s var(--ease); }
+  .btn:hover .shine { transform: translateX(120%); }
 
-  /* hero */
-  .hero { padding: 96px 0 80px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 48px; align-items: center; }
-  .eyebrow { display: inline-block; font-weight: 600; font-size: 14px; color: var(--brick-dark); background: var(--brick-soft); padding: 6px 14px; border-radius: 999px; margin-bottom: 22px; }
-  h1, h2, h3 { font-family: var(--display); letter-spacing: -.025em; line-height: 1.08; margin: 0; }
-  h1 { font-size: clamp(42px, 6.4vw, 72px); font-weight: 800; }
-  h1 em { font-style: normal; color: var(--brick); }
+  /* ---------- hero ---------- */
+  .hero { padding-top: 88px; padding-bottom: 72px; display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; color: var(--brick-dark); background: var(--brick-soft); padding: 6px 14px; border-radius: 999px; margin-bottom: 22px; }
+  .eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brick); animation: pulse 2s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(226,96,63,.5); } 70% { box-shadow: 0 0 0 8px rgba(226,96,63,0); } 100% { box-shadow: 0 0 0 0 rgba(226,96,63,0); } }
+  h1, h2, h3 { font-family: var(--display); letter-spacing: -.025em; line-height: 1.06; margin: 0; }
+  h1 { font-size: clamp(42px, 6.6vw, 76px); font-weight: 800; }
+  .rotator { display: inline-grid; color: var(--brick); }
+  .rotator span { grid-area: 1 / 1; opacity: 0; transform: translateY(.4em); transition: opacity .5s, transform .5s var(--ease); }
+  .rotator span.on { opacity: 1; transform: none; }
   .lead { font-size: 20px; color: var(--muted); max-width: 540px; margin: 24px 0 36px; }
   .actions { display: flex; gap: 14px; flex-wrap: wrap; }
-  .cubes { position: relative; aspect-ratio: 1; max-width: 380px; justify-self: center; width: 100%; }
-  .cubes svg { width: 100%; height: 100%; }
-  @media (max-width: 860px) { .hero { grid-template-columns: 1fr; padding: 64px 0 56px; } .cubes { max-width: 240px; order: -1; } }
 
-  /* sections */
+  /* 3D cube */
+  .stage { perspective: 900px; display: grid; place-items: center; min-height: 340px; }
+  .cube { position: relative; width: 170px; height: 170px; transform-style: preserve-3d; transform: rotateX(-28deg) rotateY(-42deg); transition: transform .15s linear; cursor: grab; }
+  .cube.idle { animation: spin 14s linear infinite; }
+  @keyframes spin { from { transform: rotateX(-28deg) rotateY(0deg); } to { transform: rotateX(-28deg) rotateY(360deg); } }
+  .face { position: absolute; inset: 0; border-radius: 14px; display: grid; place-items: center; font-family: var(--display); font-weight: 800; font-size: 22px; color: rgba(255,255,255,.95); backface-visibility: hidden; text-align: center; padding: 8px; }
+  .f-front { background: var(--brick); transform: translateZ(85px); }
+  .f-back { background: var(--teal); transform: rotateY(180deg) translateZ(85px); }
+  .f-right { background: var(--brick-dark); transform: rotateY(90deg) translateZ(85px); }
+  .f-left { background: #23615A; transform: rotateY(-90deg) translateZ(85px); }
+  .f-top { background: var(--brick-light); transform: rotateX(90deg) translateZ(85px); }
+  .f-bottom { background: var(--ink); transform: rotateX(-90deg) translateZ(85px); }
+  .shadow { width: 200px; height: 30px; margin-top: 60px; border-radius: 50%; background: radial-gradient(rgba(29,27,46,.22), transparent 70%); }
+  .stage-hint { font-size: 13px; color: var(--muted); margin-top: 6px; }
+  @media (max-width: 860px) { .hero { grid-template-columns: 1fr; padding-top: 40px; padding-bottom: 40px; } .stage { order: -1; min-height: 260px; } .cube { width: 130px; height: 130px; } .f-front { transform: translateZ(65px); } .f-back { transform: rotateY(180deg) translateZ(65px); } .f-right { transform: rotateY(90deg) translateZ(65px); } .f-left { transform: rotateY(-90deg) translateZ(65px); } .f-top { transform: rotateX(90deg) translateZ(65px); } .f-bottom { transform: rotateX(-90deg) translateZ(65px); } .shadow { margin-top: 44px; } .face { font-size: 17px; } }
+
+  /* ---------- sections ---------- */
   section { padding: 88px 0; }
-  .section-head { max-width: 640px; margin-bottom: 48px; }
+  .section-head { max-width: 640px; margin-bottom: 44px; }
   .section-head h2 { font-size: clamp(32px, 4.4vw, 48px); font-weight: 800; }
   .section-head p { color: var(--muted); font-size: 19px; margin: 16px 0 0; }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+  .reveal.in { opacity: 1; transform: none; }
 
-  /* apps */
-  .apps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-  .app { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 36px; display: flex; flex-direction: column; }
-  .app-icon { width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; font-family: var(--display); font-weight: 800; font-size: 26px; color: #fff; margin-bottom: 22px; }
+  /* ---------- app switcher ---------- */
+  .tabs { display: inline-flex; gap: 6px; padding: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; margin-bottom: 28px; }
+  .tab { min-height: 44px; padding: 10px 22px; border: 0; border-radius: 999px; background: transparent; font: 600 16px var(--body); color: var(--muted); cursor: pointer; transition: background .25s, color .25s; }
+  .tab:hover { color: var(--ink); }
+  .tab[aria-selected="true"] { background: var(--ink); color: #fff; }
+  .panel { display: none; grid-template-columns: 1fr 1fr; gap: 28px; align-items: stretch; }
+  .panel.active { display: grid; animation: fadeUp .5s var(--ease); }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .app-info { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 36px; display: flex; flex-direction: column; }
+  .app-icon { width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; font-family: var(--display); font-weight: 800; font-size: 26px; color: #fff; margin-bottom: 20px; }
   .app-tag { font-size: 14px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
-  .app h3 { font-size: 32px; font-weight: 800; margin-bottom: 14px; }
-  .app p { color: var(--muted); margin: 0 0 22px; }
-  .app ul { list-style: none; padding: 0; margin: 0 0 30px; display: grid; gap: 10px; }
-  .app li { display: flex; gap: 10px; align-items: flex-start; }
-  .app li::before { content: ""; flex: none; width: 20px; height: 20px; margin-top: 3px; border-radius: 6px; background: var(--check-bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3 3 7-7' stroke='%231D1B2E' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat; }
-  .app .actions { margin-top: auto; }
-  .app.kiosk { --check-bg: var(--brick-soft); } .app.kiosk .app-icon { background: var(--brick); }
-  .app.pecule { --check-bg: var(--teal-soft); } .app.pecule .app-icon { background: var(--teal); }
-  .soon { grid-column: 1 / -1; border: 1.5px dashed #CFC6B8; border-radius: var(--radius); padding: 28px 36px; display: flex; align-items: center; gap: 20px; color: var(--muted); }
-  .soon strong { color: var(--ink); font-family: var(--display); font-size: 20px; display: block; }
-  @media (max-width: 800px) { .apps { grid-template-columns: 1fr; } .app { padding: 28px; } .soon { padding: 24px; } }
+  .app-info h3 { font-size: 34px; font-weight: 800; margin-bottom: 12px; }
+  .app-info p { color: var(--muted); margin: 0 0 24px; }
+  .features { display: grid; gap: 10px; margin-bottom: 30px; }
+  .feature { display: flex; gap: 14px; align-items: flex-start; width: 100%; text-align: left; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); font: 500 16px var(--body); color: var(--ink); cursor: pointer; transition: border-color .2s, background .2s, transform .2s var(--ease); }
+  .feature:hover { transform: translateX(4px); }
+  .feature[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+  .feature .num { flex: none; width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; font: 700 14px var(--display); background: var(--accent-soft); color: var(--accent-dark); }
+  .feature[aria-pressed="true"] .num { background: var(--accent); color: #fff; }
+  .app-info .actions { margin-top: auto; }
+  .kiosk { --accent: var(--brick); --accent-soft: var(--brick-soft); --accent-dark: var(--brick-dark); }
+  .pecule { --accent: var(--teal); --accent-soft: var(--teal-soft); --accent-dark: #23615A; }
+  .kiosk .app-icon { background: var(--brick); } .pecule .app-icon { background: var(--teal); }
+  .pecule .btn-primary { background: var(--teal); box-shadow: 0 6px 18px rgba(47,125,114,.28); }
+  .pecule .btn-primary:hover { background: #23615A; box-shadow: 0 10px 28px rgba(47,125,114,.38); }
 
-  /* pricing */
+  .showcase { position: relative; border-radius: var(--radius); background: var(--accent-soft); overflow: hidden; display: grid; place-items: center; padding: 40px 28px; min-height: 420px; }
+  .showcase-card { width: 100%; max-width: 380px; background: var(--surface); border-radius: 18px; padding: 28px; box-shadow: 0 24px 60px rgba(29,27,46,.12); }
+  .showcase-card .big { font-family: var(--display); font-size: 64px; font-weight: 800; line-height: 1; color: var(--accent); margin-bottom: 14px; }
+  .showcase-card h4 { font-family: var(--display); font-size: 24px; margin: 0 0 8px; letter-spacing: -.02em; }
+  .showcase-card p { color: var(--muted); margin: 0; }
+  .showcase .blob { position: absolute; width: 260px; height: 260px; border-radius: 40px; background: var(--accent); opacity: .12; transform: rotate(18deg); right: -80px; bottom: -80px; transition: transform .8s var(--ease); }
+  .showcase:hover .blob { transform: rotate(60deg) scale(1.1); }
+  .swap { animation: fadeUp .45s var(--ease); }
+  .soon { margin-top: 28px; border: 1.5px dashed #CFC6B8; border-radius: var(--radius); padding: 24px 32px; display: flex; align-items: center; gap: 20px; color: var(--muted); }
+  .soon strong { color: var(--ink); font-family: var(--display); font-size: 20px; display: block; }
+  .soon svg { flex: none; animation: float 4s ease-in-out infinite; }
+  @keyframes float { 50% { transform: translateY(-6px) rotate(8deg); } }
+  @media (max-width: 860px) { .panel.active { grid-template-columns: 1fr; } .app-info { padding: 26px; } .showcase { min-height: 300px; } .tabs { display: flex; } .tab { flex: 1; } .soon { padding: 20px; } }
+
+  /* ---------- pricing ---------- */
   .pricing-band { background: var(--ink); color: #fff; border-radius: 32px; padding: 80px 48px; }
   .pricing-band .section-head p { color: #B9B6C9; }
   .plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-  .plan { background: #2A2840; border: 1px solid #3A3854; border-radius: var(--radius); padding: 30px; display: flex; flex-direction: column; min-width: 0; }
+  .plan { position: relative; background: #2A2840; border: 1px solid #3A3854; border-radius: var(--radius); padding: 32px; display: flex; flex-direction: column; min-width: 0; transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s; }
+  .plan:hover { transform: translateY(-6px); border-color: #55527A; box-shadow: 0 24px 50px rgba(0,0,0,.35); }
   .plan.featured { background: #fff; color: var(--ink); border-color: #fff; }
-  .plan-name { font-family: var(--display); font-weight: 700; font-size: 24px; overflow-wrap: anywhere; }
+  .badge { position: absolute; top: -13px; left: 28px; background: var(--brick); color: #fff; font-size: 13px; font-weight: 600; padding: 4px 12px; border-radius: 999px; }
+  .plan-name { font-family: var(--display); font-weight: 700; font-size: 26px; overflow-wrap: anywhere; }
   .plan-desc { color: #B9B6C9; font-size: 15px; margin: 8px 0 22px; }
   .plan.featured .plan-desc { color: var(--muted); }
-  .price { font-family: var(--display); font-weight: 800; font-size: 46px; line-height: 1; }
+  .price { font-family: var(--display); font-weight: 800; font-size: 50px; line-height: 1; }
   .cadence { font-size: 16px; color: #B9B6C9; font-family: var(--body); font-weight: 500; margin-left: 4px; }
   .plan.featured .cadence { color: var(--muted); }
-  .fee { font-size: 14px; color: #B9B6C9; margin-top: 6px; }
   .trial { display: inline-block; margin-top: 14px; font-size: 13px; font-weight: 600; background: var(--brick-soft); color: var(--brick-dark); padding: 4px 12px; border-radius: 999px; }
   .plan ul { list-style: none; padding: 0; margin: 24px 0 28px; display: grid; gap: 10px; font-size: 15px; }
-  .plan li { padding-left: 24px; position: relative; }
-  .plan li::before { content: "✓"; position: absolute; left: 0; color: var(--brick); font-weight: 700; }
+  .plan li { padding-left: 26px; position: relative; }
+  .plan li::before { content: ""; position: absolute; left: 0; top: 5px; width: 16px; height: 16px; border-radius: 50%; background: var(--brick) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.2 2.2 4.8-4.8' stroke='%23fff' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat; }
   .plan .cta { margin-top: auto; }
-  .plan .cta .btn { width: 100%; }
-  .plan .err { color: #FFB4A2; font-size: 14px; margin-top: 10px; }
-  .plan.featured .err { color: var(--brick-dark); }
-  .skeleton { min-height: 360px; background: linear-gradient(90deg, #2A2840 25%, #34324D 50%, #2A2840 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
-  @keyframes shimmer { to { background-position: -200% 0; } }
-  .note { color: #B9B6C9; font-size: 15px; margin-top: 28px; }
+  .free-card { background: transparent; border: 1.5px dashed #4A4766; }
+  .note { color: #B9B6C9; font-size: 15px; margin-top: 28px; display: flex; align-items: center; gap: 8px; }
   @media (max-width: 640px) { .pricing-band { padding: 56px 20px; border-radius: 24px; } section { padding: 64px 0; } }
 
-  /* about + footer */
+  /* ---------- FAQ ---------- */
+  .faq { display: grid; gap: 12px; max-width: 780px; }
+  .faq details { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; transition: border-color .2s, box-shadow .2s; }
+  .faq details[open] { border-color: var(--brick); box-shadow: 0 10px 30px rgba(29,27,46,.06); }
+  .faq summary { list-style: none; cursor: pointer; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-weight: 600; font-size: 17px; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary .plus { flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--bg); display: grid; place-items: center; transition: transform .3s var(--ease), background .3s; }
+  .faq details[open] .plus { transform: rotate(45deg); background: var(--brick-soft); }
+  .faq .answer { padding: 0 24px 22px; color: var(--muted); }
+
+  /* ---------- about + footer ---------- */
   .about { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
   .about p { color: var(--muted); font-size: 19px; margin: 0 0 16px; }
   .langs { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
-  .langs span { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 16px; font-weight: 500; font-size: 15px; }
+  .langs span { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 16px; font-weight: 500; font-size: 15px; transition: transform .2s var(--ease), border-color .2s; }
+  .langs span:hover { transform: translateY(-3px); border-color: var(--brick); }
   @media (max-width: 800px) { .about { grid-template-columns: 1fr; gap: 24px; } }
-  footer { border-top: 1px solid var(--line); padding: 36px 0; color: var(--muted); font-size: 15px; }
-  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .cta-band { text-align: center; padding: 72px 20px; background: var(--brick); color: #fff; border-radius: 32px; }
+  .cta-band h2 { font-size: clamp(30px, 4.4vw, 46px); font-weight: 800; }
+  .cta-band p { color: #FFE3DA; font-size: 19px; margin: 14px auto 30px; max-width: 520px; }
+  .cta-band .actions { justify-content: center; }
+  footer { border-top: 1px solid var(--line); padding: 36px 0; color: var(--muted); font-size: 15px; margin-top: 88px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; }
+  footer a { text-decoration: none; } footer a:hover { color: var(--ink); }
+  .to-top { position: fixed; right: 20px; bottom: 20px; width: 48px; height: 48px; border-radius: 50%; border: 0; background: var(--ink); color: #fff; cursor: pointer; display: grid; place-items: center; box-shadow: 0 10px 24px rgba(29,27,46,.25); opacity: 0; transform: translateY(12px); pointer-events: none; transition: opacity .3s, transform .3s var(--ease); z-index: 15; }
+  .to-top.show { opacity: 1; transform: none; pointer-events: auto; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+    html { scroll-behavior: auto; }
+  }
 </style>
 </head>
 <body>
 
-<header>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="arrow" viewBox="0 0 20 20"><path d="M4 10h11m-4.5-4.5L15 10l-4.5 4.5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="kubo" viewBox="0 0 100 100"><path d="M50 8 86 29 50 50 14 29z" fill="#EB9079"/><path d="M14 29 50 50v42L14 71z" fill="#E2603F"/><path d="M50 50 86 29v42L50 92z" fill="#B94F34"/></symbol>
+</svg>
+
+<header id="top-bar">
   <div class="wrap nav">
-    <a href="#" class="logo" aria-label="Kubo Studio, accueil">
-      <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 8 86 29 50 50 14 29z" fill="#EB9079"/><path d="M14 29 50 50v42L14 71z" fill="#E2603F"/><path d="M50 50 86 29v42L50 92z" fill="#B94F34"/></svg>
-      Kubo Studio
-    </a>
-    <nav class="nav-links">
+    <a href="#" class="logo" aria-label="Kubo Studio, accueil"><svg aria-hidden="true"><use href="#kubo"/></svg>Kubo Studio</a>
+    <button class="menu-btn" id="menu-btn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-links">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <nav class="nav-links" id="nav-links">
       <a href="#apps">Nos apps</a>
       <a href="#tarifs">Tarifs</a>
+      <a href="#faq">Questions</a>
       <a href="#studio">Le studio</a>
-      <a href="#tarifs" class="btn btn-primary btn-small">Commencer</a>
+      <a href="#tarifs" class="btn btn-dark btn-small">Commencer<svg class="arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
     </nav>
   </div>
 </header>
 
 <main>
   <div class="wrap hero">
-    <div>
-      <span class="eyebrow">Fait à Toulouse</span>
-      <h1>Des logiciels <em>simples</em>, pour la vraie vie.</h1>
-      <p class="lead">Kubo Studio crée des applications claires et faciles à prendre en main — pour gérer votre commerce ou vos finances, sans prise de tête.</p>
+    <div class="reveal">
+      <span class="eyebrow"><span class="dot"></span>Fait à Toulouse</span>
+      <h1>Des logiciels simples pour <span class="rotator" aria-live="polite"><span class="on">votre boutique.</span><span>vos finances.</span><span>la vraie vie.</span></span></h1>
+      <p class="lead">Kubo Studio crée des applications claires et faciles à prendre en main — sans jargon, sans prise de tête.</p>
       <div class="actions">
-        <a href="#apps" class="btn btn-primary">Découvrir les apps</a>
+        <a href="#apps" class="btn btn-primary"><span class="shine"></span>Découvrir les apps<svg class="arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
         <a href="#tarifs" class="btn btn-ghost">Voir les tarifs</a>
       </div>
     </div>
-    <div class="cubes" aria-hidden="true">
-      <svg viewBox="0 0 300 300">
-        <g transform="translate(150 70)">
-          <path d="M0 0 60 34.6v69.3L0 138.6-60 103.9V34.6z" fill="#E2603F"/>
-          <path d="M0 0 60 34.6 0 69.3-60 34.6z" fill="#F08A6E"/>
-          <path d="M0 69.3 60 34.6v69.3L0 138.6z" fill="#C24A2C"/>
-        </g>
-        <g transform="translate(78 150)">
-          <path d="M0 0 48 27.7v55.4L0 110.9-48 83.1V27.7z" fill="#2F7D72"/>
-          <path d="M0 0 48 27.7 0 55.4-48 27.7z" fill="#4FA396"/>
-          <path d="M0 55.4 48 27.7v55.4L0 110.9z" fill="#23615A"/>
-        </g>
-        <g transform="translate(222 168)">
-          <path d="M0 0 36 20.8v41.6L0 83.1-36 62.4V20.8z" fill="#1D1B2E"/>
-          <path d="M0 0 36 20.8 0 41.6-36 20.8z" fill="#3A3854"/>
-          <path d="M0 41.6 36 20.8v41.6L0 83.1z" fill="#121120"/>
-        </g>
-      </svg>
+    <div class="stage" aria-hidden="true">
+      <div class="cube idle" id="cube">
+        <div class="face f-front">Kubo</div>
+        <div class="face f-back">Pécule</div>
+        <div class="face f-right"></div>
+        <div class="face f-left">MonKiosk</div>
+        <div class="face f-top"></div>
+        <div class="face f-bottom"></div>
+      </div>
+      <div class="shadow"></div>
+      <div class="stage-hint">Faites tourner le cube</div>
     </div>
   </div>
 
   <section id="apps">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head reveal">
         <h2>Nos applications</h2>
         <p>Chaque app Kubo est une brique : elle fait une chose, et elle la fait bien.</p>
       </div>
-      <div class="apps">
-        <article class="app kiosk">
+
+      <div class="tabs reveal" role="tablist" aria-label="Choisir une application">
+        <button class="tab" role="tab" id="tab-kiosk" aria-controls="panel-kiosk" aria-selected="true">MonKiosk</button>
+        <button class="tab" role="tab" id="tab-pecule" aria-controls="panel-pecule" aria-selected="false" tabindex="-1">Pécule</button>
+      </div>
+
+      <div class="panel kiosk active reveal" role="tabpanel" id="panel-kiosk" aria-labelledby="tab-kiosk">
+        <div class="app-info">
           <div class="app-icon">M</div>
           <div class="app-tag">Pour les commerçants</div>
           <h3>MonKiosk</h3>
-          <p>L'outil de gestion tout-en-un pour les petits commerces. Plannings de l'équipe, organisation de la boutique : tout est au même endroit.</p>
-          <ul>
-            <li>Plannings d'équipe faits en quelques minutes</li>
-            <li>Sur ordinateur et sur téléphone</li>
-            <li>Un compte par commerce, synchronisé partout</li>
-          </ul>
-          <div class="actions">
-            <a href="#tarifs" class="btn btn-primary">Essayer MonKiosk</a>
+          <p>L'outil de gestion tout-en-un pour les petits commerces. Cliquez sur une fonction pour la découvrir.</p>
+          <div class="features" data-showcase="show-kiosk">
+            <button class="feature" aria-pressed="true" data-big="1" data-title="Plannings d'équipe" data-text="Organisez les horaires de votre équipe en quelques minutes, sans tableur ni casse-tête."><span class="num">1</span>Plannings d'équipe simplifiés</button>
+            <button class="feature" aria-pressed="false" data-big="2" data-title="Sur tous vos écrans" data-text="Utilisez MonKiosk sur l'ordinateur de la boutique comme sur votre téléphone."><span class="num">2</span>Sur ordinateur et téléphone</button>
+            <button class="feature" aria-pressed="false" data-big="3" data-title="Toujours synchronisé" data-text="Un compte par commerce : vos données sont à jour partout, sur chaque appareil."><span class="num">3</span>Données synchronisées</button>
           </div>
-        </article>
-        <article class="app pecule">
+          <div class="actions">
+            <a href="https://buy.polar.sh/polar_cl_KcnMWCV5C0ZpahK6hqf24pj72wu6yWNPwiVXa0wUJna" class="btn btn-primary"><span class="shine"></span>Essayer 14 jours gratuits<svg class="arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+            <a href="#tarifs" class="btn btn-ghost">Voir le prix</a>
+          </div>
+        </div>
+        <div class="showcase" id="show-kiosk" aria-live="polite">
+          <div class="blob"></div>
+          <div class="showcase-card"><div class="big">1</div><h4>Plannings d'équipe</h4><p>Organisez les horaires de votre équipe en quelques minutes, sans tableur ni casse-tête.</p></div>
+        </div>
+      </div>
+
+      <div class="panel pecule reveal" role="tabpanel" id="panel-pecule" aria-labelledby="tab-pecule">
+        <div class="app-info">
           <div class="app-icon">P</div>
           <div class="app-tag">Pour vous</div>
           <h3>Pécule</h3>
-          <p>L'application de finances personnelles pour Windows. Suivez votre argent simplement, sans tableur compliqué.</p>
-          <ul>
-            <li>Gratuite à télécharger</li>
-            <li>Installée sur votre ordinateur</li>
-            <li>Une version Pro pour aller plus loin</li>
-          </ul>
-          <div class="actions">
-            <a href="https://github.com/zyg-off/Pecule/releases" class="btn btn-primary" target="_blank" rel="noopener">Télécharger gratuitement</a>
-            <a href="#tarifs" class="btn btn-ghost">Pécule Pro</a>
+          <p>L'application de finances personnelles pour Windows. Cliquez sur une fonction pour la découvrir.</p>
+          <div class="features" data-showcase="show-pecule">
+            <button class="feature" aria-pressed="true" data-big="0 €" data-title="Gratuite" data-text="Téléchargez Pécule gratuitement et suivez votre argent simplement, sans tableur compliqué."><span class="num">1</span>Gratuite à télécharger</button>
+            <button class="feature" aria-pressed="false" data-big="PC" data-title="Chez vous" data-text="Pécule s'installe directement sur votre ordinateur Windows."><span class="num">2</span>Installée sur votre ordinateur</button>
+            <button class="feature" aria-pressed="false" data-big="Pro" data-title="Pécule Pro" data-text="Débloquez les fonctions avancées avec une clé de licence, reçue par e-mail après l'abonnement."><span class="num">3</span>Une version Pro pour aller plus loin</button>
           </div>
-        </article>
-        <div class="soon">
-          <svg width="36" height="36" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 29 9.5v13L16 30 3 22.5v-13z" fill="none" stroke="#CFC6B8" stroke-width="2" stroke-dasharray="4 3"/></svg>
-          <div><strong>D'autres apps arrivent</strong>Le studio grandit : de nouvelles briques rejoindront bientôt la famille Kubo.</div>
+          <div class="actions">
+            <a href="https://github.com/zyg-off/Pecule/releases" class="btn btn-primary" target="_blank" rel="noopener"><span class="shine"></span>Télécharger gratuitement<svg class="arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+            <a href="https://buy.polar.sh/polar_cl_RZquC1pevH3ghLIsdmeln4F2vFGXhXGW9ek2N1QzRuH" class="btn btn-ghost">Passer à Pro</a>
+          </div>
         </div>
+        <div class="showcase" id="show-pecule" aria-live="polite">
+          <div class="blob"></div>
+          <div class="showcase-card"><div class="big">0 €</div><h4>Gratuite</h4><p>Téléchargez Pécule gratuitement et suivez votre argent simplement, sans tableur compliqué.</p></div>
+        </div>
+      </div>
+
+      <div class="soon reveal">
+        <svg width="40" height="40" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 29 9.5v13L16 30 3 22.5v-13z" fill="none" stroke="#CFC6B8" stroke-width="2" stroke-dasharray="4 3"/></svg>
+        <div><strong>D'autres apps arrivent</strong>Le studio grandit : de nouvelles briques rejoindront bientôt la famille Kubo.</div>
       </div>
     </div>
   </section>
 
   <section id="tarifs">
     <div class="wrap">
-      <div class="pricing-band">
+      <div class="pricing-band reveal">
         <div class="section-head">
           <h2>Des tarifs clairs</h2>
           <p>Sans engagement : vous pouvez annuler votre abonnement quand vous voulez.</p>
         </div>
-        <div class="plans" id="plans"></div>
-        <p class="note">Pécule reste gratuit à télécharger. Le paiement est sécurisé par Polar.</p>
+        <div class="plans">
+          <article class="plan featured">
+            <span class="badge">Essai gratuit</span>
+            <div class="plan-name">MonKiosk</div>
+            <div class="plan-desc">L'outil de gestion tout-en-un pour les petits commerces, sur PC et téléphone.</div>
+            <div><span class="price">14,90 €</span><span class="cadence">/ mois</span></div>
+            <div><span class="trial">14 jours d'essai gratuit</span></div>
+            <ul>
+              <li>Plannings d'équipe simplifiés</li>
+              <li>Gestion de la boutique au même endroit</li>
+              <li>Sur ordinateur et téléphone</li>
+              <li>Données synchronisées entre appareils</li>
+            </ul>
+            <div class="cta"><a class="btn btn-primary btn-block" href="https://buy.polar.sh/polar_cl_KcnMWCV5C0ZpahK6hqf24pj72wu6yWNPwiVXa0wUJna"><span class="shine"></span>Essayer gratuitement<svg class="arrow" aria-hidden="true"><use href="#arrow"/></svg></a></div>
+          </article>
+          <article class="plan">
+            <div class="plan-name">Pécule Pro</div>
+            <div class="plan-desc">Toutes les fonctions avancées de Pécule, l'app de finances personnelles.</div>
+            <div><span class="price">2,99 €</span><span class="cadence">/ mois</span></div>
+            <ul>
+              <li>Fonctions avancées de Pécule</li>
+              <li>Nouvelles fonctions Pro en priorité</li>
+              <li>Soutien direct au développement</li>
+            </ul>
+            <div class="cta"><a class="btn btn-light btn-block" href="https://buy.polar.sh/polar_cl_RZquC1pevH3ghLIsdmeln4F2vFGXhXGW9ek2N1QzRuH">S'abonner<svg class="arrow" aria-hidden="true"><use href="#arrow"/></svg></a></div>
+          </article>
+          <article class="plan free-card">
+            <div class="plan-name">Pécule</div>
+            <div class="plan-desc">L'app de finances personnelles pour Windows, en version gratuite.</div>
+            <div><span class="price">0 €</span></div>
+            <ul>
+              <li>Suivi de vos finances</li>
+              <li>Installée sur votre ordinateur</li>
+              <li>Sans abonnement</li>
+            </ul>
+            <div class="cta"><a class="btn btn-ghost btn-block" style="color:#fff; box-shadow: inset 0 0 0 1.5px #fff" href="https://github.com/zyg-off/Pecule/releases" target="_blank" rel="noopener">Télécharger</a></div>
+          </article>
+        </div>
+        <p class="note"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 9V7a5 5 0 0 1 10 0v2M4 9h12v8H4z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/></svg>Paiement sécurisé par Polar. Prix TTC.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Questions fréquentes</h2>
+      </div>
+      <div class="faq reveal">
+        <details>
+          <summary>Comment fonctionne l'essai gratuit de MonKiosk ?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+          <div class="answer">Vous profitez de MonKiosk gratuitement pendant 14 jours. Le premier paiement n'a lieu qu'à la fin de l'essai, et vous pouvez annuler avant si l'app ne vous convient pas.</div>
+        </details>
+        <details>
+          <summary>Puis-je annuler mon abonnement ?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+          <div class="answer">Oui, à tout moment et sans engagement, depuis votre espace client Polar. Le lien est dans l'e-mail reçu après votre achat.</div>
+        </details>
+        <details>
+          <summary>Comment débloquer Pécule Pro ?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+          <div class="answer">Après votre abonnement, vous recevez une clé de licence par e-mail. Une même clé fonctionne sur 3 ordinateurs maximum.</div>
+        </details>
+        <details>
+          <summary>Le paiement est-il sécurisé ?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+          <div class="answer">Oui. Les paiements sont gérés par Polar, une plateforme spécialisée dans la vente de logiciels. Kubo Studio n'a jamais accès à vos coordonnées bancaires.</div>
+        </details>
+        <details>
+          <summary>Sur quels appareils fonctionnent les apps ?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+          <div class="answer">MonKiosk s'utilise sur ordinateur et sur téléphone. Pécule est une application pour Windows.</div>
+        </details>
       </div>
     </div>
   </section>
 
   <section id="studio">
-    <div class="wrap about">
+    <div class="wrap about reveal">
       <div class="section-head" style="margin:0">
         <h2>Un petit studio, des outils utiles</h2>
       </div>
@@ -240,56 +409,152 @@
       </div>
     </div>
   </section>
+
+  <div class="wrap">
+    <div class="cta-band reveal">
+      <h2>Prêt à simplifier votre quotidien ?</h2>
+      <p>Essayez MonKiosk gratuitement pendant 14 jours, ou téléchargez Pécule sans payer.</p>
+      <div class="actions">
+        <a href="https://buy.polar.sh/polar_cl_KcnMWCV5C0ZpahK6hqf24pj72wu6yWNPwiVXa0wUJna" class="btn btn-light"><span class="shine"></span>Essayer MonKiosk<svg class="arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+        <a href="https://github.com/zyg-off/Pecule/releases" class="btn btn-ghost" style="color:#fff; box-shadow: inset 0 0 0 1.5px #fff" target="_blank" rel="noopener">Télécharger Pécule</a>
+      </div>
+    </div>
+  </div>
 </main>
 
 <footer>
   <div class="wrap">
-    <span>© 2026 Kubo Studio · Toulouse</span>
-    <span>MonKiosk · Pécule</span>
+    <a href="#" class="logo" style="font-size:18px"><svg aria-hidden="true" style="width:24px;height:24px"><use href="#kubo"/></svg>Kubo Studio</a>
+    <span>© 2026 Kubo Studio · Fait à Toulouse</span>
   </div>
 </footer>
 
-<script>
-  // ---- Liens de paiement Polar : colle ici les liens "Checkout Link" de chaque produit ----
-  const PLANS = [
-    {
-      id: "monkiosk",
-      name: "MonKiosk",
-      description: "L'outil de gestion tout-en-un pour les petits commerces, sur PC et téléphone.",
-      price: "14,90 €",
-      billing: "/ mois",
-      trialDays: 14,
-      perks: ["Plannings d'équipe simplifiés", "Gestion de la boutique au même endroit", "Sur ordinateur et téléphone", "Données synchronisées entre appareils"],
-      checkoutUrl: "https://buy.polar.sh/polar_cl_KcnMWCV5C0ZpahK6hqf24pj72wu6yWNPwiVXa0wUJna"
-    },
-    {
-      id: "pecule-pro",
-      name: "Pécule Pro",
-      description: "Toutes les fonctions avancées de Pécule, l'app de finances personnelles.",
-      price: "2,99 €",
-      billing: "/ mois",
-      trialDays: null,
-      perks: ["Fonctions avancées de Pécule", "Nouvelles fonctions Pro en priorité", "Soutien direct au développement"],
-      checkoutUrl: "https://buy.polar.sh/polar_cl_RZquC1pevH3ghLIsdmeln4F2vFGXhXGW9ek2N1QzRuH"
-    }
-  ];
+<button class="to-top" id="to-top" aria-label="Revenir en haut">
+  <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 16V4m-5 5 5-5 5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
 
-  const esc = (s) => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  const el = document.getElementById("plans");
-  el.innerHTML = PLANS.map((p, i) => {
-    const label = p.trialDays ? "Commencer l'essai gratuit" : "S'abonner";
-    const cta = p.checkoutUrl
-      ? `<a class="btn btn-primary" href="${esc(p.checkoutUrl)}">${label}</a>`
-      : `<button class="btn btn-primary" disabled>Bientôt disponible</button>`;
-    return `<article class="plan${i === 0 ? " featured" : ""}">
-      <div class="plan-name">${esc(p.name)}</div>
-      <div class="plan-desc">${esc(p.description)}</div>
-      <div><span class="price">${esc(p.price)}</span><span class="cadence">${esc(p.billing)}</span></div>
-      ${p.trialDays ? `<div><span class="trial">${p.trialDays} jours d'essai gratuit</span></div>` : ""}
-      <ul>${p.perks.map(k => `<li>${esc(k)}</li>`).join("")}</ul>
-      <div class="cta">${cta}</div>
-    </article>`;
-  }).join("");
+<script>
+(function () {
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // header shadow + back-to-top
+  var bar = document.getElementById("top-bar"), toTop = document.getElementById("to-top");
+  function onScroll() {
+    var y = window.scrollY;
+    bar.classList.toggle("scrolled", y > 8);
+    toTop.classList.toggle("show", y > 700);
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+  toTop.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" }); });
+
+  // mobile menu
+  var menuBtn = document.getElementById("menu-btn"), links = document.getElementById("nav-links");
+  menuBtn.addEventListener("click", function () {
+    var open = links.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  links.addEventListener("click", function (e) {
+    if (e.target.closest("a")) { links.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false"); }
+  });
+
+  // active nav link
+  var navAnchors = Array.prototype.slice.call(links.querySelectorAll('a[href^="#"]:not(.btn)'));
+  if ("IntersectionObserver" in window) {
+    var secObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) navAnchors.forEach(function (a) { a.classList.toggle("active", a.getAttribute("href") === "#" + en.target.id); });
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    ["apps", "tarifs", "faq", "studio"].forEach(function (id) { var s = document.getElementById(id); if (s) secObs.observe(s); });
+
+    // scroll reveal
+    var revObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); revObs.unobserve(en.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach(function (el) { revObs.observe(el); });
+  } else {
+    document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("in"); });
+  }
+
+  // rotating words
+  var words = document.querySelectorAll(".rotator span"), w = 0;
+  if (!reduce) setInterval(function () {
+    words[w].classList.remove("on");
+    w = (w + 1) % words.length;
+    words[w].classList.add("on");
+  }, 2600);
+
+  // draggable 3D cube
+  var cube = document.getElementById("cube"), stage = cube.parentElement;
+  var rx = -28, ry = -42, dragging = false, lastX = 0, lastY = 0;
+  function apply() { cube.style.transform = "rotateX(" + rx + "deg) rotateY(" + ry + "deg)"; }
+  stage.addEventListener("pointerdown", function (e) {
+    dragging = true; lastX = e.clientX; lastY = e.clientY;
+    cube.classList.remove("idle"); cube.style.cursor = "grabbing";
+    stage.setPointerCapture(e.pointerId);
+  });
+  stage.addEventListener("pointermove", function (e) {
+    if (dragging) {
+      ry += (e.clientX - lastX) * 0.5; rx -= (e.clientY - lastY) * 0.5;
+      rx = Math.max(-80, Math.min(80, rx));
+      lastX = e.clientX; lastY = e.clientY; apply();
+    } else if (!cube.classList.contains("idle") && e.pointerType === "mouse") {
+      var r = stage.getBoundingClientRect();
+      ry = -42 + ((e.clientX - r.left) / r.width - 0.5) * 50;
+      rx = -28 - ((e.clientY - r.top) / r.height - 0.5) * 30;
+      apply();
+    }
+  });
+  function stop() { dragging = false; cube.style.cursor = "grab"; }
+  stage.addEventListener("pointerup", stop);
+  stage.addEventListener("pointercancel", stop);
+  stage.style.touchAction = "pan-y";
+  if (reduce) cube.classList.remove("idle");
+
+  // app tabs
+  var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
+  function selectTab(tab) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute("aria-selected", on ? "true" : "false");
+      t.tabIndex = on ? 0 : -1;
+      var panel = document.getElementById(t.getAttribute("aria-controls"));
+      panel.classList.toggle("active", on);
+      if (on) panel.classList.add("in");
+    });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () { selectTab(t); });
+    t.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+        var n = tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length];
+        selectTab(n); n.focus();
+      }
+    });
+  });
+
+  // feature showcase
+  document.querySelectorAll(".features").forEach(function (group) {
+    var show = document.getElementById(group.getAttribute("data-showcase"));
+    var card = show.querySelector(".showcase-card");
+    group.querySelectorAll(".feature").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        group.querySelectorAll(".feature").forEach(function (b) { b.setAttribute("aria-pressed", b === btn ? "true" : "false"); });
+        card.querySelector(".big").textContent = btn.getAttribute("data-big");
+        card.querySelector("h4").textContent = btn.getAttribute("data-title");
+        card.querySelector("p").textContent = btn.getAttribute("data-text");
+        card.classList.remove("swap"); void card.offsetWidth; card.classList.add("swap");
+      });
+    });
+  });
+
+  // FAQ: one open at a time
+  var faqs = document.querySelectorAll(".faq details");
+  faqs.forEach(function (d) {
+    d.addEventListener("toggle", function () { if (d.open) faqs.forEach(function (o) { if (o !== d) o.open = false; }); });
+  });
+})();
 </script>
 </body>
 </html>

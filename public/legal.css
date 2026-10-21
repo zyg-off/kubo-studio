@@ -42,3 +42,13 @@ footer .bar { height: auto; padding-top: 28px; padding-bottom: 28px; flex-wrap: 
 footer nav { display: flex; flex-wrap: wrap; gap: 6px 18px; }
 footer a { color: var(--muted); text-decoration: none; }
 footer a:hover { color: var(--ink); }
+
+@media (prefers-color-scheme: dark) {
+  :root { color-scheme: dark; --bg: #14131B; --surface: #22212D; --ink: #F1EFF7; --muted: #ABA8BB; --line: #322F40; --brick-dark: #F59A82; }
+  p, li { color: #CFCCDB; }
+  header { background: rgba(20,19,27,.9); }
+  .back { background: #3A3854; }
+  .back:hover { background: #4A4766; }
+  .box { border-color: var(--line); }
+  .todo { background: #4A3F12; color: #FFE58A; }
+}

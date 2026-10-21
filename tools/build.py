@@ -269,7 +269,9 @@ def page(meta, body):
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:image" content="brand/kubo-app-icon-512.png">
-<meta name="theme-color" content="#FAF6F1">{robots}
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#FAF6F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14131B" media="(prefers-color-scheme: dark)">{robots}
 <link rel="icon" href="brand/kubo-icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="brand/kubo-app-icon-512.png">
 <link rel="preload" href="fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>

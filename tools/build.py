@@ -68,6 +68,9 @@ ICONS = {
     "leaf": '<path d="M4 16c0-7 4.5-11.5 12-12-.3 7.4-4.8 12-12 12z"/><path d="M4 16l6.5-6.5"/>',
     "smile": '<circle cx="10" cy="10" r="7.5"/><path d="M7 11.5a3.5 3.5 0 0 0 6 0M7.5 7.8v.2M12.5 7.8v.2"/>',
     "up": '<path d="M10 16V4m-5 5 5-5 5 5"/>',
+    "user": '<circle cx="10" cy="6.8" r="3.3"/><path d="M3.5 17.2c.8-3.3 3.4-5.2 6.5-5.2s5.7 1.9 6.5 5.2"/>',
+    "key": '<circle cx="6.5" cy="13.5" r="3.5"/><path d="M9 11l7.5-7.5M13.5 6.5l2 2M15.5 4.5l1.5 1.5"/>',
+    "receipt": '<path d="M5 2.5h10v15l-2.5-1.5-2.5 1.5-2.5-1.5L5 17.5z"/><path d="M8 7h4M8 10.5h4"/>',
 }
 
 
@@ -94,6 +97,7 @@ def header(current):
         cur = ' aria-current="page"' if key == current else ""
         ico = f'<img src="{icon}" alt="">' if icon else ""
         items.append(f'<a href="{href}"{cur}>{ico}{label}</a>')
+    acc = ' aria-current="page"' if current == "espace" else ""
     return f"""{sprite()}
 <header class="site-header">
   <div class="wrap nav">
@@ -103,6 +107,7 @@ def header(current):
     </button>
     <nav class="nav-links" id="nav-links" aria-label="Menu principal">
       {"".join(items)}
+      <a href="espace-client.html" class="account-link"{acc}><svg aria-hidden="true"><use href="#i-user"/></svg>Espace client</a>
       <a href="tarifs.html" class="btn btn-dark btn-small">Commencer<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
     </nav>
   </div>
@@ -129,7 +134,7 @@ FOOTER = f"""<footer class="site-footer">
         <ul>
           <li><a href="aide.html">Questions fréquentes</a></li>
           <li><a href="aide.html#contact">Nous contacter</a></li>
-          <li><a href="{PORTAL}">Gérer mon abonnement</a></li>
+          <li><a href="espace-client.html">Espace client</a></li>
         </ul>
       </div>
       <div>

@@ -1,0 +1,105 @@
+<!--
+title: Espace client — Kubo Studio
+description: Gérez vos abonnements, retrouvez vos factures et votre clé Pécule Pro, ouvrez MonKiosk : tout votre espace client Kubo Studio.
+current: espace
+-->
+<div class="wrap page-head">
+  <span class="eyebrow reveal">Espace client</span>
+  <h1 class="reveal">Bonjour, <span class="accent">ravi de vous revoir.</span></h1>
+  <p class="lead reveal d1">Abonnements, factures, clé de licence, accès à vos apps : tout ce dont vous avez besoin est ici.</p>
+</div>
+
+<section style="padding-top: 24px">
+  <div class="wrap account-grid">
+
+    <div class="acc-card main reveal">
+      <div>
+        <div class="acc-head">
+          <span class="ico"><svg aria-hidden="true"><use href="#i-card"/></svg></span>
+          <h2>Mes abonnements</h2>
+        </div>
+        <p style="margin-top: 12px">Votre espace sécurisé pour tout ce qui touche au paiement, pour MonKiosk comme pour Pécule Pro.</p>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Voir et télécharger vos factures</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Changer de carte bancaire</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Retrouver votre clé Pécule Pro</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Résilier un abonnement en quelques clics</li>
+        </ul>
+        <div class="actions">
+          <a class="btn btn-primary" href="{{PORTAL}}"><span class="shine"></span>Accéder à mes abonnements<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <p style="margin-bottom: 14px; font-weight: 600; color: #fff">Comment se connecter ?</p>
+        <ol class="login-steps">
+          <li>Saisissez l'e-mail utilisé lors de votre achat.</li>
+          <li>Recevez un code de connexion par e-mail.</li>
+          <li>Entrez le code : vos abonnements s'affichent.</li>
+        </ol>
+        <p style="font-size: 14px; margin-top: 14px">Pas de mot de passe à retenir. L'espace est géré par Polar, notre revendeur.</p>
+      </div>
+    </div>
+
+    <div class="acc-card reveal">
+      <div class="acc-head">
+        <img src="brand/monkiosk-logo.svg" alt="">
+        <div><span class="tag">Pour les commerçants</span><h2>MonKiosk</h2></div>
+      </div>
+      <p>Connectez-vous avec l'e-mail de votre commerce pour retrouver votre équipe, votre planning et vos tâches.</p>
+      <ul>
+        <li><svg aria-hidden="true"><use href="#i-user"/></svg>Votre formule : <b>Compte › Mon abonnement</b></li>
+        <li><svg aria-hidden="true"><use href="#i-phone"/></svg>Sur téléphone : ajoutez la page à l'écran d'accueil</li>
+      </ul>
+      <div class="actions">
+        <a class="btn btn-primary" href="{{MONKIOSK_APP}}"><span class="shine"></span>Ouvrir MonKiosk<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-ghost" href="{{MONKIOSK_PC}}"><svg class="arrow" aria-hidden="true" style="transform:none"><use href="#i-download"/></svg>Appli Windows</a>
+      </div>
+    </div>
+
+    <div class="acc-card reveal d1">
+      <div class="acc-head">
+        <img src="brand/pecule-logo.png" alt="">
+        <div><span class="tag">Pour vous</span><h2>Pécule</h2></div>
+      </div>
+      <p>Téléchargez la dernière version, et activez Pécule Pro avec la clé reçue par e-mail.</p>
+      <ul>
+        <li><svg aria-hidden="true" style="color: var(--mint-dark)"><use href="#i-key"/></svg>Activer la clé : <b>Réglages › ⭐ Pécule Pro › J'ai une clé</b></li>
+        <li><svg aria-hidden="true" style="color: var(--mint-dark)"><use href="#i-refresh"/></svg>Les mises à jour s'installent en un clic depuis l'app</li>
+      </ul>
+      <div class="actions">
+        <a class="btn btn-mint" href="{{PECULE_DOWNLOAD}}"><span class="shine"></span><svg class="arrow" aria-hidden="true" style="transform:none"><use href="#i-download"/></svg>Télécharger Pécule</a>
+        <a class="btn btn-ghost" href="merci-pecule.html">Activer Pro</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="section-head center reveal"><h2>Un souci avec votre compte ?</h2></div>
+    <div class="faq center reveal">
+      <details>
+        <summary>Je ne reçois pas le code de connexion<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+        <div class="answer">Vérifiez que vous utilisez bien l'adresse e-mail saisie lors de l'achat, et regardez dans vos courriers indésirables. Si rien n'arrive au bout de quelques minutes, <a href="aide.html#contact">écrivez-nous</a>.</div>
+      </details>
+      <details>
+        <summary>J'ai perdu ma clé Pécule Pro<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+        <div class="answer">Elle est dans l'e-mail reçu après votre achat, et dans <a href="{{PORTAL}}">vos abonnements</a>. Une même clé fonctionne sur 3 ordinateurs au maximum.</div>
+      </details>
+      <details>
+        <summary>Ma formule MonKiosk ne s'est pas activée<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+        <div class="answer">Dans MonKiosk, cliquez sur « J'ai payé : actualiser ». L'activation prend en général quelques secondes. Si votre commerce reste bloqué, <a href="aide.html#contact">écrivez-nous</a> avec votre référence de commande.</div>
+      </details>
+      <details>
+        <summary>Je veux changer l'e-mail de mon abonnement<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+        <div class="answer"><a href="aide.html#contact">Écrivez-nous</a> depuis l'ancienne adresse en indiquant la nouvelle : nous nous en occupons.</div>
+      </details>
+      <details>
+        <summary>Comment être remboursé ?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+        <div class="answer">Vous disposez de 14 jours après votre souscription pour changer d'avis, sans vous justifier. <a href="aide.html#contact">Écrivez-nous</a> : le remboursement arrive sous 14 jours. Les détails sont dans nos <a href="conditions.html">conditions de vente</a>.</div>
+      </details>
+    </div>
+    <p class="reveal" style="text-align:center; margin-top: 28px"><a class="link-arrow" href="aide.html#contact">Contacter Kubo Studio<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
+  </div>
+</section>

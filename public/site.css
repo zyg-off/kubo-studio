@@ -403,3 +403,33 @@ section { padding: 96px 0; }
 .lang-switch button[aria-pressed="true"] { background: var(--brick); color: #fff; }
 .pecule-theme .lang-switch button[aria-pressed="true"] { background: var(--mint-dark); }
 .pecule-theme .path { background: var(--mint-soft); color: var(--mint-dark); }
+
+/* ---------- account link in header ---------- */
+.nav-links .account-link { display: inline-flex; align-items: center; gap: 8px; margin-left: 6px; padding: 8px 14px; border-radius: 999px; text-decoration: none; font-weight: 600; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--line); transition: box-shadow .2s, background .2s; }
+.nav-links .account-link svg { width: 18px; height: 18px; }
+.nav-links .account-link:hover, .nav-links .account-link[aria-current="page"] { background: #fff; box-shadow: inset 0 0 0 1.5px var(--ink); }
+@media (max-width: 1080px) and (min-width: 901px) { .nav-links a:not(.btn) img { display: none; } .nav-links a:not(.btn) { padding: 8px 10px; } }
+@media (max-width: 900px) { .nav-links .account-link { margin: 6px 0 0; justify-content: center; min-height: 48px; } }
+
+/* ---------- espace client ---------- */
+.account-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.acc-card { position: relative; display: flex; flex-direction: column; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 32px; transition: transform .3s var(--ease), box-shadow .3s; }
+.acc-card:hover { transform: translateY(-4px); box-shadow: 0 20px 44px rgba(29,27,46,.08); }
+.acc-card.main { grid-column: 1 / -1; background: var(--ink); color: #fff; border-color: var(--ink); display: grid; grid-template-columns: 1.1fr .9fr; gap: 32px; align-items: center; }
+.acc-card.main p { color: #C9C6D6; }
+.acc-head { display: flex; align-items: center; gap: 14px; }
+.acc-head img, .acc-head .ico { width: 52px; height: 52px; flex: none; }
+.acc-head .ico { border-radius: 14px; display: grid; place-items: center; background: var(--peach); color: var(--brick-dark); }
+.acc-card.main .acc-head .ico { background: rgba(255,255,255,.1); color: #fff; }
+.acc-head .ico svg { width: 26px; height: 26px; }
+.acc-card h2 { font-size: 26px; }
+.acc-card p { margin: 0; color: var(--muted); }
+.acc-card ul { list-style: none; padding: 0; margin: 4px 0 8px; display: grid; gap: 8px; }
+.acc-card li { display: flex; gap: 10px; align-items: flex-start; font-size: 16px; }
+.acc-card li svg { width: 18px; height: 18px; flex: none; margin-top: 3px; color: var(--brick); }
+.acc-card.main li svg { color: var(--brick-light); }
+.acc-card .actions { margin-top: auto; padding-top: 8px; }
+.login-steps { display: grid; gap: 12px; counter-reset: s; list-style: none; padding: 0; margin: 0; }
+.login-steps li { counter-increment: s; display: flex; gap: 14px; align-items: center; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 16px; padding: 14px 16px; color: #E6E4EE; }
+.login-steps li::before { content: counter(s); flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--brick); color: #fff; font: 700 15px var(--display); display: grid; place-items: center; }
+@media (max-width: 860px) { .account-grid { grid-template-columns: 1fr; } .acc-card { padding: 26px; } .acc-card.main { grid-template-columns: 1fr; } }

@@ -390,13 +390,16 @@ section { padding: 96px 0; }
 .steps { list-style: none; padding: 0; margin: 0; counter-reset: s; text-align: left; background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 8px 28px; }
 .steps li { counter-increment: s; display: flex; gap: 16px; padding: 20px 0; border-top: 1px solid var(--line); color: var(--muted); }
 .steps li:first-child { border-top: 0; }
-.steps li::before { content: counter(s); flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--mint-dark); color: #fff; font: 700 16px var(--display); display: grid; place-items: center; }
+.steps li::before { content: counter(s); flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--brick); color: #fff; font: 700 16px var(--display); display: grid; place-items: center; }
+.pecule-theme .steps li::before { background: var(--mint-dark); }
 .steps b { color: var(--ink); }
-.path { background: var(--mint-soft); color: var(--mint-dark); border-radius: 8px; padding: 1px 8px; white-space: nowrap; font-weight: 600; }
+.path { background: var(--peach); color: var(--brick-dark); border-radius: 8px; padding: 1px 8px; white-space: nowrap; font-weight: 600; }
 .thanks .small { font-size: 15px; color: var(--muted); margin: 24px 0 0; }
 .thanks .ref { font-size: 14px; color: #8A879A; margin-top: 10px; overflow-wrap: anywhere; }
 @media (max-width: 520px) { .steps { padding: 4px 20px; } }
 .lang-switch { display: inline-flex; gap: 4px; padding: 4px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; margin-bottom: 28px; }
 .lang-switch button { min-height: 36px; padding: 6px 14px; border: 0; border-radius: 999px; background: transparent; font: 600 14px var(--body); color: var(--muted); cursor: pointer; }
 .lang-switch button:hover { color: var(--ink); }
-.lang-switch button[aria-pressed="true"] { background: var(--mint-dark); color: #fff; }
+.lang-switch button[aria-pressed="true"] { background: var(--brick); color: #fff; }
+.pecule-theme .lang-switch button[aria-pressed="true"] { background: var(--mint-dark); }
+.pecule-theme .path { background: var(--mint-soft); color: var(--mint-dark); }

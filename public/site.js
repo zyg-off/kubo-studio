@@ -161,6 +161,35 @@
     });
   });
 
+
+  // Pages traduites : français par défaut, boutons [data-lang] ou ?lang=en / ?lang=pt
+  if (window.I18N) {
+    var T = window.I18N, FR = {};
+    $$("[data-t]").forEach(function (e) {
+      FR[e.getAttribute("data-t")] = e.classList.contains("btn") ? e.lastChild.textContent : e.innerHTML;
+    });
+    FR.ref = T.fr_ref || "Référence de la commande : ";
+    T.fr = FR;
+    var params = new URLSearchParams(location.search), current = "fr";
+    var checkoutId = params.get("checkout_id"), baseTitle = document.title;
+    var setLang = function (lang) {
+      current = T[lang] ? lang : "fr";
+      var t = T[current];
+      document.documentElement.lang = current;
+      $$("[data-t]").forEach(function (e) {
+        var v = t[e.getAttribute("data-t")];
+        if (!v) return;
+        if (e.classList.contains("btn")) e.lastChild.textContent = v; else e.innerHTML = v;
+      });
+      document.title = current === "fr" ? baseTitle : (t.doc_title || baseTitle);
+      $$("[data-lang]").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-lang") === current ? "true" : "false"); });
+      var ref = $("#ref");
+      if (ref && checkoutId && checkoutId.indexOf("{") === -1) ref.textContent = t.ref + checkoutId.slice(0, 40);
+    };
+    $$("[data-lang]").forEach(function (b) { b.addEventListener("click", function () { setLang(b.getAttribute("data-lang")); }); });
+    setLang(params.get("lang") || "fr");
+  }
+
   // FAQ deep link: open the targeted question
   if (location.hash) {
     var target = document.getElementById(location.hash.slice(1));

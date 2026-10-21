@@ -1,0 +1,61 @@
+<!--
+title: Merci · MonKiosk
+description: Votre abonnement MonKiosk est confirmé. Votre formule s'active toute seule dans l'app.
+current: monkiosk
+noindex: oui
+-->
+<div class="thanks">
+  <div class="lang-switch" role="group" aria-label="Langue">
+    <button type="button" data-lang="fr" aria-pressed="true">Français</button>
+    <button type="button" data-lang="en" aria-pressed="false">English</button>
+    <button type="button" data-lang="pt" aria-pressed="false">Português</button>
+  </div>
+  <img class="app-logo" src="brand/monkiosk-logo.svg" alt="">
+  <span class="eyebrow" data-t="badge">Paiement confirmé</span>
+  <h1 data-t="title">Merci, votre boutique est <span class="accent">prête à ouvrir</span></h1>
+  <p class="lead" data-t="sub">Votre paiement est bien passé. Votre formule s'active toute seule dans MonKiosk, en quelques secondes.</p>
+
+  <ol class="steps">
+    <li><div data-t="s1"><b>Revenez dans MonKiosk</b>, dans l'onglet ou l'appli où vous avez choisi votre formule.</div></li>
+    <li><div data-t="s2">Si l'écran des formules est encore affiché, cliquez sur <b>« J'ai payé : actualiser »</b>. Votre commerce s'ouvre aussitôt.</div></li>
+    <li><div data-t="s3"><b>Ajoutez votre équipe</b> et préparez votre premier planning. Les options de votre formule sont dans <span class="path">Compte › Mon abonnement</span>.</div></li>
+  </ol>
+
+  <div class="actions" style="justify-content: center; margin-top: 32px">
+    <a href="{{MONKIOSK_APP}}" class="btn btn-primary" data-t="open"><span class="shine"></span>Ouvrir MonKiosk</a>
+    <a href="aide.html#contact" class="btn btn-ghost" data-t="help">Besoin d'aide ?</a>
+  </div>
+
+  <p class="small" data-t="foot">Votre reçu arrive par e-mail de la part de Polar. Pour gérer ou résilier votre abonnement : MonKiosk › Compte › Mon abonnement, ou votre <a href="{{PORTAL}}">espace client</a>.</p>
+  <p class="ref" id="ref"></p>
+</div>
+
+<script>
+  // Traductions de la page (le français est écrit directement dans la page)
+  window.I18N = {
+    en: {
+      doc_title: "Thank you · MonKiosk",
+      badge: "Payment confirmed",
+      title: "Thank you, your shop is <span class=\"accent\">ready to open</span>",
+      sub: "Your payment went through. Your plan turns on by itself in MonKiosk, within a few seconds.",
+      s1: "<b>Go back to MonKiosk</b>, in the tab or app where you chose your plan.",
+      s2: "If the plans screen is still showing, click <b>“J'ai payé : actualiser”</b> (I've paid: refresh). Your shop opens right away.",
+      s3: "<b>Add your team</b> and prepare your first schedule. Your plan's options are in <span class=\"path\">Compte › Mon abonnement</span>.",
+      open: "Open MonKiosk", help: "Need help?",
+      foot: "Your receipt is e-mailed by Polar. To manage or cancel your subscription: MonKiosk › Compte › Mon abonnement, or your <a href=\"{{PORTAL}}\">customer portal</a>.",
+      ref: "Order reference: "
+    },
+    pt: {
+      doc_title: "Obrigado · MonKiosk",
+      badge: "Pagamento confirmado",
+      title: "Obrigado, a sua loja está <span class=\"accent\">pronta a abrir</span>",
+      sub: "O seu pagamento foi efetuado. A sua fórmula ativa-se sozinha no MonKiosk, em poucos segundos.",
+      s1: "<b>Volte ao MonKiosk</b>, no separador ou na aplicação onde escolheu a sua fórmula.",
+      s2: "Se o ecrã das fórmulas ainda estiver aberto, clique em <b>«J'ai payé : actualiser»</b> (Já paguei: atualizar). A sua loja abre logo.",
+      s3: "<b>Adicione a sua equipa</b> e prepare o seu primeiro horário. As opções da sua fórmula estão em <span class=\"path\">Compte › Mon abonnement</span>.",
+      open: "Abrir o MonKiosk", help: "Precisa de ajuda?",
+      foot: "O recibo chega por e-mail da Polar. Para gerir ou cancelar a subscrição: MonKiosk › Compte › Mon abonnement, ou o seu <a href=\"{{PORTAL}}\">espaço de cliente</a>.",
+      ref: "Referência da encomenda: "
+    }
+  };
+</script>

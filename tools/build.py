@@ -18,6 +18,7 @@ CHECKOUT_MONKIOSK = "https://buy.polar.sh/polar_cl_KcnMWCV5C0ZpahK6hqf24pj72wu6y
 CHECKOUT_PECULE_PRO = "https://buy.polar.sh/polar_cl_RZquC1pevH3ghLIsdmeln4F2vFGXhXGW9ek2N1QzRuH"
 PORTAL = "https://polar.sh/kubo-studio/portal"
 MONKIOSK_DEMO = "https://zyg-off.github.io/MonKiosk/"
+MONKIOSK_APP = "https://zyg-off.github.io/MonKiosk/"
 MONKIOSK_PC = "https://github.com/zyg-off/MonKiosk/releases/latest/download/MonKiosk-Installer.exe"
 PECULE_DOWNLOAD = "https://github.com/zyg-off/pecule/releases/latest/download/Pecule-Setup.exe"
 EMAIL = "kubostudio.contact@gmail.com"
@@ -27,6 +28,7 @@ LINKS = {
     "CHECKOUT_PECULE_PRO": CHECKOUT_PECULE_PRO,
     "PORTAL": PORTAL,
     "MONKIOSK_DEMO": MONKIOSK_DEMO,
+    "MONKIOSK_APP": MONKIOSK_APP,
     "MONKIOSK_PC": MONKIOSK_PC,
     "PECULE_DOWNLOAD": PECULE_DOWNLOAD,
     "EMAIL": EMAIL,

@@ -59,9 +59,8 @@
 </div>
 
 <script>
-  // Textes en anglais et en portugais selon la langue du navigateur
-  (function () {
-    var T = {
+  // Traductions de la page (le français est écrit directement dans la page)
+  window.I18N = {
       en: {
         badge: "Payment confirmed",
         title: "Thank you, and welcome to <span class=\"accent-mint\">Pécule Pro</span>",
@@ -71,7 +70,7 @@
         s3: "<b>Paste the key</b>, then click <b>Activate</b>. That's it: bank sync, your accounts on your phone, profiles and encryption are yours.",
         dl: "Download Pécule", help: "Need help?",
         foot: "To manage or cancel your subscription, or find your key again: the link is in Polar's e-mail, in Pécule › Settings › Pécule Pro, and in your <a href=\"https://polar.sh/kubo-studio/portal\">customer portal</a>.",
-        ref: "Order reference: "
+        ref: "Order reference: ", doc_title: "Thank you · Pécule Pro"
       },
       pt: {
         badge: "Pagamento confirmado",
@@ -82,40 +81,9 @@
         s3: "<b>Cole a chave</b> e depois clique em <b>Ativar</b>. Pronto: a sincronização com o banco, as contas no telemóvel, os perfis e a encriptação são seus.",
         dl: "Descarregar o Pécule", help: "Precisa de ajuda?",
         foot: "Para gerir ou cancelar a subscrição, ou reencontrar a chave: o link está no e-mail da Polar, no Pécule › Definições › Pécule Pro, e no seu <a href=\"https://polar.sh/kubo-studio/portal\">espaço de cliente</a>.",
-        ref: "Referência da encomenda: "
+        ref: "Referência da encomenda: ", doc_title: "Obrigado · Pécule Pro"
       }
     };
-    // Le français par défaut ; les boutons (ou ?lang=en / ?lang=pt) changent la langue
-    var FR = {};
-    document.querySelectorAll("[data-t]").forEach(function (e) {
-      FR[e.getAttribute("data-t")] = e.classList.contains("btn") ? e.lastChild.textContent : e.innerHTML;
-    });
-    FR.ref = "Référence de la commande : ";
-    T.fr = FR;
-    var current = "fr";
-    function setLang(lang) {
-      var t = T[lang] || T.fr;
-      current = T[lang] ? lang : "fr";
-      document.documentElement.lang = current;
-      document.querySelectorAll("[data-t]").forEach(function (e) {
-        var v = t[e.getAttribute("data-t")];
-        if (!v) return;
-        if (e.classList.contains("btn")) { e.lastChild.textContent = v; } else { e.innerHTML = v; }
-      });
-      document.title = (current === "fr" ? "Merci" : t.title.replace(/<[^>]+>/g, "").split(",")[0]) + " · Pécule Pro";
-      document.querySelectorAll("[data-lang]").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-lang") === current ? "true" : "false"); });
-      showRef();
-    }
-    var params = new URLSearchParams(location.search);
-    var id = params.get("checkout_id");
-    function showRef() {
-      if (id && id.indexOf("{") === -1) document.getElementById("ref").textContent = T[current].ref + id.slice(0, 40);
-    }
-    document.querySelectorAll("[data-lang]").forEach(function (b) {
-      b.addEventListener("click", function () { setLang(b.getAttribute("data-lang")); });
-    });
-    setLang(params.get("lang") || "fr");
-  })();
 </script>
 
 </main>

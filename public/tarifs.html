@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tarifs — Kubo Studio</title>
-<meta name="description" content="MonKiosk à 14,90 € par mois avec 14 jours d'essai, Pécule gratuit et Pécule Pro à 2,99 € par mois. Sans engagement.">
+<meta name="description" content="MonKiosk dès 4,99 € par mois avec 14 jours d'essai, Pécule gratuit, et Pécule Pro à 2,99 € par mois ou 24 € par an. Sans engagement.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Tarifs — Kubo Studio">
-<meta property="og:description" content="MonKiosk à 14,90 € par mois avec 14 jours d'essai, Pécule gratuit et Pécule Pro à 2,99 € par mois. Sans engagement.">
+<meta property="og:description" content="MonKiosk dès 4,99 € par mois avec 14 jours d'essai, Pécule gratuit, et Pécule Pro à 2,99 € par mois ou 24 € par an. Sans engagement.">
 <meta property="og:image" content="brand/kubo-app-icon-512.png">
 <meta name="theme-color" content="#FAF6F1">
 <link rel="icon" href="brand/kubo-icon.svg" type="image/svg+xml">
@@ -38,48 +38,101 @@
   <p class="lead reveal d1">Pas d'engagement, pas de frais cachés. Vous essayez, vous restez si ça vous plaît, et vous résiliez en quelques clics si ce n'est plus le cas.</p>
 </div>
 
-<section style="padding-top: 24px">
+<section id="monkiosk" style="padding-top: 24px">
   <div class="wrap">
     <div class="pricing-band reveal">
-      <div class="plans">
-        <article class="plan featured">
-          <span class="badge">14 jours gratuits</span>
-          <div class="plan-head"><img src="brand/monkiosk-logo.svg" alt=""><div class="plan-name">MonKiosk</div></div>
-          <p class="plan-desc">L'outil de gestion tout-en-un pour les petits commerces, sur PC et téléphone.</p>
-          <div><span class="price">14,90 €</span><span class="cadence">TTC / mois</span></div>
-          <ul>
-            <li>Planning, équipe et congés</li>
-            <li>Tâches, hygiène et annonces</li>
-            <li>Stock et ventes</li>
-            <li>Ordinateur et téléphone, synchronisés</li>
-          </ul>
-          <div class="cta"><a class="btn btn-primary btn-block" href="https://buy.polar.sh/polar_cl_KcnMWCV5C0ZpahK6hqf24pj72wu6yWNPwiVXa0wUJna"><span class="shine"></span>Essayer gratuitement<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
-        </article>
-        <article class="plan">
-          <div class="plan-head"><img src="brand/pecule-logo.png" alt=""><div class="plan-name">Pécule Pro</div></div>
-          <p class="plan-desc">Toutes les fonctions avancées de Pécule, l'app de finances personnelles.</p>
-          <div><span class="price">2,99 €</span><span class="cadence">TTC / mois</span></div>
-          <ul>
-            <li>Tout Pécule gratuit, et en plus :</li>
-            <li>Connexion directe à votre banque</li>
-            <li>Vos comptes sur votre téléphone</li>
-            <li>Plusieurs profils et chiffrement</li>
-          </ul>
-          <div class="cta"><a class="btn btn-light btn-block" href="https://buy.polar.sh/polar_cl_RZquC1pevH3ghLIsdmeln4F2vFGXhXGW9ek2N1QzRuH">S'abonner<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
-        </article>
-        <article class="plan free-card">
-          <div class="plan-head"><img src="brand/pecule-logo.png" alt=""><div class="plan-name">Pécule</div></div>
-          <p class="plan-desc">L'app de finances personnelles pour Windows, en version gratuite.</p>
-          <div><span class="price">0 €</span></div>
-          <ul>
-            <li>Comptes, budgets et objectifs</li>
-            <li>Courses, repas et foyer</li>
-            <li>Sans publicité, sans limite de durée</li>
-          </ul>
-          <div class="cta"><a class="btn btn-outline-light btn-block" href="https://github.com/zyg-off/pecule/releases/latest/download/Pecule-Setup.exe">Télécharger</a></div>
-        </article>
+      <div class="section-head">
+        <span class="eyebrow">MonKiosk</span>
+        <h2>Pour votre commerce</h2>
+        <p>Un prix par commerce, plus un petit montant par salarié. Faites glisser le curseur pour voir votre prix.</p>
       </div>
-      <p class="note"><svg width="18" height="18" aria-hidden="true"><use href="#i-lock"/></svg><span>Prix TTC. Abonnements mensuels reconduits automatiquement, résiliables à tout moment. Paiement sécurisé par Polar, notre revendeur agréé. En vous abonnant, vous acceptez nos <a href="conditions.html">conditions de vente</a>.</span></p>
+      <span class="trial-strip"><svg aria-hidden="true"><use href="#i-sparkle"/></svg>14 jours gratuits sur toutes les formules</span>
+      <div class="calc" data-calc>
+    <label class="calc-label" for="calc-n">Combien de salariés dans votre équipe ?</label>
+    <div class="calc-row">
+      <input type="range" id="calc-n" min="1" max="30" value="5" step="1">
+      <output for="calc-n" class="calc-out"><b data-n>5</b> salariés</output>
+    </div>
+    <div class="plans plans-3">
+    <article class="plan" data-base="4.99" data-per="3.0">
+      
+      <div class="plan-head"><img src="brand/monkiosk-logo.svg" alt=""><div class="plan-name">Essentiel</div></div>
+      <p class="plan-desc">L'essentiel pour organiser la boutique et l'équipe.</p>
+      <div><span class="price">4,99 €</span><span class="cadence">/ mois</span></div>
+      <div class="per-line">+ 3 € par salarié et par mois</div>
+      <div class="calc-total" aria-live="polite">Pour <b data-n>5</b> salariés : <b data-total>19,99 €</b> / mois</div>
+      <ul><li>Planning, équipe et congés</li><li>Checklists et relevés de température</li><li>Stock, commandes et ventes</li><li>Pertes et invendus</li><li>Ordinateur et téléphone, synchronisés</li></ul>
+      <div class="cta"><a class="btn btn-light btn-block" href="https://zyg-off.github.io/MonKiosk/"><span class="shine"></span>Essayer 14 jours gratuits<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+    </article><article class="plan featured" data-base="29.0" data-per="2.5">
+      <span class="badge">Conseillée</span>
+      <div class="plan-head"><img src="brand/monkiosk-logo.svg" alt=""><div class="plan-name">Pro</div></div>
+      <p class="plan-desc">Pour piloter l'équipe et la rentabilité au quotidien.</p>
+      <div><span class="price">29 €</span><span class="cadence">/ mois</span></div>
+      <div class="per-line">+ 2,50 € par salarié et par mois</div>
+      <div class="calc-total" aria-live="polite">Pour <b data-n>5</b> salariés : <b data-total>41,50 €</b> / mois</div>
+      <ul><li class="lead-li">Tout Essentiel, plus :</li><li>Espace salarié et badgeuse</li><li>Coût salarial et rentabilité</li><li>Statistiques et prévisions de ventes</li><li>Registre d'hygiène en PDF</li><li>Export pour l'expert-comptable</li></ul>
+      <div class="cta"><a class="btn btn-primary btn-block" href="https://zyg-off.github.io/MonKiosk/"><span class="shine"></span>Essayer 14 jours gratuits<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+    </article><article class="plan" data-base="49.0" data-per="2.0">
+      
+      <div class="plan-head"><img src="brand/monkiosk-logo.svg" alt=""><div class="plan-name">Premium</div></div>
+      <p class="plan-desc">Pour les commerces qui veulent tout, ou plusieurs boutiques.</p>
+      <div><span class="price">49 €</span><span class="cadence">/ mois</span></div>
+      <div class="per-line">+ 2 € par salarié et par mois</div>
+      <div class="calc-total" aria-live="polite">Pour <b data-n>5</b> salariés : <b data-total>59 €</b> / mois</div>
+      <ul><li class="lead-li">Tout Pro, plus :</li><li>Documents salariés</li><li>Mode tablette en boutique</li><li>Boutiques regroupées</li></ul>
+      <div class="cta"><a class="btn btn-light btn-block" href="https://zyg-off.github.io/MonKiosk/"><span class="shine"></span>Essayer 14 jours gratuits<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+    </article>
+    </div>
+  </div>
+      <p class="note"><svg width="18" height="18" aria-hidden="true"><use href="#i-lock"/></svg><span>Prix TTC, par commerce. Le prix par salarié se base sur le nombre de salariés enregistrés dans MonKiosk (le plus élevé du mois). Vous choisissez votre formule dans l'app, après avoir créé votre commerce. Sans engagement. Paiement sécurisé par Polar, notre revendeur agréé. <a href="conditions.html">Conditions de vente</a></span></p>
+    </div>
+  </div>
+</section>
+
+<section id="pecule" style="padding-top: 0">
+  <div class="wrap">
+    <div class="pricing-band reveal" style="background: #17352A">
+      <div class="section-head">
+        <span class="eyebrow mint">Pécule</span>
+        <h2>Pour vous</h2>
+        <p>Pécule est gratuit. Pécule Pro ajoute quatre fonctions avancées, au mois ou à l'année.</p>
+      </div>
+      <div class="plans">
+    <article class="plan featured" data-billing>
+      <div class="plan-head"><img src="brand/pecule-logo.png" alt=""><div class="plan-name">Pécule Pro</div></div>
+      <p class="plan-desc">Les quatre fonctions avancées de Pécule, et le soutien au développement de l'app.</p>
+      <div class="bill-toggle" role="group" aria-label="Période de facturation">
+        <button type="button" data-period="month" aria-pressed="true">Mensuel</button>
+        <button type="button" data-period="year" aria-pressed="false">Annuel <span class="save-chip">−33 %</span></button>
+      </div>
+      <div data-show="month"><span class="price">2,99 €</span><span class="cadence">/ mois</span></div>
+      <div data-show="year" hidden><span class="price">24 €</span><span class="cadence">/ an</span><div class="per-line">soit 2 € par mois</div></div>
+      <ul>
+        <li>Tout Pécule gratuit, et en plus :</li>
+        <li>Synchro automatique avec votre banque</li>
+        <li>Vos comptes et budgets sur le téléphone</li>
+        <li>Plusieurs profils sur le même PC</li>
+        <li>Chiffrement de vos données</li>
+      </ul>
+      <div class="cta">
+        <a data-show="month" class="btn btn-mint btn-block" href="https://buy.polar.sh/polar_cl_RZquC1pevH3ghLIsdmeln4F2vFGXhXGW9ek2N1QzRuH"><span class="shine"></span>S'abonner · 2,99 € / mois<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a data-show="year" hidden class="btn btn-mint btn-block" href="https://buy.polar.sh/polar_cl_2uup4r4aYjmyYCtpMZtRg3ZRee5egw7a20tgV4BQhJu"><span class="shine"></span>S'abonner · 24 € / an<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+    </article>
+    <article class="plan free-card">
+      <div class="plan-head"><img src="brand/pecule-logo.png" alt=""><div class="plan-name">Pécule</div></div>
+      <p class="plan-desc">L'app de finances personnelles pour Windows, gratuite.</p>
+      <div style="margin-top: 60px"><span class="price">0 €</span></div>
+      <ul>
+        <li>Comptes, budgets, analyses et objectifs</li>
+        <li>Import de relevés CSV et OFX</li>
+        <li>Courses, repas, foyer et agenda</li>
+        <li>Sans publicité, sans limite de durée</li>
+      </ul>
+      <div class="cta"><a class="btn btn-outline-light btn-block" href="https://github.com/zyg-off/pecule/releases/latest/download/Pecule-Setup.exe">Télécharger gratuitement</a></div>
+    </article>
+  </div>
+      <p class="note"><svg width="18" height="18" aria-hidden="true"><use href="#i-lock"/></svg><span>Prix TTC. Abonnement reconduit automatiquement, résiliable à tout moment. Paiement sécurisé par Polar. En vous abonnant, vous acceptez nos <a href="conditions.html">conditions de vente</a>.</span></p>
     </div>
   </div>
 </section>
@@ -98,7 +151,7 @@
       <div class="value reveal d1">
         <div class="ico" style="background: var(--mint-soft); color: var(--mint-dark)"><svg aria-hidden="true"><use href="#i-card"/></svg></div>
         <h3>2. Abonnez-vous</h3>
-        <p>Le paiement se fait sur une page sécurisée. Vous recevez aussitôt une confirmation par e-mail.</p>
+        <p>Pour MonKiosk, choisissez votre formule dans l'app : elle s'active toute seule. Le paiement se fait sur une page sécurisée.</p>
       </div>
       <div class="value reveal d2">
         <div class="ico" style="background: var(--gold-soft); color: #8A6414"><svg aria-hidden="true"><use href="#i-refresh"/></svg></div>

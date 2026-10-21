@@ -14,8 +14,8 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = ROOT / "pages"
 OUT = ROOT / "public"
 
-CHECKOUT_MONKIOSK = "https://buy.polar.sh/polar_cl_KcnMWCV5C0ZpahK6hqf24pj72wu6yWNPwiVXa0wUJna"
 CHECKOUT_PECULE_PRO = "https://buy.polar.sh/polar_cl_RZquC1pevH3ghLIsdmeln4F2vFGXhXGW9ek2N1QzRuH"
+CHECKOUT_PECULE_PRO_YEAR = "https://buy.polar.sh/polar_cl_2uup4r4aYjmyYCtpMZtRg3ZRee5egw7a20tgV4BQhJu"
 PORTAL = "https://polar.sh/kubo-studio/portal"
 MONKIOSK_DEMO = "https://zyg-off.github.io/MonKiosk/"
 MONKIOSK_APP = "https://zyg-off.github.io/MonKiosk/"
@@ -24,8 +24,8 @@ PECULE_DOWNLOAD = "https://github.com/zyg-off/pecule/releases/latest/download/Pe
 EMAIL = "kubostudio.contact@gmail.com"
 
 LINKS = {
-    "CHECKOUT_MONKIOSK": CHECKOUT_MONKIOSK,
     "CHECKOUT_PECULE_PRO": CHECKOUT_PECULE_PRO,
+    "CHECKOUT_PECULE_PRO_YEAR": CHECKOUT_PECULE_PRO_YEAR,
     "PORTAL": PORTAL,
     "MONKIOSK_DEMO": MONKIOSK_DEMO,
     "MONKIOSK_APP": MONKIOSK_APP,
@@ -81,6 +81,104 @@ def sprite():
     )
     return f'<svg width="0" height="0" style="position:absolute" aria-hidden="true">{syms}</svg>'
 
+
+
+# Formules MonKiosk : prix de base par commerce et prix par salarié (par mois, TTC)
+MONKIOSK_FORMULES = [
+    {
+        "key": "essentiel", "name": "Essentiel", "base": 4.99, "per": 3.00,
+        "desc": "L'essentiel pour organiser la boutique et l'équipe.",
+        "lead": None,
+        "items": ["Planning, équipe et congés", "Checklists et relevés de température",
+                  "Stock, commandes et ventes", "Pertes et invendus", "Ordinateur et téléphone, synchronisés"],
+    },
+    {
+        "key": "pro", "name": "Pro", "base": 29.00, "per": 2.50, "featured": True,
+        "desc": "Pour piloter l'équipe et la rentabilité au quotidien.",
+        "lead": "Tout Essentiel, plus :",
+        "items": ["Espace salarié et badgeuse", "Coût salarial et rentabilité", "Statistiques et prévisions de ventes",
+                  "Registre d'hygiène en PDF", "Export pour l'expert-comptable"],
+    },
+    {
+        "key": "premium", "name": "Premium", "base": 49.00, "per": 2.00,
+        "desc": "Pour les commerces qui veulent tout, ou plusieurs boutiques.",
+        "lead": "Tout Pro, plus :",
+        "items": ["Documents salariés", "Mode tablette en boutique", "Boutiques regroupées"],
+    },
+]
+
+
+def eur(x):
+    return f"{x:,.2f}".replace(",", " ").replace(".", ",").replace(",00", "") + " €"
+
+
+def monkiosk_plans():
+    cards = []
+    for f in MONKIOSK_FORMULES:
+        featured = f.get("featured")
+        cls = "plan featured" if featured else "plan"
+        badge = '<span class="badge">Conseillée</span>' if featured else ""
+        lead = f'<li class="lead-li">{f["lead"]}</li>' if f["lead"] else ""
+        items = "".join(f"<li>{i}</li>" for i in f["items"])
+        btn = "btn-primary" if featured else "btn-light"
+        cards.append(f"""<article class="{cls}" data-base="{f['base']}" data-per="{f['per']}">
+      {badge}
+      <div class="plan-head"><img src="brand/monkiosk-logo.svg" alt=""><div class="plan-name">{f['name']}</div></div>
+      <p class="plan-desc">{f['desc']}</p>
+      <div><span class="price">{eur(f['base'])}</span><span class="cadence">/ mois</span></div>
+      <div class="per-line">+ {eur(f['per'])} par salarié et par mois</div>
+      <div class="calc-total" aria-live="polite">Pour <b data-n>5</b> salariés : <b data-total>{eur(f['base'] + 5 * f['per'])}</b> / mois</div>
+      <ul>{lead}{items}</ul>
+      <div class="cta"><a class="btn {btn} btn-block" href="{MONKIOSK_APP}"><span class="shine"></span>Essayer 14 jours gratuits<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+    </article>""")
+    return f"""<div class="calc" data-calc>
+    <label class="calc-label" for="calc-n">Combien de salariés dans votre équipe ?</label>
+    <div class="calc-row">
+      <input type="range" id="calc-n" min="1" max="30" value="5" step="1">
+      <output for="calc-n" class="calc-out"><b data-n>5</b> salariés</output>
+    </div>
+    <div class="plans plans-3">
+    {"".join(cards)}
+    </div>
+  </div>"""
+
+
+def pecule_cards():
+    return f"""<div class="plans">
+    <article class="plan featured" data-billing>
+      <div class="plan-head"><img src="brand/pecule-logo.png" alt=""><div class="plan-name">Pécule Pro</div></div>
+      <p class="plan-desc">Les quatre fonctions avancées de Pécule, et le soutien au développement de l'app.</p>
+      <div class="bill-toggle" role="group" aria-label="Période de facturation">
+        <button type="button" data-period="month" aria-pressed="true">Mensuel</button>
+        <button type="button" data-period="year" aria-pressed="false">Annuel <span class="save-chip">−33 %</span></button>
+      </div>
+      <div data-show="month"><span class="price">2,99 €</span><span class="cadence">/ mois</span></div>
+      <div data-show="year" hidden><span class="price">24 €</span><span class="cadence">/ an</span><div class="per-line">soit 2 € par mois</div></div>
+      <ul>
+        <li>Tout Pécule gratuit, et en plus :</li>
+        <li>Synchro automatique avec votre banque</li>
+        <li>Vos comptes et budgets sur le téléphone</li>
+        <li>Plusieurs profils sur le même PC</li>
+        <li>Chiffrement de vos données</li>
+      </ul>
+      <div class="cta">
+        <a data-show="month" class="btn btn-mint btn-block" href="{CHECKOUT_PECULE_PRO}"><span class="shine"></span>S'abonner · 2,99 € / mois<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a data-show="year" hidden class="btn btn-mint btn-block" href="{CHECKOUT_PECULE_PRO_YEAR}"><span class="shine"></span>S'abonner · 24 € / an<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+    </article>
+    <article class="plan free-card">
+      <div class="plan-head"><img src="brand/pecule-logo.png" alt=""><div class="plan-name">Pécule</div></div>
+      <p class="plan-desc">L'app de finances personnelles pour Windows, gratuite.</p>
+      <div style="margin-top: 60px"><span class="price">0 €</span></div>
+      <ul>
+        <li>Comptes, budgets, analyses et objectifs</li>
+        <li>Import de relevés CSV et OFX</li>
+        <li>Courses, repas, foyer et agenda</li>
+        <li>Sans publicité, sans limite de durée</li>
+      </ul>
+      <div class="cta"><a class="btn btn-outline-light btn-block" href="{PECULE_DOWNLOAD}">Télécharger gratuitement</a></div>
+    </article>
+  </div>"""
 
 NAV = [
     ("index", "./", "Accueil", None),
@@ -195,7 +293,8 @@ def main():
         m = re.match(r"<!--\n(.*?)\n-->\n", text, re.S)
         meta = dict(line.split(": ", 1) for line in m.group(1).splitlines())
         body = text[m.end():]
-        for k, v in LINKS.items():
+        links = dict(LINKS, MONKIOSK_PLANS=monkiosk_plans(), PECULE_PLANS=pecule_cards())
+        for k, v in links.items():
             body = body.replace("{{" + k + "}}", v)
         left = re.findall(r"\{\{[A-Z_]+\}\}", body)
         if left:

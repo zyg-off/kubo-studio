@@ -161,20 +161,53 @@
         <tbody>
           <tr><td>Comptes, budgets, analyses et objectifs</td><td class="yes">✓</td><td class="yes">✓</td></tr>
           <tr><td>Import de relevés CSV et OFX</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-          <tr><td>Courses, stock, repas, cadeaux et agenda</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>Foyer, courses, stock, repas, cadeaux et agenda</td><td class="yes">✓</td><td class="yes">✓</td></tr>
           <tr><td>Courriers, aide aux impôts, comparateur de factures</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-          <tr><td>Connexion directe à votre banque</td><td class="no">—</td><td class="yes">✓</td></tr>
-          <tr><td>Vos comptes sur votre téléphone</td><td class="no">—</td><td class="yes">✓</td></tr>
-          <tr><td>Plusieurs profils</td><td class="no">—</td><td class="yes">✓</td></tr>
-          <tr><td>Chiffrement de vos données</td><td class="no">—</td><td class="yes">✓</td></tr>
+          <tr><td>Synchro automatique avec votre banque</td><td class="no">—</td><td class="yes">✓</td></tr>
+          <tr><td>Vos comptes, opérations et budgets sur le téléphone</td><td class="no">—</td><td class="yes">✓</td></tr>
+          <tr><td>Plusieurs profils sur le même PC</td><td class="no">—</td><td class="yes">✓</td></tr>
+          <tr><td>Chiffrement de vos données par mot de passe</td><td class="no">—</td><td class="yes">✓</td></tr>
         </tbody>
       </table>
     </div>
-    <div class="actions reveal" style="justify-content: center; margin-top: 32px">
-      <a href="https://github.com/zyg-off/pecule/releases/latest/download/Pecule-Setup.exe" class="btn btn-ghost">Télécharger la version gratuite</a>
-      <a href="https://buy.polar.sh/polar_cl_RZquC1pevH3ghLIsdmeln4F2vFGXhXGW9ek2N1QzRuH" class="btn btn-mint"><span class="shine"></span>Passer à Pro · 2,99 € / mois<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <div class="pricing-band reveal" style="background: #17352A; margin-top: 40px">
+      <div class="plans">
+    <article class="plan featured" data-billing>
+      <div class="plan-head"><img src="brand/pecule-logo.png" alt=""><div class="plan-name">Pécule Pro</div></div>
+      <p class="plan-desc">Les quatre fonctions avancées de Pécule, et le soutien au développement de l'app.</p>
+      <div class="bill-toggle" role="group" aria-label="Période de facturation">
+        <button type="button" data-period="month" aria-pressed="true">Mensuel</button>
+        <button type="button" data-period="year" aria-pressed="false">Annuel <span class="save-chip">−33 %</span></button>
+      </div>
+      <div data-show="month"><span class="price">2,99 €</span><span class="cadence">/ mois</span></div>
+      <div data-show="year" hidden><span class="price">24 €</span><span class="cadence">/ an</span><div class="per-line">soit 2 € par mois</div></div>
+      <ul>
+        <li>Tout Pécule gratuit, et en plus :</li>
+        <li>Synchro automatique avec votre banque</li>
+        <li>Vos comptes et budgets sur le téléphone</li>
+        <li>Plusieurs profils sur le même PC</li>
+        <li>Chiffrement de vos données</li>
+      </ul>
+      <div class="cta">
+        <a data-show="month" class="btn btn-mint btn-block" href="https://buy.polar.sh/polar_cl_RZquC1pevH3ghLIsdmeln4F2vFGXhXGW9ek2N1QzRuH"><span class="shine"></span>S'abonner · 2,99 € / mois<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a data-show="year" hidden class="btn btn-mint btn-block" href="https://buy.polar.sh/polar_cl_2uup4r4aYjmyYCtpMZtRg3ZRee5egw7a20tgV4BQhJu"><span class="shine"></span>S'abonner · 24 € / an<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+    </article>
+    <article class="plan free-card">
+      <div class="plan-head"><img src="brand/pecule-logo.png" alt=""><div class="plan-name">Pécule</div></div>
+      <p class="plan-desc">L'app de finances personnelles pour Windows, gratuite.</p>
+      <div style="margin-top: 60px"><span class="price">0 €</span></div>
+      <ul>
+        <li>Comptes, budgets, analyses et objectifs</li>
+        <li>Import de relevés CSV et OFX</li>
+        <li>Courses, repas, foyer et agenda</li>
+        <li>Sans publicité, sans limite de durée</li>
+      </ul>
+      <div class="cta"><a class="btn btn-outline-light btn-block" href="https://github.com/zyg-off/pecule/releases/latest/download/Pecule-Setup.exe">Télécharger gratuitement</a></div>
+    </article>
+  </div>
+      <p class="note"><svg width="18" height="18" aria-hidden="true"><use href="#i-lock"/></svg><span>Prix TTC. Sans engagement. Votre clé de licence arrive par e-mail et fonctionne sur 3 ordinateurs. Vos données restent toujours accessibles, abonné ou non.</span></p>
     </div>
-    <p class="muted reveal" style="text-align:center; font-size: 15px; margin-top: 14px">Sans engagement. Votre clé de licence arrive par e-mail et fonctionne sur 3 ordinateurs.</p>
   </div>
 </section>
 
@@ -207,7 +240,7 @@
     <p>Téléchargez Pécule gratuitement pour Windows. L'installation prend quelques minutes.</p>
     <div class="actions">
       <a href="https://github.com/zyg-off/pecule/releases/latest/download/Pecule-Setup.exe" class="btn btn-light"><span class="shine"></span>Télécharger Pécule<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-      <a href="https://buy.polar.sh/polar_cl_RZquC1pevH3ghLIsdmeln4F2vFGXhXGW9ek2N1QzRuH" class="btn btn-outline-light">Passer à Pro</a>
+      <a href="#pro" class="btn btn-outline-light">Découvrir Pécule Pro</a>
     </div>
   </div>
 </div>

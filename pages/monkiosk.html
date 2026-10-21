@@ -1,6 +1,6 @@
 <!--
 title: MonKiosk — L'outil de gestion des petits commerces · Kubo Studio
-description: Planning d'équipe, congés, tâches et hygiène, stock et ventes : MonKiosk organise votre boutique, sur ordinateur et téléphone. 14 jours d'essai gratuit.
+description: Planning d'équipe, congés, tâches et hygiène, stock et ventes : MonKiosk organise votre boutique, sur ordinateur et téléphone. Dès 4,99 € par mois, 14 jours d'essai gratuit.
 current: monkiosk
 -->
 <div class="wrap p-hero">
@@ -9,7 +9,7 @@ current: monkiosk
   <h1 class="reveal">Votre boutique, <span class="accent">enfin organisée.</span></h1>
   <p class="lead reveal d1">Planning de l'équipe, congés, checklists, hygiène, stock et ventes : tout au même endroit, sur l'ordinateur de la boutique comme sur votre téléphone.</p>
   <div class="actions reveal d2">
-    <a href="{{CHECKOUT_MONKIOSK}}" class="btn btn-primary"><span class="shine"></span>Essayer 14 jours gratuits<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <a href="{{MONKIOSK_APP}}" class="btn btn-primary"><span class="shine"></span>Essayer 14 jours gratuits<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
     <a href="{{MONKIOSK_DEMO}}" class="btn btn-ghost" target="_blank" rel="noopener">Voir la démo en ligne</a>
   </div>
   <div class="hero-meta reveal d2">
@@ -121,32 +121,16 @@ current: monkiosk
   <p class="sr-only">MonKiosk convient aux boulangeries, cafés, épiceries, fleuristes, salons de coiffure, restaurants et à tous les petits commerces avec une équipe.</p>
 </section>
 
-<section>
+<section id="formules">
   <div class="wrap">
     <div class="pricing-band reveal">
-      <div class="split">
-        <div>
-          <h2>Un seul prix, tout compris</h2>
-          <p class="lead" style="color:#B9B6C9; margin-bottom: 24px">Toutes les fonctions, sur tous vos appareils. Essayez gratuitement pendant 14 jours, puis restez seulement si MonKiosk vous plaît.</p>
-          <div class="actions">
-            <a href="{{MONKIOSK_DEMO}}" class="btn btn-outline-light" target="_blank" rel="noopener">Explorer la démo d'abord</a>
-          </div>
-        </div>
-        <article class="plan featured">
-          <span class="badge">14 jours gratuits</span>
-          <div class="plan-head"><img src="brand/monkiosk-logo.svg" alt=""><div class="plan-name">MonKiosk</div></div>
-          <p class="plan-desc">Pour un commerce et toute son équipe.</p>
-          <div><span class="price">14,90 €</span><span class="cadence">TTC / mois</span></div>
-          <ul>
-            <li>Planning, équipe et congés</li>
-            <li>Tâches, hygiène et annonces</li>
-            <li>Stock et ventes</li>
-            <li>Ordinateur et téléphone, synchronisés</li>
-          </ul>
-          <div class="cta"><a class="btn btn-primary btn-block" href="{{CHECKOUT_MONKIOSK}}"><span class="shine"></span>Essayer gratuitement<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
-        </article>
+      <div class="section-head">
+        <h2>Trois formules, un prix qui suit votre équipe</h2>
+        <p>Un prix par commerce, plus un petit montant par salarié. Faites glisser le curseur pour voir votre prix.</p>
       </div>
-      <p class="note"><svg width="18" height="18" aria-hidden="true"><use href="#i-lock"/></svg><span>Sans engagement, résiliable en quelques clics. Paiement sécurisé par Polar, notre revendeur agréé. <a href="conditions.html">Conditions de vente</a></span></p>
+      <span class="trial-strip"><svg aria-hidden="true"><use href="#i-sparkle"/></svg>14 jours gratuits sur toutes les formules</span>
+      {{MONKIOSK_PLANS}}
+      <p class="note"><svg width="18" height="18" aria-hidden="true"><use href="#i-lock"/></svg><span>Prix TTC, par commerce. Le prix par salarié se base sur le nombre de salariés enregistrés dans MonKiosk (le plus élevé du mois). Sans engagement, résiliable en quelques clics. Paiement sécurisé par Polar, notre revendeur agréé. <a href="conditions.html">Conditions de vente</a></span></p>
     </div>
   </div>
 </section>
@@ -157,7 +141,15 @@ current: monkiosk
     <div class="faq center reveal">
       <details>
         <summary>Comment fonctionne l'essai gratuit ?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
-        <div class="answer">Vous profitez de MonKiosk gratuitement pendant 14 jours. Le premier paiement n'a lieu qu'à la fin de l'essai, et vous pouvez résilier avant si l'app ne vous convient pas.</div>
+        <div class="answer">Créez votre commerce dans MonKiosk, puis choisissez votre formule : les 14 premiers jours sont gratuits. Le premier paiement n'a lieu qu'à la fin de l'essai, et vous pouvez résilier avant si l'app ne vous convient pas.</div>
+      </details>
+      <details>
+        <summary>Comment est calculé le prix par salarié ?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+        <div class="answer">MonKiosk compte les salariés enregistrés dans votre équipe. Chaque mois, c'est le nombre le plus élevé du mois qui est retenu. Par exemple, avec la formule Pro et 4 salariés : 29 € + 4 × 2,50 € = 39 € par mois.</div>
+      </details>
+      <details>
+        <summary>Puis-je changer de formule ?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+        <div class="answer">Oui, quand vous voulez, depuis MonKiosk dans <b>Compte › Mon abonnement</b>.</div>
       </details>
       <details>
         <summary>Puis-je tester sans m'inscrire ?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
@@ -179,7 +171,7 @@ current: monkiosk
     <h2>Faites de votre prochain planning une formalité</h2>
     <p>Essayez MonKiosk gratuitement pendant 14 jours. Sans engagement.</p>
     <div class="actions">
-      <a href="{{CHECKOUT_MONKIOSK}}" class="btn btn-light"><span class="shine"></span>Commencer l'essai gratuit<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a href="{{MONKIOSK_APP}}" class="btn btn-light"><span class="shine"></span>Commencer l'essai gratuit<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       <a href="{{MONKIOSK_DEMO}}" class="btn btn-outline-light" target="_blank" rel="noopener">Voir la démo</a>
     </div>
   </div>

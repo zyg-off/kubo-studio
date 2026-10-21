@@ -190,6 +190,43 @@
     setLang(params.get("lang") || "fr");
   }
 
+
+  // Calculateur MonKiosk : prix selon le nombre de salariés
+  var fmt = function (x) {
+    try { return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", minimumFractionDigits: x % 1 ? 2 : 0 }).format(x); }
+    catch (e) { return x.toFixed(2).replace(".", ",") + " €"; }
+  };
+  $$("[data-calc]").forEach(function (calc) {
+    var input = $("input[type=range]", calc);
+    var update = function () {
+      var n = +input.value;
+      $$("[data-n]", calc).forEach(function (el) { el.textContent = n; });
+      $$(".calc-out", calc).forEach(function (el) { el.innerHTML = "<b>" + n + "</b> salarié" + (n > 1 ? "s" : ""); });
+      $$("[data-base]", calc).forEach(function (card) {
+        var t = Math.round((+card.getAttribute("data-base") + n * +card.getAttribute("data-per")) * 100) / 100;
+        var total = $("[data-total]", card);
+        if (total) total.textContent = fmt(t);
+        var lbl = $(".calc-total", card);
+        if (lbl) lbl.firstChild.textContent = "Pour ";
+        var s = $("[data-n]", card);
+        if (s && s.nextSibling) s.nextSibling.textContent = n > 1 ? " salariés : " : " salarié : ";
+      });
+    };
+    input.addEventListener("input", update);
+    update();
+  });
+
+  // Pécule Pro : mensuel ou annuel
+  $$("[data-billing]").forEach(function (box) {
+    var btns = $$("[data-period]", box);
+    var show = function (period) {
+      btns.forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-period") === period ? "true" : "false"); });
+      $$("[data-show]", box).forEach(function (el) { el.hidden = el.getAttribute("data-show") !== period; });
+    };
+    btns.forEach(function (b) { b.addEventListener("click", function () { show(b.getAttribute("data-period")); }); });
+    show("month");
+  });
+
   // FAQ deep link: open the targeted question
   if (location.hash) {
     var target = document.getElementById(location.hash.slice(1));

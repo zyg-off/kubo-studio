@@ -1,6 +1,6 @@
 <!--
 title: Tarifs — Kubo Studio
-description: MonKiosk à 14,90 € par mois avec 14 jours d'essai, Pécule gratuit et Pécule Pro à 2,99 € par mois. Sans engagement.
+description: MonKiosk dès 4,99 € par mois avec 14 jours d'essai, Pécule gratuit, et Pécule Pro à 2,99 € par mois ou 24 € par an. Sans engagement.
 current: tarifs
 -->
 <div class="wrap page-head">
@@ -9,48 +9,31 @@ current: tarifs
   <p class="lead reveal d1">Pas d'engagement, pas de frais cachés. Vous essayez, vous restez si ça vous plaît, et vous résiliez en quelques clics si ce n'est plus le cas.</p>
 </div>
 
-<section style="padding-top: 24px">
+<section id="monkiosk" style="padding-top: 24px">
   <div class="wrap">
     <div class="pricing-band reveal">
-      <div class="plans">
-        <article class="plan featured">
-          <span class="badge">14 jours gratuits</span>
-          <div class="plan-head"><img src="brand/monkiosk-logo.svg" alt=""><div class="plan-name">MonKiosk</div></div>
-          <p class="plan-desc">L'outil de gestion tout-en-un pour les petits commerces, sur PC et téléphone.</p>
-          <div><span class="price">14,90 €</span><span class="cadence">TTC / mois</span></div>
-          <ul>
-            <li>Planning, équipe et congés</li>
-            <li>Tâches, hygiène et annonces</li>
-            <li>Stock et ventes</li>
-            <li>Ordinateur et téléphone, synchronisés</li>
-          </ul>
-          <div class="cta"><a class="btn btn-primary btn-block" href="{{CHECKOUT_MONKIOSK}}"><span class="shine"></span>Essayer gratuitement<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
-        </article>
-        <article class="plan">
-          <div class="plan-head"><img src="brand/pecule-logo.png" alt=""><div class="plan-name">Pécule Pro</div></div>
-          <p class="plan-desc">Toutes les fonctions avancées de Pécule, l'app de finances personnelles.</p>
-          <div><span class="price">2,99 €</span><span class="cadence">TTC / mois</span></div>
-          <ul>
-            <li>Tout Pécule gratuit, et en plus :</li>
-            <li>Connexion directe à votre banque</li>
-            <li>Vos comptes sur votre téléphone</li>
-            <li>Plusieurs profils et chiffrement</li>
-          </ul>
-          <div class="cta"><a class="btn btn-light btn-block" href="{{CHECKOUT_PECULE_PRO}}">S'abonner<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
-        </article>
-        <article class="plan free-card">
-          <div class="plan-head"><img src="brand/pecule-logo.png" alt=""><div class="plan-name">Pécule</div></div>
-          <p class="plan-desc">L'app de finances personnelles pour Windows, en version gratuite.</p>
-          <div><span class="price">0 €</span></div>
-          <ul>
-            <li>Comptes, budgets et objectifs</li>
-            <li>Courses, repas et foyer</li>
-            <li>Sans publicité, sans limite de durée</li>
-          </ul>
-          <div class="cta"><a class="btn btn-outline-light btn-block" href="{{PECULE_DOWNLOAD}}">Télécharger</a></div>
-        </article>
+      <div class="section-head">
+        <span class="eyebrow">MonKiosk</span>
+        <h2>Pour votre commerce</h2>
+        <p>Un prix par commerce, plus un petit montant par salarié. Faites glisser le curseur pour voir votre prix.</p>
       </div>
-      <p class="note"><svg width="18" height="18" aria-hidden="true"><use href="#i-lock"/></svg><span>Prix TTC. Abonnements mensuels reconduits automatiquement, résiliables à tout moment. Paiement sécurisé par Polar, notre revendeur agréé. En vous abonnant, vous acceptez nos <a href="conditions.html">conditions de vente</a>.</span></p>
+      <span class="trial-strip"><svg aria-hidden="true"><use href="#i-sparkle"/></svg>14 jours gratuits sur toutes les formules</span>
+      {{MONKIOSK_PLANS}}
+      <p class="note"><svg width="18" height="18" aria-hidden="true"><use href="#i-lock"/></svg><span>Prix TTC, par commerce. Le prix par salarié se base sur le nombre de salariés enregistrés dans MonKiosk (le plus élevé du mois). Vous choisissez votre formule dans l'app, après avoir créé votre commerce. Sans engagement. Paiement sécurisé par Polar, notre revendeur agréé. <a href="conditions.html">Conditions de vente</a></span></p>
+    </div>
+  </div>
+</section>
+
+<section id="pecule" style="padding-top: 0">
+  <div class="wrap">
+    <div class="pricing-band reveal" style="background: #17352A">
+      <div class="section-head">
+        <span class="eyebrow mint">Pécule</span>
+        <h2>Pour vous</h2>
+        <p>Pécule est gratuit. Pécule Pro ajoute quatre fonctions avancées, au mois ou à l'année.</p>
+      </div>
+      {{PECULE_PLANS}}
+      <p class="note"><svg width="18" height="18" aria-hidden="true"><use href="#i-lock"/></svg><span>Prix TTC. Abonnement reconduit automatiquement, résiliable à tout moment. Paiement sécurisé par Polar. En vous abonnant, vous acceptez nos <a href="conditions.html">conditions de vente</a>.</span></p>
     </div>
   </div>
 </section>
@@ -69,7 +52,7 @@ current: tarifs
       <div class="value reveal d1">
         <div class="ico" style="background: var(--mint-soft); color: var(--mint-dark)"><svg aria-hidden="true"><use href="#i-card"/></svg></div>
         <h3>2. Abonnez-vous</h3>
-        <p>Le paiement se fait sur une page sécurisée. Vous recevez aussitôt une confirmation par e-mail.</p>
+        <p>Pour MonKiosk, choisissez votre formule dans l'app : elle s'active toute seule. Le paiement se fait sur une page sécurisée.</p>
       </div>
       <div class="value reveal d2">
         <div class="ico" style="background: var(--gold-soft); color: #8A6414"><svg aria-hidden="true"><use href="#i-refresh"/></svg></div>

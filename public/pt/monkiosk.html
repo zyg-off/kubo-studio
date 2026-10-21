@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MonKiosk — A ferramenta de gestão para pequenas lojas · Kubo Studio</title>
+<meta name="description" content="Horários da equipa, férias, tarefas e higiene, stock e vendas: o MonKiosk organiza a sua loja, no computador e no telemóvel. Desde 4,99 € por mês, 14 dias grátis.">
+<link rel="canonical" href="https://kubo-studio.kubostudio.workers.dev/pt/monkiosk.html">
+<link rel="alternate" hreflang="fr" href="https://kubo-studio.kubostudio.workers.dev/monkiosk.html">
+<link rel="alternate" hreflang="en" href="https://kubo-studio.kubostudio.workers.dev/en/monkiosk.html">
+<link rel="alternate" hreflang="pt" href="https://kubo-studio.kubostudio.workers.dev/pt/monkiosk.html">
+<link rel="alternate" hreflang="x-default" href="https://kubo-studio.kubostudio.workers.dev/monkiosk.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kubo Studio">
+<meta property="og:locale" content="pt_PT">
+<meta property="og:url" content="https://kubo-studio.kubostudio.workers.dev/pt/monkiosk.html">
+<meta property="og:title" content="MonKiosk — A ferramenta de gestão para pequenas lojas · Kubo Studio">
+<meta property="og:description" content="Horários da equipa, férias, tarefas e higiene, stock e vendas: o MonKiosk organiza a sua loja, no computador e no telemóvel. Desde 4,99 € por mês, 14 dias grátis.">
+<meta property="og:image" content="https://kubo-studio.kubostudio.workers.dev/img/og-monkiosk.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#FAF6F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14131B" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/brand/kubo-icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/brand/kubo-app-icon-512.png">
+<link rel="preload" href="/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "MonKiosk", "applicationCategory": "BusinessApplication", "operatingSystem": "Web, Windows, Android, iOS", "url": "https://kubo-studio.kubostudio.workers.dev/pt/monkiosk.html", "image": "https://kubo-studio.kubostudio.workers.dev/img/og-monkiosk.png", "offers": {"@type": "AggregateOffer", "priceCurrency": "EUR", "lowPrice": "4.99", "highPrice": "49.00", "offerCount": 3}, "publisher": {"@type": "Organization", "name": "Kubo Studio", "url": "https://kubo-studio.kubostudio.workers.dev/", "logo": "https://kubo-studio.kubostudio.workers.dev/brand/kubo-app-icon-512.png", "email": "kubostudio.contact@gmail.com", "address": {"@type": "PostalAddress", "addressLocality": "Toulouse", "addressCountry": "FR"}}}</script>
+</head>
+<body class="">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h11m-4.5-4.5L15 10l-4.5 4.5"/></symbol><symbol id="i-check" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 10.5l3.2 3.2L15 7"/></symbol><symbol id="i-calendar" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="14" height="12.5" rx="2"/><path d="M3 8.5h14M7 2.5v4M13 2.5v4"/></symbol><symbol id="i-users" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="7" r="2.8"/><path d="M2.5 16.5c.6-2.8 2.7-4.3 5-4.3s4.4 1.5 5 4.3"/><path d="M13 4.5a2.8 2.8 0 0 1 0 5.2M14.5 12.4c1.6.5 2.7 1.9 3 4.1"/></symbol><symbol id="i-tasks" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="3"/><path d="M6.5 10l2.5 2.5 4.5-5"/></symbol><symbol id="i-box" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6.5L10 3l7 3.5v7L10 17l-7-3.5z"/><path d="M3 6.5L10 10l7-3.5M10 10v7"/></symbol><symbol id="i-chart" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 16.5V9M8.5 16.5V4M13.5 16.5v-6M17 16.5H2"/></symbol><symbol id="i-home" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l7-5.5L17 9v7.5a.8.8 0 0 1-.8.8H12.5v-5h-5v5H3.8a.8.8 0 0 1-.8-.8z"/></symbol><symbol id="i-thermo" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5a2 2 0 0 1 4 0v8.2a3.6 3.6 0 1 1-4 0z"/><path d="M10 9v5"/></symbol><symbol id="i-bell" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13.5V9a5 5 0 0 1 10 0v4.5l1.5 1.5h-13z"/><path d="M8.5 17.5a1.6 1.6 0 0 0 3 0"/></symbol><symbol id="i-phone" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="8" height="15" rx="2"/><path d="M9 15h2"/></symbol><symbol id="i-pc" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="15" height="10" rx="1.5"/><path d="M7 17h6M10 13.5V17"/></symbol><symbol id="i-shield" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.5l6 2.3v4.7c0 3.7-2.6 6.5-6 8-3.4-1.5-6-4.3-6-8V4.8z"/><path d="M7.3 10l2 2 3.6-3.8"/></symbol><symbol id="i-bank" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5L10 3l7.5 4.5M4 7.5v7M8 7.5v7M12 7.5v7M16 7.5v7M2.5 16.5h15"/></symbol><symbol id="i-lock" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="9" width="12" height="8.5" rx="2"/><path d="M6.5 9V6.5a3.5 3.5 0 0 1 7 0V9"/></symbol><symbol id="i-cart" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 3.5h2.2l2 9.5h8.6l1.8-6.8H5.5"/><circle cx="8" cy="16.3" r="1.2"/><circle cx="14" cy="16.3" r="1.2"/></symbol><symbol id="i-mail" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="15" height="11" rx="2"/><path d="M3 5.5l7 5.5 7-5.5"/></symbol><symbol id="i-gift" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="14" height="9" rx="1.5"/><path d="M2.5 5.5h15V8h-15zM10 5.5V17M10 5.5C9 3 6 2.5 6 4.3S9 5.5 10 5.5c1 0 4-.6 4-1.2S11 3 10 5.5"/></symbol><symbol id="i-target" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><circle cx="10" cy="10" r="3.5"/><circle cx="10" cy="10" r=".6"/></symbol><symbol id="i-sparkle" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.5l1.7 4.6 4.8 1.7-4.8 1.7L10 15l-1.7-4.5L3.5 8.8l4.8-1.7z"/><path d="M15.5 13.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></symbol><symbol id="i-globe" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2.2 2 3.2 4.5 3.2 7.5s-1 5.5-3.2 7.5c-2.2-2-3.2-4.5-3.2-7.5s1-5.5 3.2-7.5z"/></symbol><symbol id="i-help" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M7.8 7.8a2.3 2.3 0 1 1 3.2 2.1c-.6.3-1 .8-1 1.5v.4M10 14.3v.2"/></symbol><symbol id="i-card" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="15" height="11" rx="2"/><path d="M2.5 8.5h15M5.5 12.5h3"/></symbol><symbol id="i-refresh" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 10a6 6 0 1 1-1.8-4.3M16 3.5v3.5h-3.5"/></symbol><symbol id="i-download" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3v10M5.5 9l4.5 4.5L14.5 9M3.5 16.5h13"/></symbol><symbol id="i-doc" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2.5h6.5L15.5 6.5v11H5z"/><path d="M11 2.5V7h4.5M7.5 10.5h5M7.5 13.5h5"/></symbol><symbol id="i-heart" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 16.5s-6.5-3.8-6.5-8.3A3.6 3.6 0 0 1 10 6a3.6 3.6 0 0 1 6.5 2.2c0 4.5-6.5 8.3-6.5 8.3z"/></symbol><symbol id="i-megaphone" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5v3h3l6.5 4v-11L6 8.5z"/><path d="M15 7.5a3.5 3.5 0 0 1 0 5"/></symbol><symbol id="i-clock" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M10 5.5V10l3 2"/></symbol><symbol id="i-leaf" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16c0-7 4.5-11.5 12-12-.3 7.4-4.8 12-12 12z"/><path d="M4 16l6.5-6.5"/></symbol><symbol id="i-smile" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M7 11.5a3.5 3.5 0 0 0 6 0M7.5 7.8v.2M12.5 7.8v.2"/></symbol><symbol id="i-up" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 16V4m-5 5 5-5 5 5"/></symbol><symbol id="i-user" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6.8" r="3.3"/><path d="M3.5 17.2c.8-3.3 3.4-5.2 6.5-5.2s5.7 1.9 6.5 5.2"/></symbol><symbol id="i-key" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="13.5" r="3.5"/><path d="M9 11l7.5-7.5M13.5 6.5l2 2M15.5 4.5l1.5 1.5"/></symbol><symbol id="i-receipt" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2.5h10v15l-2.5-1.5-2.5 1.5-2.5-1.5L5 17.5z"/><path d="M8 7h4M8 10.5h4"/></symbol></svg>
+<a class="skip" href="#contenu">Ir para o conteúdo</a>
+<header class="site-header">
+  <div class="wrap nav">
+    <a href="/pt/" class="logo" aria-label="Kubo Studio, início"><img src="/brand/kubo-icon.svg" alt="">Kubo Studio</a>
+    <button class="menu-btn" aria-label="Abrir o menu" aria-expanded="false" aria-controls="nav-links">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <nav class="nav-links" id="nav-links" aria-label="Menu principal">
+      <a href="/pt/">Início</a><a href="/pt/monkiosk.html" aria-current="page"><img src="/brand/monkiosk-logo.svg" alt="">MonKiosk</a><a href="/pt/pecule.html"><img src="/brand/pecule-logo.png" alt="">Pécule</a><a href="/pt/tarifs.html">Preços</a><a href="/pt/aide.html">Ajuda</a>
+      <div class="lang-pick" role="group" aria-label="Idioma"><a href="/monkiosk.html" hreflang="fr" lang="fr">FR</a><a href="/en/monkiosk.html" hreflang="en" lang="en">EN</a><a href="/pt/monkiosk.html" hreflang="pt" lang="pt" aria-current="true">PT</a></div>
+      <a href="/pt/espace-client.html" class="account-link"><svg aria-hidden="true"><use href="#i-user"/></svg>Área de cliente</a>
+      <a href="/pt/tarifs.html" class="btn btn-dark btn-small">Começar<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </nav>
+  </div>
+</header>
+<main id="contenu">
+<div class="wrap p-hero">
+  <img class="app-logo reveal" src="/brand/monkiosk-logo.svg" alt="">
+  <span class="eyebrow reveal">Para pequenas lojas</span>
+  <h1 class="reveal">A sua loja, <span class="accent">finalmente organizada.</span></h1>
+  <p class="lead reveal d1">Horários da equipa, férias, listas de verificação, higiene, stock e vendas: tudo no mesmo sítio, no computador da loja e no seu telemóvel.</p>
+  <div class="actions reveal d2">
+    <a href="https://zyg-off.github.io/MonKiosk/" class="btn btn-primary"><span class="shine"></span>Experimentar 14 dias grátis<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <a href="https://zyg-off.github.io/MonKiosk/" class="btn btn-ghost" target="_blank" rel="noopener">Ver a demonstração</a>
+  </div>
+  <div class="hero-meta reveal d2">
+    <span><svg aria-hidden="true"><use href="#i-check"/></svg>Computador e telemóvel</span>
+    <span><svg aria-hidden="true"><use href="#i-check"/></svg>Sincronizado em tempo real</span>
+    <span><svg aria-hidden="true"><use href="#i-check"/></svg>Sem fidelização</span>
+  </div>
+  <div class="p-showcase reveal d3">
+    <div class="browser">
+      <div class="browser-bar"><i></i><i></i><i></i><span class="url">MonKiosk · Au Pain Doré</span></div>
+      <div class="video-wrap" data-video>
+        <video muted loop playsinline preload="metadata" poster="/video/monkiosk-demo-poster.webp" width="1280" height="800" aria-label="Demonstração do MonKiosk: início, horários, tarefas, stock e vendas">
+          <source src="/video/monkiosk-demo.webm" type="video/webm">
+          <source src="/video/monkiosk-demo.mp4" type="video/mp4">
+        </video>
+        <button type="button" class="video-btn" aria-label="Pausar o vídeo"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path class="i-pause" d="M7 4v12M13 4v12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path class="i-play" d="M6.5 4.5v11l9-5.5z" fill="currentColor"/></svg></button>
+      </div>
+    </div>
+    <div class="phone float"><span class="screen"><img src="/img/monkiosk-mobile-planning.webp" alt="O horário do MonKiosk no telemóvel" width="600" height="1298"></span></div>
+  </div>
+</div>
+
+<section class="band" style="margin-top: 72px">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Faça a visita ao MonKiosk</h2>
+      <p>Seis áreas, uma só app. Clique numa secção para a ver em ação, com a padaria fictícia da nossa demonstração.</p>
+    </div>
+    <div class="tour" data-tour>
+      <div class="tour-list" role="tablist" aria-label="As áreas do MonKiosk" aria-orientation="vertical">
+        <button class="tour-item" role="tab" aria-selected="true" data-src="/img/monkiosk-accueil.webp" data-alt="O ecrã inicial do MonKiosk" data-url="MonKiosk · Início">
+          <span class="ico"><svg aria-hidden="true"><use href="#i-home"/></svg></span>
+          <span><strong>Início</strong><span class="desc">O que precisa da sua atenção hoje: descansos curtos demais, ausências, horas extra, stock baixo.</span><span class="bar"><b></b></span></span>
+        </button>
+        <button class="tour-item" role="tab" aria-selected="false" tabindex="-1" data-src="/img/monkiosk-planning.webp" data-alt="O horário da semana" data-url="MonKiosk · Horários">
+          <span class="ico"><svg aria-hidden="true"><use href="#i-calendar"/></svg></span>
+          <span><strong>Horários</strong><span class="desc">A semana de toda a equipa num relance, por posto, com as horas de cada um.</span><span class="bar"><b></b></span></span>
+        </button>
+        <button class="tour-item" role="tab" aria-selected="false" tabindex="-1" data-src="/img/monkiosk-equipe.webp" data-alt="A equipa e os contratos" data-url="MonKiosk · Equipa">
+          <span class="ico"><svg aria-hidden="true"><use href="#i-users"/></svg></span>
+          <span><strong>Equipa</strong><span class="desc">Os seus funcionários, os contratos e os pedidos de férias, no mesmo sítio.</span><span class="bar"><b></b></span></span>
+        </button>
+        <button class="tour-item" role="tab" aria-selected="false" tabindex="-1" data-src="/img/monkiosk-taches.webp" data-alt="Listas de verificação e registos de temperatura" data-url="MonKiosk · Tarefas">
+          <span class="ico"><svg aria-hidden="true"><use href="#i-tasks"/></svg></span>
+          <span><strong>Tarefas e higiene</strong><span class="desc">Listas de abertura e fecho, registos de temperatura dos frigoríficos.</span><span class="bar"><b></b></span></span>
+        </button>
+        <button class="tour-item" role="tab" aria-selected="false" tabindex="-1" data-src="/img/monkiosk-stock.webp" data-alt="O stock e os limites" data-url="MonKiosk · Stock">
+          <span class="ico"><svg aria-hidden="true"><use href="#i-box"/></svg></span>
+          <span><strong>Stock</strong><span class="desc">Os seus produtos e os limites mínimos: o MonKiosk avisa antes da rutura.</span><span class="bar"><b></b></span></span>
+        </button>
+        <button class="tour-item" role="tab" aria-selected="false" tabindex="-1" data-src="/img/monkiosk-ventes.webp" data-alt="O acompanhamento das vendas" data-url="MonKiosk · Vendas">
+          <span class="ico"><svg aria-hidden="true"><use href="#i-chart"/></svg></span>
+          <span><strong>Vendas</strong><span class="desc">Faturação, cesto médio e melhores dias, sem folha de cálculo.</span><span class="bar"><b></b></span></span>
+        </button>
+      </div>
+      <div class="tour-view">
+        <div class="browser">
+          <div class="browser-bar"><i></i><i></i><i></i><span class="url">MonKiosk · Início</span></div>
+          <img class="zoomable" data-zoom src="/img/monkiosk-accueil.webp" alt="O ecrã inicial do MonKiosk" width="1600" height="1000">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Os pequenos extras que fazem toda a diferença</h2>
+      <p>O MonKiosk trata dos pormenores, para que possa tratar dos seus clientes.</p>
+    </div>
+    <div class="features">
+      <div class="feature reveal"><div class="ico"><svg aria-hidden="true"><use href="#i-shield"/></svg></div><h3>Alertas legais</h3><p>Descanso inferior a 11 horas, horas extra, contrato ultrapassado: é avisado antes de publicar o horário. Segundo as regras laborais francesas.</p></div>
+      <div class="feature reveal d1"><div class="ico"><svg aria-hidden="true"><use href="#i-clock"/></svg></div><h3>Férias e ausências</h3><p>Os pedidos de férias chegam à app, e o horário tem as ausências em conta.</p></div>
+      <div class="feature reveal d2"><div class="ico"><svg aria-hidden="true"><use href="#i-megaphone"/></svg></div><h3>Avisos</h3><p>Uma informação para toda a equipa? Publique um aviso, sem bilhetinhos colados na caixa.</p></div>
+      <div class="feature reveal"><div class="ico"><svg aria-hidden="true"><use href="#i-thermo"/></svg></div><h3>Higiene</h3><p>Os registos de temperatura ficam anotados e datados, e os valores fora da norma saltam à vista.</p></div>
+      <div class="feature reveal d1"><div class="ico"><svg aria-hidden="true"><use href="#i-refresh"/></svg></div><h3>Sempre atualizado</h3><p>Uma alteração no computador aparece logo no telemóvel, e vice-versa.</p></div>
+      <div class="feature reveal d2"><div class="ico"><svg aria-hidden="true"><use href="#i-pc"/></svg></div><h3>App para Windows</h3><p>Uma verdadeira app para o computador da loja, que se atualiza sozinha.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap split">
+    <div class="reveal">
+      <span class="eyebrow">No seu telemóvel</span>
+      <h2>A loja no bolso</h2>
+      <p class="lead" style="margin-bottom: 0">Adicione o MonKiosk ao ecrã principal do telemóvel: abre como uma app, com a mesma equipa, o mesmo horário e as mesmas tarefas.</p>
+      <ul class="checks">
+        <li><strong>Uma olhadela de manhã</strong> para ver o que o espera.</li>
+        <li><strong>As listas de verificação</strong> marcam-se diretamente no telemóvel.</li>
+        <li><strong>Nada para instalar</strong>: funciona no navegador.</li>
+      </ul>
+    </div>
+    <div class="phones reveal d1">
+      <div class="phone"><span class="screen"><img class="zoomable" data-zoom src="/img/monkiosk-mobile-accueil.webp" alt="O ecrã inicial do MonKiosk no telemóvel" loading="lazy" width="600" height="1298"></span></div>
+      <div class="phone"><span class="screen"><img class="zoomable" data-zoom src="/img/monkiosk-mobile-taches.webp" alt="As tarefas do MonKiosk no telemóvel" loading="lazy" width="600" height="1298"></span></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-bottom: 48px">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <h2>Pensado para todas as pequenas lojas</h2>
+      <p>Assim que tem uma loja e uma equipa, o MonKiosk poupa-lhe tempo.</p>
+    </div>
+  </div>
+  <div class="marquee reveal" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Padarias</span><span>Cafés</span><span>Mercearias</span><span>Floristas</span><span>Cabeleireiros</span><span>Restaurantes</span><span>Garrafeiras</span><span>Livrarias</span><span>Lojas de roupa</span><span>Queijarias</span><span>Pastelarias</span><span>Bares</span>
+      <span>Padarias</span><span>Cafés</span><span>Mercearias</span><span>Floristas</span><span>Cabeleireiros</span><span>Restaurantes</span><span>Garrafeiras</span><span>Livrarias</span><span>Lojas de roupa</span><span>Queijarias</span><span>Pastelarias</span><span>Bares</span>
+    </div>
+  </div>
+  <p class="sr-only">O MonKiosk serve padarias, cafés, mercearias, floristas, cabeleireiros, restaurantes e todas as pequenas lojas com equipa.</p>
+</section>
+
+<section id="formules">
+  <div class="wrap">
+    <div class="pricing-band reveal">
+      <div class="section-head">
+        <h2>Três fórmulas, um preço que acompanha a equipa</h2>
+        <p>Um preço por loja, mais um pequeno valor por funcionário. Deslize o cursor para ver o seu preço.</p>
+      </div>
+      <span class="trial-strip"><svg aria-hidden="true"><use href="#i-sparkle"/></svg>14 dias grátis em todas as fórmulas</span>
+      <div class="calc" data-calc data-lang="pt" data-emp="funcionário" data-emps="funcionários" data-for="Para">
+    <label class="calc-label" for="calc-n">Quantos funcionários tem a sua equipa?</label>
+    <div class="calc-row">
+      <input type="range" id="calc-n" min="1" max="30" value="5" step="1">
+      <output for="calc-n" class="calc-out"><b data-n>5</b> funcionários</output>
+    </div>
+    <div class="plans plans-3">
+    <article class="plan" data-base="4.99" data-per="3.0">
+      
+      <div class="plan-head"><img src="/brand/monkiosk-logo.svg" alt=""><div class="plan-name">Essentiel</div></div>
+      <p class="plan-desc">O essencial para organizar a loja e a equipa.</p>
+      <div><span class="price">4,99 €</span><span class="cadence">/ mês</span></div>
+      <div class="per-line">+ 3 € por funcionário e por mês</div>
+      <div class="calc-total" aria-live="polite">Para <b data-n>5</b> funcionários : <b data-total>19,99 €</b> / mês</div>
+      <ul><li>Horários, equipa e férias</li><li>Checklists e registos de temperatura</li><li>Stock, encomendas e vendas</li><li>Perdas e sobras</li><li>Computador e telemóvel, sincronizados</li></ul>
+      <div class="cta"><a class="btn btn-light btn-block" href="https://zyg-off.github.io/MonKiosk/"><span class="shine"></span>Experimentar 14 dias grátis<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+    </article><article class="plan featured" data-base="29.0" data-per="2.5">
+      <span class="badge">Recomendada</span>
+      <div class="plan-head"><img src="/brand/monkiosk-logo.svg" alt=""><div class="plan-name">Pro</div></div>
+      <p class="plan-desc">Para gerir a equipa e a rentabilidade no dia a dia.</p>
+      <div><span class="price">29 €</span><span class="cadence">/ mês</span></div>
+      <div class="per-line">+ 2,50 € por funcionário e por mês</div>
+      <div class="calc-total" aria-live="polite">Para <b data-n>5</b> funcionários : <b data-total>41,50 €</b> / mês</div>
+      <ul><li class="lead-li">Tudo do Essentiel, e mais:</li><li>Área do funcionário e ponto</li><li>Custo salarial e rentabilidade</li><li>Estatísticas e previsões de vendas</li><li>Registo de higiene em PDF</li><li>Exportação para o contabilista</li></ul>
+      <div class="cta"><a class="btn btn-primary btn-block" href="https://zyg-off.github.io/MonKiosk/"><span class="shine"></span>Experimentar 14 dias grátis<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+    </article><article class="plan" data-base="49.0" data-per="2.0">
+      
+      <div class="plan-head"><img src="/brand/monkiosk-logo.svg" alt=""><div class="plan-name">Premium</div></div>
+      <p class="plan-desc">Para quem quer tudo, ou tem várias lojas.</p>
+      <div><span class="price">49 €</span><span class="cadence">/ mês</span></div>
+      <div class="per-line">+ 2 € por funcionário e por mês</div>
+      <div class="calc-total" aria-live="polite">Para <b data-n>5</b> funcionários : <b data-total>59 €</b> / mês</div>
+      <ul><li class="lead-li">Tudo do Pro, e mais:</li><li>Documentos dos funcionários</li><li>Modo tablet na loja</li><li>Lojas agrupadas</li></ul>
+      <div class="cta"><a class="btn btn-light btn-block" href="https://zyg-off.github.io/MonKiosk/"><span class="shine"></span>Experimentar 14 dias grátis<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+    </article>
+    </div>
+  </div>
+      <p class="note"><svg width="18" height="18" aria-hidden="true"><use href="#i-lock"/></svg><span>Preços com IVA, por loja. O preço por funcionário baseia-se no número de funcionários registados no MonKiosk (o mais alto do mês). Sem fidelização, cancelamento em poucos cliques. Pagamento seguro pela Polar, o nosso revendedor autorizado. <a href="/conditions.html">Condições de venda (em francês)</a></span></p>
+    </div>
+  </div>
+</section>
+
+<section id="quiz" class="band">
+  <div class="wrap quiz-wrap">
+    <div class="reveal">
+      <span class="eyebrow">Na dúvida?</span>
+      <h2>Que fórmula é a minha?</h2>
+      <p class="lead" style="margin-bottom: 0">Quatro perguntas, e recomendamos a fórmula certa, com o preço exato para a sua equipa.</p>
+    </div>
+    <div class="reveal d1"><div class="quiz" data-quiz data-emp="funcionário" data-emps="funcionários" aria-live="polite">
+    <div class="quiz-bar" aria-hidden="true"><b></b></div>
+    <fieldset class="quiz-step" data-step="0">
+      <legend><span class="quiz-count">Pergunta 1 de 4</span>Quantos funcionários tem a sua equipa?</legend>
+      <div class="quiz-num">
+        <button type="button" class="num-btn" data-delta="-1" aria-label="−1">−</button>
+        <input type="number" id="quiz-n" min="1" max="200" value="5" inputmode="numeric" aria-label="Quantos funcionários tem a sua equipa?">
+        <button type="button" class="num-btn" data-delta="1" aria-label="+1">+</button>
+      </div>
+      <div class="quiz-nav"><button type="button" class="btn btn-primary" data-next>Seguinte<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
+    </fieldset><fieldset class="quiz-step" data-step="1" hidden>
+      <legend><span class="quiz-count">Pergunta 2 de 4</span>Os seus funcionários devem ver o horário no telemóvel, ou registar o ponto?</legend>
+      <div class="quiz-choices">
+        <button type="button" class="choice" data-answer="staff" data-value="1">Sim</button>
+        <button type="button" class="choice" data-answer="staff" data-value="0">Não</button>
+      </div>
+      <div class="quiz-nav"><button type="button" class="btn btn-ghost btn-small" data-back>Voltar</button></div>
+    </fieldset><fieldset class="quiz-step" data-step="2" hidden>
+      <legend><span class="quiz-count">Pergunta 3 de 4</span>Quer acompanhar o custo salarial e a rentabilidade, ou preparar os salários para o contabilista?</legend>
+      <div class="quiz-choices">
+        <button type="button" class="choice" data-answer="manage" data-value="1">Sim</button>
+        <button type="button" class="choice" data-answer="manage" data-value="0">Não</button>
+      </div>
+      <div class="quiz-nav"><button type="button" class="btn btn-ghost btn-small" data-back>Voltar</button></div>
+    </fieldset><fieldset class="quiz-step" data-step="3" hidden>
+      <legend><span class="quiz-count">Pergunta 4 de 4</span>Tem várias lojas, ou precisa de guardar documentos dos funcionários ou de um tablet na loja?</legend>
+      <div class="quiz-choices">
+        <button type="button" class="choice" data-answer="premium" data-value="1">Sim</button>
+        <button type="button" class="choice" data-answer="premium" data-value="0">Não</button>
+      </div>
+      <div class="quiz-nav"><button type="button" class="btn btn-ghost btn-small" data-back>Voltar</button></div>
+    </fieldset>
+    <div class="quiz-result" data-result="essentiel" data-base="4.99" data-per="3.0" hidden>
+      <span class="eyebrow">O nosso conselho</span>
+      <h3>MonKiosk Essentiel</h3>
+      <p>Precisa do essencial: horários, férias, checklists, higiene, stock e vendas.</p>
+      <p class="quiz-price"><span data-total>19,99 €</span> / mês <span class="muted">· Para <span data-n>5</span> <span data-word>funcionários</span></span></p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://zyg-off.github.io/MonKiosk/"><span class="shine"></span>Experimentar 14 dias grátis<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-ghost" href="#comparatif">Ver a comparação</a>
+        <button type="button" class="link-btn" data-restart>Recomeçar</button>
+      </div>
+    </div><div class="quiz-result" data-result="pro" data-base="29.0" data-per="2.5" hidden>
+      <span class="eyebrow">O nosso conselho</span>
+      <h3>MonKiosk Pro</h3>
+      <p>Os seus funcionários têm acesso próprio, e acompanha os custos e a rentabilidade.</p>
+      <p class="quiz-price"><span data-total>41,50 €</span> / mês <span class="muted">· Para <span data-n>5</span> <span data-word>funcionários</span></span></p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://zyg-off.github.io/MonKiosk/"><span class="shine"></span>Experimentar 14 dias grátis<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-ghost" href="#comparatif">Ver a comparação</a>
+        <button type="button" class="link-btn" data-restart>Recomeçar</button>
+      </div>
+    </div><div class="quiz-result" data-result="premium" data-base="49.0" data-per="2.0" hidden>
+      <span class="eyebrow">O nosso conselho</span>
+      <h3>MonKiosk Premium</h3>
+      <p>Precisa de tudo, incluindo várias lojas, documentos dos funcionários ou o modo tablet.</p>
+      <p class="quiz-price"><span data-total>59 €</span> / mês <span class="muted">· Para <span data-n>5</span> <span data-word>funcionários</span></span></p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://zyg-off.github.io/MonKiosk/"><span class="shine"></span>Experimentar 14 dias grátis<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-ghost" href="#comparatif">Ver a comparação</a>
+        <button type="button" class="link-btn" data-restart>Recomeçar</button>
+      </div>
+    </div>
+  </div></div>
+  </div>
+</section>
+
+<section id="comparatif">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Todas as funções, fórmula a fórmula</h2>
+      <p>As funções de cada fórmula, tal como estão na app.</p>
+    </div>
+    <div class="reveal"><div class="table-scroll">
+    <table class="compare compare-3">
+      <caption class="sr-only">Comparação das fórmulas MonKiosk</caption>
+      <thead><tr><th scope="col">Função</th><th scope="col">Essentiel</th><th scope="col" class=pro>Pro</th><th scope="col">Premium</th></tr></thead>
+      <tbody>
+        <tr class="cmp-price"><th scope="row">Preço</th><td><b>4,99 €</b><span class="cmp-sub">+ 3 € por funcionário</span></td><td><b>29 €</b><span class="cmp-sub">+ 2,50 € por funcionário</span></td><td><b>49 €</b><span class="cmp-sub">+ 2 € por funcionário</span></td></tr>
+        <tr class="cmp-group"><th scope="rowgroup" colspan="4">Organizar a equipa</th></tr><tr><th scope="row">Horário da equipa</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr><tr><th scope="row">Alertas legais (descanso, horas extra, contratos)</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr><tr><th scope="row">Semanas-tipo</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr><tr><th scope="row">Férias e ausências</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr><tr><th scope="row">Disponibilidades dos funcionários</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr><tr><th scope="row">Trocas de turnos</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr><tr><th scope="row">Avisos e mensagens da equipa</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr><tr><th scope="row">Área do funcionário (cada um vê o seu horário)</th><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Não incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr><tr><th scope="row">Ponto com o código do dia</th><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Não incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr><tr><th scope="row">Documentos (contratos, recibos)</th><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Não incluído</span></td><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Não incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr><tr class="cmp-group"><th scope="rowgroup" colspan="4">Loja e higiene</th></tr><tr><th scope="row">Checklists de abertura e fecho</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr><tr><th scope="row">Registos de temperatura</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr><tr><th scope="row">Lembretes se faltar um registo</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr><tr><th scope="row">Ocorrências (avaria, quebra, higiene)</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr><tr><th scope="row">Registo de higiene em PDF</th><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Não incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr><tr><th scope="row">Modo tablet na loja</th><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Não incluído</span></td><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Não incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr><tr class="cmp-group"><th scope="rowgroup" colspan="4">Stock e vendas</th></tr><tr><th scope="row">Stock e lista de encomendas</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr><tr><th scope="row">Perdas e sobras</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr><tr><th scope="row">Vendas (faturação, cesto médio)</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr><tr><th scope="row">Estatísticas mensais</th><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Não incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr><tr><th scope="row">Previsões de vendas e equipa aconselhada</th><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Não incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr><tr class="cmp-group"><th scope="rowgroup" colspan="4">Gestão</th></tr><tr><th scope="row">Custo salarial do horário</th><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Não incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr><tr><th scope="row">Rentabilidade semanal e mensal</th><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Não incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr><tr><th scope="row">Exportação para o contabilista</th><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Não incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr><tr><th scope="row">Lojas agrupadas (vários negócios)</th><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Não incluído</span></td><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Não incluído</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Incluído</span></td></tr>
+      </tbody>
+    </table>
+  </div></div>
+  </div>
+</section>
+
+
+<section style="padding-top: 0">
+  <div class="wrap">
+    <div class="section-head center reveal"><h2>Perguntas frequentes</h2></div>
+    <div class="faq center reveal">
+      <details>
+        <summary>Como funciona o período grátis?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+        <div class="answer">Crie a sua loja no MonKiosk e escolha a fórmula: os primeiros 14 dias são grátis. O primeiro pagamento só acontece no fim do período grátis, e pode cancelar antes se a app não lhe servir.</div>
+      </details>
+      <details>
+        <summary>Como é calculado o preço por funcionário?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+        <div class="answer">O MonKiosk conta os funcionários registados na equipa. Em cada mês, conta o número mais alto atingido nesse mês. Por exemplo, com a fórmula Pro e 4 funcionários: 29 € + 4 × 2,50 € = 39 € por mês.</div>
+      </details>
+      <details>
+        <summary>Posso mudar de fórmula?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+        <div class="answer">Sim, quando quiser, no MonKiosk em <b>Compte › Mon abonnement</b> (Conta › A minha subscrição).</div>
+      </details>
+      <details>
+        <summary>Posso experimentar sem me registar?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+        <div class="answer">Sim. A <a href="https://zyg-off.github.io/MonKiosk/" target="_blank" rel="noopener">demonstração online</a> abre uma padaria fictícia com a sua equipa e horário. Nada é guardado.</div>
+      </details>
+      <details>
+        <summary>Em que aparelhos funciona?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+        <div class="answer">Em qualquer navegador, no telemóvel (adicionando-o ao ecrã principal) e com a <a href="https://github.com/zyg-off/MonKiosk/releases/latest/download/MonKiosk-Installer.exe">app para Windows</a>. Tudo fica sincronizado em tempo real.</div>
+      </details>
+      <details>
+        <summary>Para que país foi pensado o MonKiosk?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+        <div class="answer">O MonKiosk foi pensado para lojas em França: os alertas legais seguem as regras laborais francesas. <a href="/pt/aide.html#contact">Contacte-nos</a> se estiver noutro país.</div>
+      </details>
+    </div>
+    <p class="reveal" style="text-align:center; margin-top: 24px"><a class="link-arrow" href="/pt/aide.html">Todas as perguntas<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="cta-band reveal">
+    <img class="deco a" src="/brand/monkiosk-logo.svg" alt="">
+    <img class="deco b" src="/brand/monkiosk-logo.svg" alt="">
+    <h2>Faça do próximo horário uma formalidade</h2>
+    <p>Experimente o MonKiosk grátis durante 14 dias. Sem fidelização.</p>
+    <div class="actions">
+      <a href="https://zyg-off.github.io/MonKiosk/" class="btn btn-light"><span class="shine"></span>Começar o período grátis<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a href="https://zyg-off.github.io/MonKiosk/" class="btn btn-outline-light" target="_blank" rel="noopener">Ver a demonstração</a>
+    </div>
+  </div>
+</div>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="/pt/" class="logo"><img src="/brand/kubo-icon.svg" alt="">Kubo Studio</a>
+        <p>Software simples para a vida real. Feito em Toulouse.</p>
+      </div>
+      <div>
+        <h4>As nossas apps</h4>
+        <ul>
+          <li><a href="/pt/monkiosk.html">MonKiosk</a></li>
+          <li><a href="/pt/pecule.html">Pécule</a></li>
+          <li><a href="/pt/tarifs.html">Preços</a></li>
+          <li><a href="/pt/nouveautes.html">Novidades</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ajuda</h4>
+        <ul>
+          <li><a href="/pt/aide.html">Perguntas frequentes</a></li>
+          <li><a href="/pt/aide.html#contact">Contacte-nos</a></li>
+          <li><a href="/pt/espace-client.html">Área de cliente</a></li>
+          <li><a href="/guides.html">Guias (FR)</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/mentions-legales.html">Informações legais (FR)</a></li>
+          <li><a href="/conditions.html">Condições de venda (FR)</a></li>
+          <li><a href="/confidentialite.html">Privacidade (FR)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Kubo Studio</span>
+      <span>Pagamentos seguros com a Polar</span>
+    </div>
+  </div>
+</footer>
+<button class="to-top" aria-label="Voltar ao topo"><svg width="20" height="20" aria-hidden="true"><use href="#i-up"/></svg></button>
+<script src="/site.js" defer></script>
+</body>
+</html>

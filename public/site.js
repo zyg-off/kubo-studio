@@ -156,7 +156,7 @@
   $$("[data-copy]").forEach(function (b) {
     b.addEventListener("click", function () {
       var txt = b.getAttribute("data-copy"), old = b.textContent;
-      var done = function () { b.textContent = "Copié !"; setTimeout(function () { b.textContent = old; }, 1600); };
+      var done = function () { b.textContent = b.getAttribute("data-copied") || "Copié !"; setTimeout(function () { b.textContent = old; }, 1600); };
       if (navigator.clipboard) navigator.clipboard.writeText(txt).then(done, function () {});
     });
   });
@@ -346,8 +346,13 @@
       more.hidden = vis.length <= shown;
     };
     Promise.all(repos.map(function (app) {
-      return fetch("https://api.github.com/repos/" + app.repo + "/releases?per_page=20", { headers: { Accept: "application/vnd.github+json" } })
-        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      var cacheKey = "kubo-releases-" + app.repo, cached = null;
+      try { cached = JSON.parse(sessionStorage.getItem(cacheKey) || "null"); } catch (e) {}
+      var load = cached && Date.now() - cached.t < 30 * 60 * 1000 ? Promise.resolve(cached.d) :
+        fetch("https://api.github.com/repos/" + app.repo + "/releases?per_page=20", { headers: { Accept: "application/vnd.github+json" } })
+          .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+          .then(function (d) { try { sessionStorage.setItem(cacheKey, JSON.stringify({ t: Date.now(), d: d })); } catch (e) {} return d; });
+      return load
         .then(function (rel) { return rel.filter(function (x) { return !x.draft && !x.prerelease; }).map(function (x) { return { app: app, tag: x.tag_name, name: x.name, date: x.published_at, body: x.body }; }); })
         .catch(function () { return null; });
     })).then(function (res) {

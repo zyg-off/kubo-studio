@@ -8,7 +8,7 @@ MonKiosk, Pécule et les prochaines apps. Fait à Toulouse.
 
 ## Organisation
 
-- `pages/` : le contenu de chaque page (accueil, MonKiosk, Pécule, tarifs, aide).
+- `pages/` : le contenu de chaque page en français ; `pages/en/` et `pages/pt/` : les versions anglaise et portugaise (même nom de fichier).
 - `tools/build.py` : ajoute l'en-tête, le pied de page et les icônes communes, et remplace les liens (`{{CHECKOUT_MONKIOSK}}`, `{{PORTAL}}`…), puis écrit les pages dans `public/`.
 - `public/site.css`, `public/site.js` : le style et les animations communs.
 - `public/img/` : les captures d'écran des apps.

@@ -59,7 +59,7 @@ a { color: inherit; }
 .nav-links .btn { margin-left: 8px; }
 .menu-btn { display: none; width: 44px; height: 44px; border: 0; background: transparent; border-radius: 12px; cursor: pointer; color: var(--ink); }
 .menu-btn:hover { background: rgba(29,27,46,.06); }
-@media (max-width: 900px) {
+@media (max-width: 1180px) {
   .menu-btn { display: grid; place-items: center; }
   .nav-links { position: absolute; top: 70px; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 2px; padding: 12px 20px 20px; background: var(--bg); border-bottom: 1px solid var(--line); box-shadow: 0 16px 32px rgba(29,27,46,.08); transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s var(--ease); }
   .nav-links.open { opacity: 1; transform: none; pointer-events: auto; }
@@ -415,8 +415,8 @@ section { padding: 96px 0; }
 .nav-links .account-link { display: inline-flex; align-items: center; gap: 8px; margin-left: 6px; padding: 8px 14px; border-radius: 999px; text-decoration: none; font-weight: 600; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--line); transition: box-shadow .2s, background .2s; }
 .nav-links .account-link svg { width: 18px; height: 18px; }
 .nav-links .account-link:hover, .nav-links .account-link[aria-current="page"] { background: var(--surface); box-shadow: inset 0 0 0 1.5px var(--ink); }
-@media (max-width: 1080px) and (min-width: 901px) { .nav-links a:not(.btn) img { display: none; } .nav-links a:not(.btn) { padding: 8px 10px; } }
-@media (max-width: 900px) { .nav-links .account-link { margin: 6px 0 0; justify-content: center; min-height: 48px; } }
+@media (max-width: 1080px) and (min-width: 1181px) { .nav-links a:not(.btn) img { display: none; } .nav-links a:not(.btn) { padding: 8px 10px; } }
+@media (max-width: 1180px) { .nav-links .account-link { margin: 6px 0 0; justify-content: center; min-height: 48px; } }
 
 /* ---------- espace client ---------- */
 .account-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
@@ -517,7 +517,7 @@ section { padding: 96px 0; }
 .nav-links .lang-pick a { padding: 5px 9px; font-size: 13px; font-weight: 600; letter-spacing: .04em; border-radius: 999px; color: var(--muted); text-decoration: none; }
 .nav-links .lang-pick a:hover { color: var(--ink); background: var(--hover); }
 .nav-links .lang-pick a[aria-current="true"] { background: var(--ink); color: var(--bg); }
-@media (max-width: 900px) { .lang-pick { margin: 8px 0 0; align-self: center; } .nav-links .lang-pick a { padding: 8px 14px; } }
+@media (max-width: 1180px) { .lang-pick { margin: 8px 0 0; align-self: center; } .nav-links .lang-pick a { padding: 8px 14px; } }
 
 /* ---------- demo video ---------- */
 .video-wrap { position: relative; background: var(--chrome); }
@@ -645,3 +645,11 @@ section { padding: 96px 0; }
 .form-status.bad { color: var(--brick-dark); }
 .form-note { margin: 0; font-size: 14px; color: var(--muted); }
 .form-note a { color: inherit; }
+.nav-links .account-link, .nav-links a { white-space: nowrap; }
+@media (max-width: 1240px) { .p-showcase .phone { right: 8px; } }
+@media (max-width: 420px) { .btn { white-space: normal; text-align: center; } }
+@media (max-width: 900px) { .account-grid, .quiz-wrap, .acc-card.main { grid-template-columns: minmax(0, 1fr); } }
+.acc-card, .acc-card > *, .quiz-wrap > * { min-width: 0; overflow-wrap: break-word; }
+@media (max-width: 380px) { .path { white-space: normal; } .acc-card li { min-width: 0; } .acc-card li > *:not(svg) { min-width: 0; } }
+.acc-card li { overflow-wrap: anywhere; }
+.acc-card ul { min-width: 0; }

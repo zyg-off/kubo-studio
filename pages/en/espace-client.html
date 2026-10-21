@@ -1,0 +1,105 @@
+<!--
+title: Customer area — Kubo Studio
+description: Manage your subscriptions, find your invoices and your Pécule Pro key, open MonKiosk: your whole Kubo Studio customer area.
+current: espace
+-->
+<div class="wrap page-head">
+  <span class="eyebrow reveal">Customer area</span>
+  <h1 class="reveal">Hello, <span class="accent">good to see you again.</span></h1>
+  <p class="lead reveal d1">Subscriptions, invoices, licence key, access to your apps: everything you need is here.</p>
+</div>
+
+<section style="padding-top: 24px">
+  <div class="wrap account-grid">
+
+    <div class="acc-card main reveal">
+      <div>
+        <div class="acc-head">
+          <span class="ico"><svg aria-hidden="true"><use href="#i-card"/></svg></span>
+          <h2>My subscriptions</h2>
+        </div>
+        <p style="margin-top: 12px">Your secure space for everything to do with payment, for MonKiosk as well as Pécule Pro.</p>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>View and download your invoices</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Change your bank card</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Find your Pécule Pro key</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Cancel a subscription in a few clicks</li>
+        </ul>
+        <div class="actions">
+          <a class="btn btn-primary" href="{{PORTAL}}"><span class="shine"></span>Go to my subscriptions<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <p style="margin-bottom: 14px; font-weight: 600; color: #fff">How to sign in?</p>
+        <ol class="login-steps">
+          <li>Enter the e-mail you used to buy.</li>
+          <li>Receive a sign-in code by e-mail.</li>
+          <li>Enter the code: your subscriptions appear.</li>
+        </ol>
+        <p style="font-size: 14px; margin-top: 14px">No password to remember. The portal is run by Polar, our reseller.</p>
+      </div>
+    </div>
+
+    <div class="acc-card reveal">
+      <div class="acc-head">
+        <img src="brand/monkiosk-logo.svg" alt="">
+        <div><span class="tag">For shopkeepers</span><h2>MonKiosk</h2></div>
+      </div>
+      <p>Sign in with your shop's e-mail to find your team, your schedule and your tasks.</p>
+      <ul>
+        <li><svg aria-hidden="true"><use href="#i-user"/></svg>Your plan: <b>Compte › Mon abonnement</b> (Account › My subscription)</li>
+        <li><svg aria-hidden="true"><use href="#i-phone"/></svg>On your phone: add the page to your home screen</li>
+      </ul>
+      <div class="actions">
+        <a class="btn btn-primary" href="{{MONKIOSK_APP}}"><span class="shine"></span>Open MonKiosk<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-ghost" href="{{MONKIOSK_PC}}"><svg class="arrow" aria-hidden="true" style="transform:none"><use href="#i-download"/></svg>Windows app</a>
+      </div>
+    </div>
+
+    <div class="acc-card reveal d1">
+      <div class="acc-head">
+        <img src="brand/pecule-logo.png" alt="">
+        <div><span class="tag">For you</span><h2>Pécule</h2></div>
+      </div>
+      <p>Download the latest version, and activate Pécule Pro with the key you received by e-mail.</p>
+      <ul>
+        <li><svg aria-hidden="true" style="color: var(--mint-dark)"><use href="#i-key"/></svg>Activate the key: <b>Settings › ⭐ Pécule Pro › I have a key</b></li>
+        <li><svg aria-hidden="true" style="color: var(--mint-dark)"><use href="#i-refresh"/></svg>Updates install in one click from the app</li>
+      </ul>
+      <div class="actions">
+        <a class="btn btn-mint" href="{{PECULE_DOWNLOAD}}"><span class="shine"></span><svg class="arrow" aria-hidden="true" style="transform:none"><use href="#i-download"/></svg>Download Pécule</a>
+        <a class="btn btn-ghost" href="/merci-pecule.html?lang=en">Activate Pro</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="section-head center reveal"><h2>A problem with your account?</h2></div>
+    <div class="faq center reveal">
+      <details>
+        <summary>I don't receive the sign-in code<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+        <div class="answer">Check that you're using the e-mail address entered when you bought, and look in your spam folder. If nothing arrives after a few minutes, <a href="aide.html#contact">write to us</a>.</div>
+      </details>
+      <details>
+        <summary>I've lost my Pécule Pro key<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+        <div class="answer">It's in the e-mail you received after buying, and in <a href="{{PORTAL}}">your subscriptions</a>. One key works on up to 3 computers.</div>
+      </details>
+      <details>
+        <summary>My MonKiosk plan hasn't turned on<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+        <div class="answer">In MonKiosk, click "J'ai payé : actualiser" (I've paid: refresh). Activation usually takes a few seconds. If your shop stays locked, <a href="aide.html#contact">write to us</a> with your order reference.</div>
+      </details>
+      <details>
+        <summary>I want to change my subscription e-mail<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+        <div class="answer"><a href="aide.html#contact">Write to us</a> from the old address with the new one: we'll take care of it.</div>
+      </details>
+      <details>
+        <summary>How do I get a refund?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+        <div class="answer">You have 14 days after subscribing to change your mind, with no reason needed. <a href="aide.html#contact">Write to us</a>: the refund arrives within 14 days. The details are in our <a href="conditions.html">terms of sale (in French)</a>.</div>
+      </details>
+    </div>
+    <p class="reveal" style="text-align:center; margin-top: 28px"><a class="link-arrow" href="aide.html#contact">Contact Kubo Studio<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
+  </div>
+</section>

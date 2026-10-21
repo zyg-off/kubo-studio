@@ -1,0 +1,212 @@
+<!--
+title: MonKiosk — A ferramenta de gestão para pequenas lojas · Kubo Studio
+description: Horários da equipa, férias, tarefas e higiene, stock e vendas: o MonKiosk organiza a sua loja, no computador e no telemóvel. Desde 4,99 € por mês, 14 dias grátis.
+current: monkiosk
+jsonld: monkiosk
+og: og-monkiosk.png
+-->
+<div class="wrap p-hero">
+  <img class="app-logo reveal" src="brand/monkiosk-logo.svg" alt="">
+  <span class="eyebrow reveal">Para pequenas lojas</span>
+  <h1 class="reveal">A sua loja, <span class="accent">finalmente organizada.</span></h1>
+  <p class="lead reveal d1">Horários da equipa, férias, listas de verificação, higiene, stock e vendas: tudo no mesmo sítio, no computador da loja e no seu telemóvel.</p>
+  <div class="actions reveal d2">
+    <a href="{{MONKIOSK_APP}}" class="btn btn-primary"><span class="shine"></span>Experimentar 14 dias grátis<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <a href="{{MONKIOSK_DEMO}}" class="btn btn-ghost" target="_blank" rel="noopener">Ver a demonstração</a>
+  </div>
+  <div class="hero-meta reveal d2">
+    <span><svg aria-hidden="true"><use href="#i-check"/></svg>Computador e telemóvel</span>
+    <span><svg aria-hidden="true"><use href="#i-check"/></svg>Sincronizado em tempo real</span>
+    <span><svg aria-hidden="true"><use href="#i-check"/></svg>Sem fidelização</span>
+  </div>
+  <div class="p-showcase reveal d3">
+    <div class="browser">
+      <div class="browser-bar"><i></i><i></i><i></i><span class="url">MonKiosk · Au Pain Doré</span></div>
+      <div class="video-wrap" data-video>
+        <video muted loop playsinline preload="metadata" poster="video/monkiosk-demo-poster.webp" width="1280" height="800" aria-label="Demonstração do MonKiosk: início, horários, tarefas, stock e vendas">
+          <source src="video/monkiosk-demo.webm" type="video/webm">
+          <source src="video/monkiosk-demo.mp4" type="video/mp4">
+        </video>
+        <button type="button" class="video-btn" aria-label="Pausar o vídeo"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path class="i-pause" d="M7 4v12M13 4v12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path class="i-play" d="M6.5 4.5v11l9-5.5z" fill="currentColor"/></svg></button>
+      </div>
+    </div>
+    <div class="phone float"><span class="screen"><img src="img/monkiosk-mobile-planning.webp" alt="O horário do MonKiosk no telemóvel" width="600" height="1298"></span></div>
+  </div>
+</div>
+
+<section class="band" style="margin-top: 72px">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Faça a visita ao MonKiosk</h2>
+      <p>Seis áreas, uma só app. Clique numa secção para a ver em ação, com a padaria fictícia da nossa demonstração.</p>
+    </div>
+    <div class="tour" data-tour>
+      <div class="tour-list" role="tablist" aria-label="As áreas do MonKiosk" aria-orientation="vertical">
+        <button class="tour-item" role="tab" aria-selected="true" data-src="img/monkiosk-accueil.webp" data-alt="O ecrã inicial do MonKiosk" data-url="MonKiosk · Início">
+          <span class="ico"><svg aria-hidden="true"><use href="#i-home"/></svg></span>
+          <span><strong>Início</strong><span class="desc">O que precisa da sua atenção hoje: descansos curtos demais, ausências, horas extra, stock baixo.</span><span class="bar"><b></b></span></span>
+        </button>
+        <button class="tour-item" role="tab" aria-selected="false" tabindex="-1" data-src="img/monkiosk-planning.webp" data-alt="O horário da semana" data-url="MonKiosk · Horários">
+          <span class="ico"><svg aria-hidden="true"><use href="#i-calendar"/></svg></span>
+          <span><strong>Horários</strong><span class="desc">A semana de toda a equipa num relance, por posto, com as horas de cada um.</span><span class="bar"><b></b></span></span>
+        </button>
+        <button class="tour-item" role="tab" aria-selected="false" tabindex="-1" data-src="img/monkiosk-equipe.webp" data-alt="A equipa e os contratos" data-url="MonKiosk · Equipa">
+          <span class="ico"><svg aria-hidden="true"><use href="#i-users"/></svg></span>
+          <span><strong>Equipa</strong><span class="desc">Os seus funcionários, os contratos e os pedidos de férias, no mesmo sítio.</span><span class="bar"><b></b></span></span>
+        </button>
+        <button class="tour-item" role="tab" aria-selected="false" tabindex="-1" data-src="img/monkiosk-taches.webp" data-alt="Listas de verificação e registos de temperatura" data-url="MonKiosk · Tarefas">
+          <span class="ico"><svg aria-hidden="true"><use href="#i-tasks"/></svg></span>
+          <span><strong>Tarefas e higiene</strong><span class="desc">Listas de abertura e fecho, registos de temperatura dos frigoríficos.</span><span class="bar"><b></b></span></span>
+        </button>
+        <button class="tour-item" role="tab" aria-selected="false" tabindex="-1" data-src="img/monkiosk-stock.webp" data-alt="O stock e os limites" data-url="MonKiosk · Stock">
+          <span class="ico"><svg aria-hidden="true"><use href="#i-box"/></svg></span>
+          <span><strong>Stock</strong><span class="desc">Os seus produtos e os limites mínimos: o MonKiosk avisa antes da rutura.</span><span class="bar"><b></b></span></span>
+        </button>
+        <button class="tour-item" role="tab" aria-selected="false" tabindex="-1" data-src="img/monkiosk-ventes.webp" data-alt="O acompanhamento das vendas" data-url="MonKiosk · Vendas">
+          <span class="ico"><svg aria-hidden="true"><use href="#i-chart"/></svg></span>
+          <span><strong>Vendas</strong><span class="desc">Faturação, cesto médio e melhores dias, sem folha de cálculo.</span><span class="bar"><b></b></span></span>
+        </button>
+      </div>
+      <div class="tour-view">
+        <div class="browser">
+          <div class="browser-bar"><i></i><i></i><i></i><span class="url">MonKiosk · Início</span></div>
+          <img class="zoomable" data-zoom src="img/monkiosk-accueil.webp" alt="O ecrã inicial do MonKiosk" width="1600" height="1000">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Os pequenos extras que fazem toda a diferença</h2>
+      <p>O MonKiosk trata dos pormenores, para que possa tratar dos seus clientes.</p>
+    </div>
+    <div class="features">
+      <div class="feature reveal"><div class="ico"><svg aria-hidden="true"><use href="#i-shield"/></svg></div><h3>Alertas legais</h3><p>Descanso inferior a 11 horas, horas extra, contrato ultrapassado: é avisado antes de publicar o horário. Segundo as regras laborais francesas.</p></div>
+      <div class="feature reveal d1"><div class="ico"><svg aria-hidden="true"><use href="#i-clock"/></svg></div><h3>Férias e ausências</h3><p>Os pedidos de férias chegam à app, e o horário tem as ausências em conta.</p></div>
+      <div class="feature reveal d2"><div class="ico"><svg aria-hidden="true"><use href="#i-megaphone"/></svg></div><h3>Avisos</h3><p>Uma informação para toda a equipa? Publique um aviso, sem bilhetinhos colados na caixa.</p></div>
+      <div class="feature reveal"><div class="ico"><svg aria-hidden="true"><use href="#i-thermo"/></svg></div><h3>Higiene</h3><p>Os registos de temperatura ficam anotados e datados, e os valores fora da norma saltam à vista.</p></div>
+      <div class="feature reveal d1"><div class="ico"><svg aria-hidden="true"><use href="#i-refresh"/></svg></div><h3>Sempre atualizado</h3><p>Uma alteração no computador aparece logo no telemóvel, e vice-versa.</p></div>
+      <div class="feature reveal d2"><div class="ico"><svg aria-hidden="true"><use href="#i-pc"/></svg></div><h3>App para Windows</h3><p>Uma verdadeira app para o computador da loja, que se atualiza sozinha.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap split">
+    <div class="reveal">
+      <span class="eyebrow">No seu telemóvel</span>
+      <h2>A loja no bolso</h2>
+      <p class="lead" style="margin-bottom: 0">Adicione o MonKiosk ao ecrã principal do telemóvel: abre como uma app, com a mesma equipa, o mesmo horário e as mesmas tarefas.</p>
+      <ul class="checks">
+        <li><strong>Uma olhadela de manhã</strong> para ver o que o espera.</li>
+        <li><strong>As listas de verificação</strong> marcam-se diretamente no telemóvel.</li>
+        <li><strong>Nada para instalar</strong>: funciona no navegador.</li>
+      </ul>
+    </div>
+    <div class="phones reveal d1">
+      <div class="phone"><span class="screen"><img class="zoomable" data-zoom src="img/monkiosk-mobile-accueil.webp" alt="O ecrã inicial do MonKiosk no telemóvel" loading="lazy" width="600" height="1298"></span></div>
+      <div class="phone"><span class="screen"><img class="zoomable" data-zoom src="img/monkiosk-mobile-taches.webp" alt="As tarefas do MonKiosk no telemóvel" loading="lazy" width="600" height="1298"></span></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-bottom: 48px">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <h2>Pensado para todas as pequenas lojas</h2>
+      <p>Assim que tem uma loja e uma equipa, o MonKiosk poupa-lhe tempo.</p>
+    </div>
+  </div>
+  <div class="marquee reveal" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Padarias</span><span>Cafés</span><span>Mercearias</span><span>Floristas</span><span>Cabeleireiros</span><span>Restaurantes</span><span>Garrafeiras</span><span>Livrarias</span><span>Lojas de roupa</span><span>Queijarias</span><span>Pastelarias</span><span>Bares</span>
+      <span>Padarias</span><span>Cafés</span><span>Mercearias</span><span>Floristas</span><span>Cabeleireiros</span><span>Restaurantes</span><span>Garrafeiras</span><span>Livrarias</span><span>Lojas de roupa</span><span>Queijarias</span><span>Pastelarias</span><span>Bares</span>
+    </div>
+  </div>
+  <p class="sr-only">O MonKiosk serve padarias, cafés, mercearias, floristas, cabeleireiros, restaurantes e todas as pequenas lojas com equipa.</p>
+</section>
+
+<section id="formules">
+  <div class="wrap">
+    <div class="pricing-band reveal">
+      <div class="section-head">
+        <h2>Três fórmulas, um preço que acompanha a equipa</h2>
+        <p>Um preço por loja, mais um pequeno valor por funcionário. Deslize o cursor para ver o seu preço.</p>
+      </div>
+      <span class="trial-strip"><svg aria-hidden="true"><use href="#i-sparkle"/></svg>14 dias grátis em todas as fórmulas</span>
+      {{MONKIOSK_PLANS}}
+      <p class="note"><svg width="18" height="18" aria-hidden="true"><use href="#i-lock"/></svg><span>Preços com IVA, por loja. O preço por funcionário baseia-se no número de funcionários registados no MonKiosk (o mais alto do mês). Sem fidelização, cancelamento em poucos cliques. Pagamento seguro pela Polar, o nosso revendedor autorizado. <a href="conditions.html">Condições de venda (em francês)</a></span></p>
+    </div>
+  </div>
+</section>
+
+<section id="quiz" class="band">
+  <div class="wrap quiz-wrap">
+    <div class="reveal">
+      <span class="eyebrow">Na dúvida?</span>
+      <h2>Que fórmula é a minha?</h2>
+      <p class="lead" style="margin-bottom: 0">Quatro perguntas, e recomendamos a fórmula certa, com o preço exato para a sua equipa.</p>
+    </div>
+    <div class="reveal d1">{{MONKIOSK_QUIZ}}</div>
+  </div>
+</section>
+
+<section id="comparatif">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Todas as funções, fórmula a fórmula</h2>
+      <p>As funções de cada fórmula, tal como estão na app.</p>
+    </div>
+    <div class="reveal">{{MONKIOSK_COMPARE}}</div>
+  </div>
+</section>
+
+
+<section style="padding-top: 0">
+  <div class="wrap">
+    <div class="section-head center reveal"><h2>Perguntas frequentes</h2></div>
+    <div class="faq center reveal">
+      <details>
+        <summary>Como funciona o período grátis?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+        <div class="answer">Crie a sua loja no MonKiosk e escolha a fórmula: os primeiros 14 dias são grátis. O primeiro pagamento só acontece no fim do período grátis, e pode cancelar antes se a app não lhe servir.</div>
+      </details>
+      <details>
+        <summary>Como é calculado o preço por funcionário?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+        <div class="answer">O MonKiosk conta os funcionários registados na equipa. Em cada mês, conta o número mais alto atingido nesse mês. Por exemplo, com a fórmula Pro e 4 funcionários: 29 € + 4 × 2,50 € = 39 € por mês.</div>
+      </details>
+      <details>
+        <summary>Posso mudar de fórmula?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+        <div class="answer">Sim, quando quiser, no MonKiosk em <b>Compte › Mon abonnement</b> (Conta › A minha subscrição).</div>
+      </details>
+      <details>
+        <summary>Posso experimentar sem me registar?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+        <div class="answer">Sim. A <a href="{{MONKIOSK_DEMO}}" target="_blank" rel="noopener">demonstração online</a> abre uma padaria fictícia com a sua equipa e horário. Nada é guardado.</div>
+      </details>
+      <details>
+        <summary>Em que aparelhos funciona?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+        <div class="answer">Em qualquer navegador, no telemóvel (adicionando-o ao ecrã principal) e com a <a href="{{MONKIOSK_PC}}">app para Windows</a>. Tudo fica sincronizado em tempo real.</div>
+      </details>
+      <details>
+        <summary>Para que país foi pensado o MonKiosk?<span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></summary>
+        <div class="answer">O MonKiosk foi pensado para lojas em França: os alertas legais seguem as regras laborais francesas. <a href="aide.html#contact">Contacte-nos</a> se estiver noutro país.</div>
+      </details>
+    </div>
+    <p class="reveal" style="text-align:center; margin-top: 24px"><a class="link-arrow" href="aide.html">Todas as perguntas<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="cta-band reveal">
+    <img class="deco a" src="brand/monkiosk-logo.svg" alt="">
+    <img class="deco b" src="brand/monkiosk-logo.svg" alt="">
+    <h2>Faça do próximo horário uma formalidade</h2>
+    <p>Experimente o MonKiosk grátis durante 14 dias. Sem fidelização.</p>
+    <div class="actions">
+      <a href="{{MONKIOSK_APP}}" class="btn btn-light"><span class="shine"></span>Começar o período grátis<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a href="{{MONKIOSK_DEMO}}" class="btn btn-outline-light" target="_blank" rel="noopener">Ver a demonstração</a>
+    </div>
+  </div>
+</div>

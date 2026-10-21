@@ -192,24 +192,22 @@
 
 
   // Calculateur MonKiosk : prix selon le nombre de salariés
+  var loc = { fr: "fr-FR", en: "en-GB", pt: "pt-PT" }[document.documentElement.lang] || "fr-FR";
   var fmt = function (x) {
-    try { return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", minimumFractionDigits: x % 1 ? 2 : 0 }).format(x); }
+    try { return new Intl.NumberFormat(loc, { style: "currency", currency: "EUR", minimumFractionDigits: x % 1 ? 2 : 0 }).format(x); }
     catch (e) { return x.toFixed(2).replace(".", ",") + " €"; }
   };
   $$("[data-calc]").forEach(function (calc) {
     var input = $("input[type=range]", calc);
+    var one = calc.getAttribute("data-emp") || "salarié", many = calc.getAttribute("data-emps") || "salariés";
     var update = function () {
-      var n = +input.value;
-      $$("[data-n]", calc).forEach(function (el) { el.textContent = n; });
-      $$(".calc-out", calc).forEach(function (el) { el.innerHTML = "<b>" + n + "</b> salarié" + (n > 1 ? "s" : ""); });
+      var n = +input.value, word = n > 1 ? many : one;
+      $$(".calc-out", calc).forEach(function (el) { el.innerHTML = "<b>" + n + "</b> " + word; });
       $$("[data-base]", calc).forEach(function (card) {
         var t = Math.round((+card.getAttribute("data-base") + n * +card.getAttribute("data-per")) * 100) / 100;
-        var total = $("[data-total]", card);
+        var total = $("[data-total]", card), num = $("[data-n]", card);
         if (total) total.textContent = fmt(t);
-        var lbl = $(".calc-total", card);
-        if (lbl) lbl.firstChild.textContent = "Pour ";
-        var s = $("[data-n]", card);
-        if (s && s.nextSibling) s.nextSibling.textContent = n > 1 ? " salariés : " : " salarié : ";
+        if (num) { num.textContent = n; if (num.nextSibling) num.nextSibling.textContent = " " + word + " : "; }
       });
     };
     input.addEventListener("input", update);

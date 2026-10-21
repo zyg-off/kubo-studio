@@ -7,12 +7,15 @@ le pied de page et les icônes communes, puis écrit le résultat dans public/.
 
 Utilisation : python3 tools/build.py
 """
+import json
 import pathlib
 import re
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = ROOT / "pages"
 OUT = ROOT / "public"
+SITE_URL = "https://kubo-studio.kubostudio.workers.dev"
+LANGS = ["fr", "en", "pt"]
 
 CHECKOUT_PECULE_PRO = "https://buy.polar.sh/polar_cl_RZquC1pevH3ghLIsdmeln4F2vFGXhXGW9ek2N1QzRuH"
 CHECKOUT_PECULE_PRO_YEAR = "https://buy.polar.sh/polar_cl_2uup4r4aYjmyYCtpMZtRg3ZRee5egw7a20tgV4BQhJu"
@@ -83,59 +86,149 @@ def sprite():
 
 
 
+# ---------------------------------------------------------------------------
+# Textes communs (en-tête, pied de page, cartes de prix) dans les 3 langues
+# ---------------------------------------------------------------------------
+T = {
+    "fr": {
+        "home": "Accueil", "pricing": "Tarifs", "help": "Aide", "account": "Espace client", "start": "Commencer",
+        "menu": "Ouvrir le menu", "main_menu": "Menu principal", "home_aria": "Kubo Studio, accueil",
+        "tagline": "Des logiciels simples pour la vraie vie. Fait à Toulouse.",
+        "our_apps": "Nos apps", "faq": "Questions fréquentes", "contact": "Nous contacter", "news": "Nouveautés",
+        "guides": "Guides", "legal": "Légal", "legal_notice": "Mentions légales", "terms": "Conditions de vente",
+        "privacy": "Confidentialité", "secure": "Paiements sécurisés par Polar", "to_top": "Revenir en haut",
+        "lang_label": "Langue", "for_jobs": "Pour votre métier",
+        # MonKiosk
+        "per_month": "/ mois", "per_emp": "par salarié et par mois", "recommended": "Conseillée",
+        "try14": "Essayer 14 jours gratuits", "calc_q": "Combien de salariés dans votre équipe ?",
+        "for_n": "Pour", "emps": "salariés", "emp": "salarié", "per_month_total": "/ mois",
+        # Pécule
+        "pp_desc": "Les quatre fonctions avancées de Pécule, et le soutien au développement de l'app.",
+        "billing": "Période de facturation", "monthly": "Mensuel", "yearly": "Annuel", "per_year": "/ an",
+        "eq_month": "soit 2 € par mois", "pp_items": ["Tout Pécule gratuit, et en plus :", "Synchro automatique avec votre banque",
+        "Vos comptes et budgets sur le téléphone", "Plusieurs profils sur le même PC", "Chiffrement de vos données"],
+        "sub_m": "S'abonner · 2,99 € / mois", "sub_y": "S'abonner · 24 € / an",
+        "pf_desc": "L'app de finances personnelles pour Windows, gratuite.",
+        "pf_items": ["Comptes, budgets, analyses et objectifs", "Import de relevés CSV et OFX", "Courses, repas, foyer et agenda",
+                     "Sans publicité, sans limite de durée"],
+        "dl_free": "Télécharger gratuitement",
+    },
+    "en": {
+        "home": "Home", "pricing": "Pricing", "help": "Help", "account": "My account", "start": "Get started",
+        "menu": "Open the menu", "main_menu": "Main menu", "home_aria": "Kubo Studio, home",
+        "tagline": "Simple software for real life. Made in Toulouse, France.",
+        "our_apps": "Our apps", "faq": "FAQ", "contact": "Contact us", "news": "What's new",
+        "guides": "Guides (FR)", "legal": "Legal", "legal_notice": "Legal notice (FR)", "terms": "Terms of sale (FR)",
+        "privacy": "Privacy (FR)", "secure": "Secure payments by Polar", "to_top": "Back to top",
+        "lang_label": "Language", "for_jobs": "For your trade (FR)",
+        "per_month": "/ month", "per_emp": "per employee per month", "recommended": "Recommended",
+        "try14": "Try free for 14 days", "calc_q": "How many employees on your team?",
+        "for_n": "For", "emps": "employees", "emp": "employee", "per_month_total": "/ month",
+        "pp_desc": "Pécule's four advanced features, and support for the app's development.",
+        "billing": "Billing period", "monthly": "Monthly", "yearly": "Yearly", "per_year": "/ year",
+        "eq_month": "that's €2 a month", "pp_items": ["Everything in free Pécule, plus:", "Automatic sync with your bank",
+        "Your accounts and budgets on your phone", "Several profiles on the same PC", "Encryption of your data"],
+        "sub_m": "Subscribe · €2.99 / month", "sub_y": "Subscribe · €24 / year",
+        "pf_desc": "The personal finance app for Windows, free.",
+        "pf_items": ["Accounts, budgets, analyses and goals", "CSV and OFX statement import", "Shopping, meals, household and calendar",
+                     "No ads, no time limit"],
+        "dl_free": "Download for free",
+    },
+    "pt": {
+        "home": "Início", "pricing": "Preços", "help": "Ajuda", "account": "Área de cliente", "start": "Começar",
+        "menu": "Abrir o menu", "main_menu": "Menu principal", "home_aria": "Kubo Studio, início",
+        "tagline": "Software simples para a vida real. Feito em Toulouse.",
+        "our_apps": "As nossas apps", "faq": "Perguntas frequentes", "contact": "Contacte-nos", "news": "Novidades",
+        "guides": "Guias (FR)", "legal": "Legal", "legal_notice": "Informações legais (FR)", "terms": "Condições de venda (FR)",
+        "privacy": "Privacidade (FR)", "secure": "Pagamentos seguros com a Polar", "to_top": "Voltar ao topo",
+        "lang_label": "Idioma", "for_jobs": "Para o seu ofício (FR)",
+        "per_month": "/ mês", "per_emp": "por funcionário e por mês", "recommended": "Recomendada",
+        "try14": "Experimentar 14 dias grátis", "calc_q": "Quantos funcionários tem a sua equipa?",
+        "for_n": "Para", "emps": "funcionários", "emp": "funcionário", "per_month_total": "/ mês",
+        "pp_desc": "As quatro funções avançadas do Pécule, e o apoio ao desenvolvimento da app.",
+        "billing": "Período de faturação", "monthly": "Mensal", "yearly": "Anual", "per_year": "/ ano",
+        "eq_month": "ou seja, 2 € por mês", "pp_items": ["Tudo o que o Pécule grátis tem, e mais:", "Sincronização automática com o seu banco",
+        "As suas contas e orçamentos no telemóvel", "Vários perfis no mesmo PC", "Encriptação dos seus dados"],
+        "sub_m": "Subscrever · 2,99 € / mês", "sub_y": "Subscrever · 24 € / ano",
+        "pf_desc": "A app de finanças pessoais para Windows, grátis.",
+        "pf_items": ["Contas, orçamentos, análises e objetivos", "Importação de extratos CSV e OFX", "Compras, refeições, casa e agenda",
+                     "Sem publicidade, sem limite de tempo"],
+        "dl_free": "Descarregar grátis",
+    },
+}
+
 # Formules MonKiosk : prix de base par commerce et prix par salarié (par mois, TTC)
 MONKIOSK_FORMULES = [
     {
         "key": "essentiel", "name": "Essentiel", "base": 4.99, "per": 3.00,
-        "desc": "L'essentiel pour organiser la boutique et l'équipe.",
+        "desc": {"fr": "L'essentiel pour organiser la boutique et l'équipe.",
+                 "en": "The essentials to organise your shop and team.",
+                 "pt": "O essencial para organizar a loja e a equipa."},
         "lead": None,
-        "items": ["Planning, équipe et congés", "Checklists et relevés de température",
-                  "Stock, commandes et ventes", "Pertes et invendus", "Ordinateur et téléphone, synchronisés"],
+        "items": {"fr": ["Planning, équipe et congés", "Checklists et relevés de température", "Stock, commandes et ventes",
+                         "Pertes et invendus", "Ordinateur et téléphone, synchronisés"],
+                  "en": ["Schedule, team and leave", "Checklists and temperature logs", "Stock, orders and sales",
+                         "Waste and unsold goods", "Computer and phone, in sync"],
+                  "pt": ["Horários, equipa e férias", "Checklists e registos de temperatura", "Stock, encomendas e vendas",
+                         "Perdas e sobras", "Computador e telemóvel, sincronizados"]},
     },
     {
         "key": "pro", "name": "Pro", "base": 29.00, "per": 2.50, "featured": True,
-        "desc": "Pour piloter l'équipe et la rentabilité au quotidien.",
-        "lead": "Tout Essentiel, plus :",
-        "items": ["Espace salarié et badgeuse", "Coût salarial et rentabilité", "Statistiques et prévisions de ventes",
-                  "Registre d'hygiène en PDF", "Export pour l'expert-comptable"],
+        "desc": {"fr": "Pour piloter l'équipe et la rentabilité au quotidien.",
+                 "en": "To run your team and profitability day to day.",
+                 "pt": "Para gerir a equipa e a rentabilidade no dia a dia."},
+        "lead": {"fr": "Tout Essentiel, plus :", "en": "Everything in Essentiel, plus:", "pt": "Tudo do Essentiel, e mais:"},
+        "items": {"fr": ["Espace salarié et badgeuse", "Coût salarial et rentabilité", "Statistiques et prévisions de ventes",
+                         "Registre d'hygiène en PDF", "Export pour l'expert-comptable"],
+                  "en": ["Employee space and time clock", "Payroll cost and profitability", "Statistics and sales forecasts",
+                         "Hygiene log as PDF", "Export for your accountant"],
+                  "pt": ["Área do funcionário e ponto", "Custo salarial e rentabilidade", "Estatísticas e previsões de vendas",
+                         "Registo de higiene em PDF", "Exportação para o contabilista"]},
     },
     {
         "key": "premium", "name": "Premium", "base": 49.00, "per": 2.00,
-        "desc": "Pour les commerces qui veulent tout, ou plusieurs boutiques.",
-        "lead": "Tout Pro, plus :",
-        "items": ["Documents salariés", "Mode tablette en boutique", "Boutiques regroupées"],
+        "desc": {"fr": "Pour les commerces qui veulent tout, ou plusieurs boutiques.",
+                 "en": "For shops that want everything, or several locations.",
+                 "pt": "Para quem quer tudo, ou tem várias lojas."},
+        "lead": {"fr": "Tout Pro, plus :", "en": "Everything in Pro, plus:", "pt": "Tudo do Pro, e mais:"},
+        "items": {"fr": ["Documents salariés", "Mode tablette en boutique", "Boutiques regroupées"],
+                  "en": ["Employee documents", "In-store tablet mode", "Multi-shop dashboard"],
+                  "pt": ["Documentos dos funcionários", "Modo tablet na loja", "Lojas agrupadas"]},
     },
 ]
 
 
-def eur(x):
+def eur(x, lang="fr"):
+    if lang == "en":
+        return "€" + (f"{x:,.2f}".replace(".00", ""))
     return f"{x:,.2f}".replace(",", " ").replace(".", ",").replace(",00", "") + " €"
 
 
-def monkiosk_plans():
+def monkiosk_plans(lang="fr"):
+    t = T[lang]
     cards = []
     for f in MONKIOSK_FORMULES:
         featured = f.get("featured")
         cls = "plan featured" if featured else "plan"
-        badge = '<span class="badge">Conseillée</span>' if featured else ""
-        lead = f'<li class="lead-li">{f["lead"]}</li>' if f["lead"] else ""
-        items = "".join(f"<li>{i}</li>" for i in f["items"])
+        badge = f'<span class="badge">{t["recommended"]}</span>' if featured else ""
+        lead = f'<li class="lead-li">{f["lead"][lang]}</li>' if f["lead"] else ""
+        items = "".join(f"<li>{i}</li>" for i in f["items"][lang])
         btn = "btn-primary" if featured else "btn-light"
         cards.append(f"""<article class="{cls}" data-base="{f['base']}" data-per="{f['per']}">
       {badge}
       <div class="plan-head"><img src="brand/monkiosk-logo.svg" alt=""><div class="plan-name">{f['name']}</div></div>
-      <p class="plan-desc">{f['desc']}</p>
-      <div><span class="price">{eur(f['base'])}</span><span class="cadence">/ mois</span></div>
-      <div class="per-line">+ {eur(f['per'])} par salarié et par mois</div>
-      <div class="calc-total" aria-live="polite">Pour <b data-n>5</b> salariés : <b data-total>{eur(f['base'] + 5 * f['per'])}</b> / mois</div>
+      <p class="plan-desc">{f['desc'][lang]}</p>
+      <div><span class="price">{eur(f['base'], lang)}</span><span class="cadence">{t['per_month']}</span></div>
+      <div class="per-line">+ {eur(f['per'], lang)} {t['per_emp']}</div>
+      <div class="calc-total" aria-live="polite">{t['for_n']} <b data-n>5</b> {t['emps']} : <b data-total>{eur(f['base'] + 5 * f['per'], lang)}</b> {t['per_month_total']}</div>
       <ul>{lead}{items}</ul>
-      <div class="cta"><a class="btn {btn} btn-block" href="{MONKIOSK_APP}"><span class="shine"></span>Essayer 14 jours gratuits<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+      <div class="cta"><a class="btn {btn} btn-block" href="{MONKIOSK_APP}"><span class="shine"></span>{t['try14']}<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
     </article>""")
-    return f"""<div class="calc" data-calc>
-    <label class="calc-label" for="calc-n">Combien de salariés dans votre équipe ?</label>
+    return f"""<div class="calc" data-calc data-lang="{lang}" data-emp="{t['emp']}" data-emps="{t['emps']}" data-for="{t['for_n']}">
+    <label class="calc-label" for="calc-n">{t['calc_q']}</label>
     <div class="calc-row">
       <input type="range" id="calc-n" min="1" max="30" value="5" step="1">
-      <output for="calc-n" class="calc-out"><b data-n>5</b> salariés</output>
+      <output for="calc-n" class="calc-out"><b data-n>5</b> {t['emps']}</output>
     </div>
     <div class="plans plans-3">
     {"".join(cards)}
@@ -143,166 +236,283 @@ def monkiosk_plans():
   </div>"""
 
 
-def pecule_cards():
+def pecule_cards(lang="fr"):
+    t = T[lang]
+    pp = "".join(f"<li>{i}</li>" for i in t["pp_items"])
+    pf = "".join(f"<li>{i}</li>" for i in t["pf_items"])
     return f"""<div class="plans">
     <article class="plan featured" data-billing>
       <div class="plan-head"><img src="brand/pecule-logo.png" alt=""><div class="plan-name">Pécule Pro</div></div>
-      <p class="plan-desc">Les quatre fonctions avancées de Pécule, et le soutien au développement de l'app.</p>
-      <div class="bill-toggle" role="group" aria-label="Période de facturation">
-        <button type="button" data-period="month" aria-pressed="true">Mensuel</button>
-        <button type="button" data-period="year" aria-pressed="false">Annuel <span class="save-chip">−33 %</span></button>
+      <p class="plan-desc">{t['pp_desc']}</p>
+      <div class="bill-toggle" role="group" aria-label="{t['billing']}">
+        <button type="button" data-period="month" aria-pressed="true">{t['monthly']}</button>
+        <button type="button" data-period="year" aria-pressed="false">{t['yearly']} <span class="save-chip">−33 %</span></button>
       </div>
-      <div data-show="month"><span class="price">2,99 €</span><span class="cadence">/ mois</span></div>
-      <div data-show="year" hidden><span class="price">24 €</span><span class="cadence">/ an</span><div class="per-line">soit 2 € par mois</div></div>
-      <ul>
-        <li>Tout Pécule gratuit, et en plus :</li>
-        <li>Synchro automatique avec votre banque</li>
-        <li>Vos comptes et budgets sur le téléphone</li>
-        <li>Plusieurs profils sur le même PC</li>
-        <li>Chiffrement de vos données</li>
-      </ul>
+      <div data-show="month"><span class="price">{eur(2.99, lang)}</span><span class="cadence">{t['per_month']}</span></div>
+      <div data-show="year" hidden><span class="price">{eur(24, lang)}</span><span class="cadence">{t['per_year']}</span><div class="per-line">{t['eq_month']}</div></div>
+      <ul>{pp}</ul>
       <div class="cta">
-        <a data-show="month" class="btn btn-mint btn-block" href="{CHECKOUT_PECULE_PRO}"><span class="shine"></span>S'abonner · 2,99 € / mois<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        <a data-show="year" hidden class="btn btn-mint btn-block" href="{CHECKOUT_PECULE_PRO_YEAR}"><span class="shine"></span>S'abonner · 24 € / an<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a data-show="month" class="btn btn-mint btn-block" href="{CHECKOUT_PECULE_PRO}"><span class="shine"></span>{t['sub_m']}<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a data-show="year" hidden class="btn btn-mint btn-block" href="{CHECKOUT_PECULE_PRO_YEAR}"><span class="shine"></span>{t['sub_y']}<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
     </article>
     <article class="plan free-card">
       <div class="plan-head"><img src="brand/pecule-logo.png" alt=""><div class="plan-name">Pécule</div></div>
-      <p class="plan-desc">L'app de finances personnelles pour Windows, gratuite.</p>
-      <div style="margin-top: 60px"><span class="price">0 €</span></div>
-      <ul>
-        <li>Comptes, budgets, analyses et objectifs</li>
-        <li>Import de relevés CSV et OFX</li>
-        <li>Courses, repas, foyer et agenda</li>
-        <li>Sans publicité, sans limite de durée</li>
-      </ul>
-      <div class="cta"><a class="btn btn-outline-light btn-block" href="{PECULE_DOWNLOAD}">Télécharger gratuitement</a></div>
+      <p class="plan-desc">{t['pf_desc']}</p>
+      <div style="margin-top: 60px"><span class="price">{eur(0, lang)}</span></div>
+      <ul>{pf}</ul>
+      <div class="cta"><a class="btn btn-outline-light btn-block" href="{PECULE_DOWNLOAD}">{t['dl_free']}</a></div>
     </article>
   </div>"""
 
-NAV = [
-    ("index", "./", "Accueil", None),
-    ("monkiosk", "monkiosk.html", "MonKiosk", "brand/monkiosk-logo.svg"),
-    ("pecule", "pecule.html", "Pécule", "brand/pecule-logo.png"),
-    ("tarifs", "tarifs.html", "Tarifs", None),
-    ("aide", "aide.html", "Aide", None),
-]
+
+# ---------------------------------------------------------------------------
+# En-tête, pied de page
+# ---------------------------------------------------------------------------
+def prefix(lang):
+    return "/" if lang == "fr" else f"/{lang}/"
 
 
-def header(current):
+def lang_links(lang, name, available):
+    out = []
+    for l in LANGS:
+        if name not in available.get(l, set()):
+            continue
+        href = prefix(l) + ("" if name == "index.html" else name)
+        cur = ' aria-current="true"' if l == lang else ""
+        out.append(f'<a href="{href}" hreflang="{l}" lang="{l}"{cur}>{l.upper()}</a>')
+    return "".join(out)
+
+
+def header(current, lang, name, available):
+    t = T[lang]
+    nav = [("index", "./", t["home"], None), ("monkiosk", "monkiosk.html", "MonKiosk", "brand/monkiosk-logo.svg"),
+           ("pecule", "pecule.html", "Pécule", "brand/pecule-logo.png"), ("tarifs", "tarifs.html", t["pricing"], None),
+           ("aide", "aide.html", t["help"], None)]
     items = []
-    for key, href, label, icon in NAV:
+    for key, href, label, icon in nav:
         cur = ' aria-current="page"' if key == current else ""
         ico = f'<img src="{icon}" alt="">' if icon else ""
         items.append(f'<a href="{href}"{cur}>{ico}{label}</a>')
     acc = ' aria-current="page"' if current == "espace" else ""
+    langs = lang_links(lang, name, available)
+    lang_html = f'<div class="lang-pick" role="group" aria-label="{t["lang_label"]}">{langs}</div>' if langs.count("<a") > 1 else ""
     return f"""{sprite()}
+<a class="skip" href="#contenu">{'Aller au contenu' if lang == 'fr' else 'Skip to content' if lang == 'en' else 'Ir para o conteúdo'}</a>
 <header class="site-header">
   <div class="wrap nav">
-    <a href="./" class="logo" aria-label="Kubo Studio, accueil"><img src="brand/kubo-icon.svg" alt="">Kubo Studio</a>
-    <button class="menu-btn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-links">
+    <a href="./" class="logo" aria-label="{t['home_aria']}"><img src="brand/kubo-icon.svg" alt="">Kubo Studio</a>
+    <button class="menu-btn" aria-label="{t['menu']}" aria-expanded="false" aria-controls="nav-links">
       <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     </button>
-    <nav class="nav-links" id="nav-links" aria-label="Menu principal">
+    <nav class="nav-links" id="nav-links" aria-label="{t['main_menu']}">
       {"".join(items)}
-      <a href="espace-client.html" class="account-link"{acc}><svg aria-hidden="true"><use href="#i-user"/></svg>Espace client</a>
-      <a href="tarifs.html" class="btn btn-dark btn-small">Commencer<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      {lang_html}
+      <a href="espace-client.html" class="account-link"{acc}><svg aria-hidden="true"><use href="#i-user"/></svg>{t['account']}</a>
+      <a href="tarifs.html" class="btn btn-dark btn-small">{t['start']}<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
     </nav>
   </div>
 </header>"""
 
 
-FOOTER = f"""<footer class="site-footer">
+def footer(lang):
+    t = T[lang]
+    return f"""<footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">
       <div>
         <a href="./" class="logo"><img src="brand/kubo-icon.svg" alt="">Kubo Studio</a>
-        <p>Des logiciels simples pour la vraie vie. Fait à Toulouse.</p>
+        <p>{t['tagline']}</p>
       </div>
       <div>
-        <h4>Nos apps</h4>
+        <h4>{t['our_apps']}</h4>
         <ul>
           <li><a href="monkiosk.html">MonKiosk</a></li>
           <li><a href="pecule.html">Pécule</a></li>
-          <li><a href="tarifs.html">Tarifs</a></li>
+          <li><a href="tarifs.html">{t['pricing']}</a></li>
+          <li><a href="nouveautes.html">{t['news']}</a></li>
         </ul>
       </div>
       <div>
-        <h4>Aide</h4>
+        <h4>{t['help']}</h4>
         <ul>
-          <li><a href="aide.html">Questions fréquentes</a></li>
-          <li><a href="aide.html#contact">Nous contacter</a></li>
-          <li><a href="espace-client.html">Espace client</a></li>
+          <li><a href="aide.html">{t['faq']}</a></li>
+          <li><a href="aide.html#contact">{t['contact']}</a></li>
+          <li><a href="espace-client.html">{t['account']}</a></li>
+          <li><a href="guides.html">{t['guides']}</a></li>
         </ul>
       </div>
       <div>
-        <h4>Légal</h4>
+        <h4>{t['legal']}</h4>
         <ul>
-          <li><a href="mentions-legales.html">Mentions légales</a></li>
-          <li><a href="conditions.html">Conditions de vente</a></li>
-          <li><a href="confidentialite.html">Confidentialité</a></li>
+          <li><a href="mentions-legales.html">{t['legal_notice']}</a></li>
+          <li><a href="conditions.html">{t['terms']}</a></li>
+          <li><a href="confidentialite.html">{t['privacy']}</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <span>© 2026 Kubo Studio</span>
-      <span>Paiements sécurisés par Polar</span>
+      <span>{t['secure']}</span>
     </div>
   </div>
 </footer>
-<button class="to-top" aria-label="Revenir en haut"><svg width="20" height="20" aria-hidden="true"><use href="#i-up"/></svg></button>
-<script src="site.js" defer></script>"""
+<button class="to-top" aria-label="{t['to_top']}"><svg width="20" height="20" aria-hidden="true"><use href="#i-up"/></svg></button>
+<script src="/site.js" defer></script>"""
 
 
-def page(meta, body):
+# ---------------------------------------------------------------------------
+# Données structurées (pour Google)
+# ---------------------------------------------------------------------------
+def jsonld(kind, lang):
+    org = {"@type": "Organization", "name": "Kubo Studio", "url": SITE_URL + "/", "logo": SITE_URL + "/brand/kubo-app-icon-512.png",
+           "email": EMAIL, "address": {"@type": "PostalAddress", "addressLocality": "Toulouse", "addressCountry": "FR"}}
+    if kind == "org":
+        data = dict(org, **{"@context": "https://schema.org"})
+    elif kind == "monkiosk":
+        data = {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "MonKiosk",
+                "applicationCategory": "BusinessApplication", "operatingSystem": "Web, Windows, Android, iOS",
+                "url": SITE_URL + prefix(lang) + "monkiosk.html", "image": SITE_URL + "/img/og-monkiosk.png",
+                "offers": {"@type": "AggregateOffer", "priceCurrency": "EUR", "lowPrice": "4.99", "highPrice": "49.00", "offerCount": 3},
+                "publisher": org}
+    elif kind == "pecule":
+        data = {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Pécule",
+                "applicationCategory": "FinanceApplication", "operatingSystem": "Windows 10, Windows 11",
+                "url": SITE_URL + prefix(lang) + "pecule.html", "image": SITE_URL + "/img/og-pecule.png",
+                "offers": [{"@type": "Offer", "price": "0", "priceCurrency": "EUR", "name": "Pécule"},
+                           {"@type": "Offer", "price": "2.99", "priceCurrency": "EUR", "name": "Pécule Pro (mensuel)"},
+                           {"@type": "Offer", "price": "24.00", "priceCurrency": "EUR", "name": "Pécule Pro (annuel)"}],
+                "publisher": org}
+    else:
+        return ""
+    return '\n<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False) + "</script>"
+
+
+def faq_jsonld(body):
+    qs = re.findall(r"<summary>(.*?)<span class=\"plus\".*?</summary>\s*<div class=\"answer\">(.*?)</div>", body, re.S)
+    if not qs:
+        return ""
+    strip = lambda h: re.sub(r"<[^>]+>", "", h).strip()
+    data = {"@context": "https://schema.org", "@type": "FAQPage",
+            "mainEntity": [{"@type": "Question", "name": strip(q), "acceptedAnswer": {"@type": "Answer", "text": strip(a)}} for q, a in qs]}
+    return '\n<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False) + "</script>"
+
+
+# ---------------------------------------------------------------------------
+# Modèle de page
+# ---------------------------------------------------------------------------
+def page(meta, body, lang, name, available):
     title = meta["title"]
-    robots = '\n<meta name="robots" content="noindex">' if meta.get("noindex") else ""
     desc = meta["description"]
+    noindex = bool(meta.get("noindex"))
+    robots = '\n<meta name="robots" content="noindex">' if noindex else ""
+    path = prefix(lang) + ("" if name == "index.html" else name)
+    url = SITE_URL + path
+    og_img = SITE_URL + "/img/" + meta.get("og", "og-kubo.png")
+    alternates = ""
+    if not noindex:
+        for l in LANGS:
+            if name in available.get(l, set()):
+                alternates += f'\n<link rel="alternate" hreflang="{l}" href="{SITE_URL}{prefix(l)}{"" if name == "index.html" else name}">'
+        if name in available.get("fr", set()):
+            alternates += f'\n<link rel="alternate" hreflang="x-default" href="{SITE_URL}/{"" if name == "index.html" else name}">'
+    ld = jsonld(meta.get("jsonld", ""), lang) + (faq_jsonld(body) if meta.get("faq_ld") else "")
+    locale = {"fr": "fr_FR", "en": "en_GB", "pt": "pt_PT"}[lang]
     return f"""<!doctype html>
-<html lang="fr">
+<html lang="{lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{desc}">
+<link rel="canonical" href="{url}">{alternates}
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Kubo Studio">
+<meta property="og:locale" content="{locale}">
+<meta property="og:url" content="{url}">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
-<meta property="og:image" content="brand/kubo-app-icon-512.png">
+<meta property="og:image" content="{og_img}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#FAF6F1" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#14131B" media="(prefers-color-scheme: dark)">{robots}
-<link rel="icon" href="brand/kubo-icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="brand/kubo-app-icon-512.png">
-<link rel="preload" href="fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="site.css">
+<link rel="icon" href="/brand/kubo-icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/brand/kubo-app-icon-512.png">
+<link rel="preload" href="/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/site.css">{ld}
 </head>
 <body class="{meta.get('body_class', '')}">
-{header(meta['current'])}
-<main>
+{header(meta['current'], lang, name, available)}
+<main id="contenu">
 {body}
 </main>
-{FOOTER}
+{footer(lang)}
 </body>
 </html>
 """
 
 
+ROOT_ONLY = {"mentions-legales.html", "conditions.html", "confidentialite.html", "404.html"}
+
+
+def absolutize(html, lang, available):
+    """Chemins absolus : les images et styles depuis la racine, les pages dans la bonne langue."""
+    html = re.sub(r'((?:src|href|data-src|data-zoom|poster)=")(brand|img|fonts|video)/', r'\1/\2/', html)
+    pre = prefix(lang)
+
+    def fix(m):
+        attr, target, anchor = m.group(1), m.group(2), m.group(3) or ""
+        if target == "./":
+            return f'{attr}"{pre}{anchor}"'
+        if target in available.get(lang, set()):
+            return f'{attr}"{pre}{"" if target == "index.html" else target}{anchor}"'
+        return f'{attr}"/{target}{anchor}"'
+    return re.sub(r'(href=)"(\./|[a-z0-9-]+\.html)(#[^"]*)?"', fix, html)
+
+
+def sources():
+    """Les pages de chaque langue : pages/*.html (fr), pages/en/*.html, pages/pt/*.html."""
+    out = {}
+    for lang in LANGS:
+        folder = SRC if lang == "fr" else SRC / lang
+        out[lang] = sorted(folder.glob("*.html")) if folder.exists() else []
+    return out
+
+
 def main():
-    for src in sorted(SRC.glob("*.html")):
-        text = src.read_text(encoding="utf-8")
-        m = re.match(r"<!--\n(.*?)\n-->\n", text, re.S)
-        meta = dict(line.split(": ", 1) for line in m.group(1).splitlines())
-        body = text[m.end():]
-        links = dict(LINKS, MONKIOSK_PLANS=monkiosk_plans(), PECULE_PLANS=pecule_cards())
-        for k, v in links.items():
-            body = body.replace("{{" + k + "}}", v)
-        left = re.findall(r"\{\{[A-Z_]+\}\}", body)
-        if left:
-            raise SystemExit(f"{src.name}: lien inconnu {left}")
-        (OUT / src.name).write_text(page(meta, body), encoding="utf-8")
-        print("écrit", src.name)
+    srcs = sources()
+    available = {lang: {p.name for p in files} for lang, files in srcs.items()}
+    available["fr"] |= ROOT_ONLY
+    sitemap = []
+    for lang, files in srcs.items():
+        dest = OUT if lang == "fr" else OUT / lang
+        dest.mkdir(exist_ok=True)
+        for src in files:
+            text = src.read_text(encoding="utf-8")
+            m = re.match(r"<!--\n(.*?)\n-->\n", text, re.S)
+            meta = dict(line.split(": ", 1) for line in m.group(1).splitlines())
+            body = text[m.end():]
+            links = dict(LINKS, MONKIOSK_PLANS=monkiosk_plans(lang), PECULE_PLANS=pecule_cards(lang))
+            for k, v in links.items():
+                body = body.replace("{{" + k + "}}", v)
+            left = re.findall(r"\{\{[A-Z_]+\}\}", body)
+            if left:
+                raise SystemExit(f"{lang}/{src.name}: lien inconnu {left}")
+            html = absolutize(page(meta, body, lang, src.name, available), lang, available)
+            (dest / src.name).write_text(html, encoding="utf-8")
+            if not meta.get("noindex"):
+                sitemap.append(prefix(lang) + ("" if src.name == "index.html" else src.name))
+            print("écrit", ("" if lang == "fr" else lang + "/") + src.name)
+    for legal in ["mentions-legales.html", "conditions.html", "confidentialite.html"]:
+        sitemap.append("/" + legal)
+    urls = "".join(f"  <url><loc>{SITE_URL}{p}</loc></url>\n" for p in sitemap)
+    (OUT / "sitemap.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n', encoding="utf-8")
+    (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
+    print("écrit sitemap.xml et robots.txt")
 
 
 if __name__ == "__main__":

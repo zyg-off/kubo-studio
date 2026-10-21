@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kubo-studio.kubostudio.workers.dev/sitemap.xml

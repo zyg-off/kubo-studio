@@ -1,0 +1,71 @@
+<!--
+title: Merci · Pécule Pro
+description: Votre abonnement Pécule Pro est actif. Voici comment activer votre clé.
+current: pecule
+body_class: pecule-theme
+noindex: oui
+-->
+<div class="thanks">
+  <img class="app-logo" src="brand/pecule-logo.png" alt="">
+  <span class="eyebrow mint" data-t="badge">Paiement confirmé</span>
+  <h1 data-t="title">Merci, et bienvenue dans <span class="accent-mint">Pécule Pro</span></h1>
+  <p class="lead" data-t="sub">Votre paiement est bien passé. Il ne reste que trois petites étapes pour activer Pécule Pro.</p>
+
+  <ol class="steps">
+    <li><div data-t="s1"><b>Ouvrez l'e-mail de Polar</b> que vous venez de recevoir : votre <b>clé Pécule Pro</b> est dedans. Pas reçu ? Regardez dans les courriers indésirables.</div></li>
+    <li><div data-t="s2">Dans <b>Pécule sur votre PC</b>, allez dans <span class="path">Réglages › ⭐ Pécule Pro</span> et cliquez sur <b>« J'ai une clé »</b>.</div></li>
+    <li><div data-t="s3"><b>Collez la clé</b>, puis cliquez sur <b>Activer</b>. C'est tout : la synchro avec votre banque, vos comptes sur le téléphone, les profils et le chiffrement sont à vous.</div></li>
+  </ol>
+
+  <div class="actions" style="justify-content: center; margin-top: 32px">
+    <a href="{{PECULE_DOWNLOAD}}" class="btn btn-mint" data-t="dl"><span class="shine"></span>Télécharger Pécule</a>
+    <a href="aide.html#contact" class="btn btn-ghost" data-t="help">Besoin d'aide ?</a>
+  </div>
+
+  <p class="small" data-t="foot">Pour gérer ou résilier votre abonnement, ou retrouver votre clé : le lien est dans l'e-mail de Polar, dans Pécule › Réglages › Pécule Pro, et dans votre <a href="{{PORTAL}}">espace client</a>.</p>
+  <p class="ref" id="ref"></p>
+</div>
+
+<script>
+  // Textes en anglais et en portugais selon la langue du navigateur
+  (function () {
+    var T = {
+      en: {
+        badge: "Payment confirmed",
+        title: "Thank you, and welcome to <span class=\"accent-mint\">Pécule Pro</span>",
+        sub: "Your payment went through. Just three small steps to activate Pécule Pro.",
+        s1: "<b>Open the e-mail from Polar</b> you just received: your <b>Pécule Pro key</b> is inside. Nothing? Check your spam folder.",
+        s2: "In <b>Pécule on your PC</b>, go to <span class=\"path\">Settings › ⭐ Pécule Pro</span> and click <b>“I have a key”</b>.",
+        s3: "<b>Paste the key</b>, then click <b>Activate</b>. That's it: bank sync, your accounts on your phone, profiles and encryption are yours.",
+        dl: "Download Pécule", help: "Need help?",
+        foot: "To manage or cancel your subscription, or find your key again: the link is in Polar's e-mail, in Pécule › Settings › Pécule Pro, and in your <a href=\"{{PORTAL}}\">customer portal</a>.",
+        ref: "Order reference: "
+      },
+      pt: {
+        badge: "Pagamento confirmado",
+        title: "Obrigado, e bem-vindo ao <span class=\"accent-mint\">Pécule Pro</span>",
+        sub: "O seu pagamento foi efetuado. Faltam só três pequenos passos para ativar o Pécule Pro.",
+        s1: "<b>Abra o e-mail da Polar</b> que acabou de receber: a sua <b>chave Pécule Pro</b> está lá. Não chegou? Veja na pasta de spam.",
+        s2: "No <b>Pécule do seu PC</b>, vá a <span class=\"path\">Definições › ⭐ Pécule Pro</span> e clique em <b>«Tenho uma chave»</b>.",
+        s3: "<b>Cole a chave</b> e depois clique em <b>Ativar</b>. Pronto: a sincronização com o banco, as contas no telemóvel, os perfis e a encriptação são seus.",
+        dl: "Descarregar o Pécule", help: "Precisa de ajuda?",
+        foot: "Para gerir ou cancelar a subscrição, ou reencontrar a chave: o link está no e-mail da Polar, no Pécule › Definições › Pécule Pro, e no seu <a href=\"{{PORTAL}}\">espaço de cliente</a>.",
+        ref: "Referência da encomenda: "
+      }
+    };
+    var lang = (navigator.language || "fr").slice(0, 2), t = T[lang];
+    if (t) {
+      document.documentElement.lang = lang;
+      document.querySelectorAll("[data-t]").forEach(function (e) {
+        var v = t[e.getAttribute("data-t")];
+        if (!v) return;
+        if (e.classList.contains("btn")) { e.lastChild.textContent = v; } else { e.innerHTML = v; }
+      });
+      document.title = t.title.replace(/<[^>]+>/g, "") + " · Pécule Pro";
+    }
+    var id = new URLSearchParams(location.search).get("checkout_id");
+    if (id && id.indexOf("{") === -1) {
+      document.getElementById("ref").textContent = (t ? t.ref : "Référence de la commande : ") + id.slice(0, 40);
+    }
+  })();
+</script>

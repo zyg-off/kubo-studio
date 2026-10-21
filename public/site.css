@@ -380,3 +380,19 @@ section { padding: 96px 0; }
   .reveal { opacity: 1; transform: none; }
   html { scroll-behavior: auto; }
 }
+
+/* ---------- thank-you page ---------- */
+.thanks { max-width: 640px; margin: 0 auto; padding: 64px 20px 0; text-align: center; }
+.thanks .app-logo { width: 88px; height: 88px; margin: 0 auto 20px; animation: pop .7s var(--ease) both; }
+@keyframes pop { from { transform: scale(.6) rotate(-12deg); opacity: 0; } to { transform: none; opacity: 1; } }
+.thanks h1 { font-size: clamp(34px, 5.4vw, 52px); }
+.thanks .lead { margin: 16px auto 36px; }
+.steps { list-style: none; padding: 0; margin: 0; counter-reset: s; text-align: left; background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 8px 28px; }
+.steps li { counter-increment: s; display: flex; gap: 16px; padding: 20px 0; border-top: 1px solid var(--line); color: var(--muted); }
+.steps li:first-child { border-top: 0; }
+.steps li::before { content: counter(s); flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--mint-dark); color: #fff; font: 700 16px var(--display); display: grid; place-items: center; }
+.steps b { color: var(--ink); }
+.path { background: var(--mint-soft); color: var(--mint-dark); border-radius: 8px; padding: 1px 8px; white-space: nowrap; font-weight: 600; }
+.thanks .small { font-size: 15px; color: var(--muted); margin: 24px 0 0; }
+.thanks .ref { font-size: 14px; color: #8A879A; margin-top: 10px; overflow-wrap: anywhere; }
+@media (max-width: 520px) { .steps { padding: 4px 20px; } }

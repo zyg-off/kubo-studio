@@ -379,11 +379,12 @@
     form.addEventListener("input", function () { if (status.classList.contains("bad")) { status.textContent = ""; status.className = "form-status"; } });
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      if (form.botcheck.checked) return;
-      var name = form.name.value.trim(), email = form.email.value.trim(), msg = form.message.value.trim(), subject = form.subject.value;
-      if (!name || !email || !msg || !form.email.checkValidity()) {
+      if (form.elements.namedItem("botcheck").checked) return;
+      var f = function (n) { return form.elements.namedItem(n); };
+      var name = f("name").value.trim(), email = f("email").value.trim(), msg = f("message").value.trim(), subject = f("subject").value;
+      if (!name || !email || !msg || !f("email").checkValidity()) {
         say(form.getAttribute("data-msg-req"), false);
-        (!name ? form.name : !email || !form.email.checkValidity() ? form.email : form.message).focus();
+        (!name ? f("name") : !email || !f("email").checkValidity() ? f("email") : f("message")).focus();
         return;
       }
       var key = form.getAttribute("data-key");

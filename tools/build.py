@@ -435,6 +435,166 @@ def monkiosk_quiz(lang="fr"):
 
 
 # ---------------------------------------------------------------------------
+# Pages par métier (en français, pour la recherche Google)
+# ---------------------------------------------------------------------------
+METIERS = [
+    {
+        "slug": "logiciel-planning-boulangerie.html", "label": "Boulangerie et pâtisserie", "de": "d'une boulangerie", "votre": "votre boulangerie", "metier": "boulangerie",
+        "title": "Logiciel de planning pour boulangerie et pâtisserie · MonKiosk",
+        "desc": "Planning du fournil et de la vente, relevés de température, checklists et pertes : MonKiosk organise votre boulangerie. 14 jours d'essai gratuit.",
+        "h1": "Le planning de votre boulangerie, <span class=\"accent\">sans casse-tête.</span>",
+        "lead": "Fournil dès l'aube, vente toute la journée, pâtisserie le week-end : MonKiosk organise vos équipes, vos relevés d'hygiène et vos invendus au même endroit.",
+        "pains": [
+            ("calendar", "Des horaires décalés", "Le fournil commence avant l'aube, la vente finit le soir : le planning doit respecter les 11 heures de repos entre deux journées. MonKiosk vous alerte avant de publier."),
+            ("thermo", "Des frigos à surveiller", "Vitrines, chambre froide, congélateurs : les relevés sont notés et datés, et une valeur hors norme saute aux yeux."),
+            ("box", "Des invendus à suivre", "Notez les pertes et invendus chaque jour pour ajuster la production et suivre ce qu'ils coûtent."),
+        ],
+        "shot": "monkiosk-planning.webp", "shot_alt": "Le planning d'une boulangerie dans MonKiosk, par poste : fournil, pâtisserie, vente",
+        "postes": "Fournil, Pâtisserie, Vente, Nettoyage",
+    },
+    {
+        "slug": "logiciel-planning-restaurant.html", "label": "Café et restaurant", "de": "d'un café ou d'un restaurant", "votre": "votre café ou restaurant", "metier": "café ou restaurant",
+        "title": "Logiciel de planning pour café et restaurant · MonKiosk",
+        "desc": "Planning de la salle et de la cuisine, coupures, congés, hygiène et ventes : MonKiosk simplifie la gestion de votre café ou restaurant. 14 jours d'essai gratuit.",
+        "h1": "Votre café ou restaurant, <span class=\"accent\">bien organisé.</span>",
+        "lead": "Service du midi, service du soir, extras du week-end : MonKiosk organise la salle et la cuisine, et garde un œil sur l'hygiène et les ventes.",
+        "pains": [
+            ("calendar", "Des services en coupure", "Midi et soir, avec ou sans coupure : composez le planning de la salle et de la cuisine, et repérez les repos trop courts avant qu'ils posent problème."),
+            ("tasks", "Ouverture et fermeture", "Mise en place, nettoyage, caisse : les checklists se cochent chaque jour, pour que rien ne soit oublié."),
+            ("chart", "Des ventes qui varient", "Suivez le chiffre d'affaires et le panier moyen, et comparez avec la semaine précédente."),
+        ],
+        "shot": "monkiosk-taches.webp", "shot_alt": "Les checklists d'ouverture et de fermeture et les relevés de température dans MonKiosk",
+        "postes": "Salle, Cuisine, Bar, Plonge",
+    },
+    {
+        "slug": "logiciel-planning-salon-coiffure.html", "label": "Salon de coiffure", "de": "d'un salon de coiffure", "votre": "votre salon", "metier": "salon de coiffure",
+        "title": "Logiciel de planning pour salon de coiffure et institut · MonKiosk",
+        "desc": "Planning de l'équipe, congés, disponibilités et stock de produits : MonKiosk organise votre salon de coiffure ou institut de beauté. 14 jours d'essai gratuit.",
+        "h1": "Votre salon, <span class=\"accent\">une équipe bien rodée.</span>",
+        "lead": "Horaires du samedi, temps partiels, congés : MonKiosk organise votre équipe et suit votre stock de produits, sur l'ordinateur du salon comme sur votre téléphone.",
+        "pains": [
+            ("users", "Des temps partiels", "Chaque collaborateur a ses jours et son contrat : MonKiosk compte les heures et vous prévient en cas de dépassement."),
+            ("clock", "Congés et disponibilités", "Les demandes de congés et les indisponibilités apparaissent directement dans le planning."),
+            ("box", "Le stock de produits", "Colorations, soins, produits de revente : fixez un seuil et MonKiosk vous prévient avant la rupture."),
+        ],
+        "shot": "monkiosk-equipe.webp", "shot_alt": "L'équipe et les contrats dans MonKiosk",
+        "postes": "Coiffure, Couleur, Accueil",
+    },
+    {
+        "slug": "logiciel-gestion-epicerie.html", "label": "Épicerie", "de": "d'une épicerie", "votre": "votre épicerie", "metier": "épicerie ou commerce de proximité",
+        "title": "Logiciel de gestion pour épicerie et commerce de proximité · MonKiosk",
+        "desc": "Stock, commandes, relevés de température, planning et ventes : MonKiosk simplifie la gestion de votre épicerie ou commerce de proximité. 14 jours d'essai gratuit.",
+        "h1": "Votre épicerie, <span class=\"accent\">gérée simplement.</span>",
+        "lead": "Rayons, frigos, livraisons et équipe : MonKiosk rassemble votre stock, vos commandes, vos relevés d'hygiène et votre planning dans une seule app.",
+        "pains": [
+            ("box", "Un stock à suivre", "Seuils d'alerte, liste de commande par fournisseur : vous savez quoi commander, et quand."),
+            ("thermo", "Des produits frais", "Les relevés de température des frigos sont notés chaque jour, avec un rappel s'ils sont oubliés."),
+            ("calendar", "De longues amplitudes", "Ouvert tôt, fermé tard, parfois le dimanche : un planning clair pour toute l'équipe, sur ordinateur et téléphone."),
+        ],
+        "shot": "monkiosk-stock.webp", "shot_alt": "Le stock et la liste de commande dans MonKiosk",
+        "postes": "Caisse, Rayons, Réception",
+    },
+]
+
+
+def metier_page(m):
+    pains = "".join(f"""<div class="feature reveal{' d' + str(i) if i else ''}"><div class="ico"><svg aria-hidden="true"><use href="#i-{ico}"/></svg></div><h3>{t}</h3><p>{d}</p></div>""" for i, (ico, t, d) in enumerate(m["pains"]))
+    others = "".join(f'<li><a href="{o["slug"]}">{o["label"]}</a></li>' for o in METIERS if o is not m)
+    body = f"""<div class="wrap p-hero">
+  <img class="app-logo reveal" src="brand/monkiosk-logo.svg" alt="">
+  <span class="eyebrow reveal">MonKiosk pour {m['metier']}</span>
+  <h1 class="reveal">{m['h1']}</h1>
+  <p class="lead reveal d1">{m['lead']}</p>
+  <div class="actions reveal d2">
+    <a href="{MONKIOSK_APP}" class="btn btn-primary"><span class="shine"></span>Essayer 14 jours gratuits<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <a href="{MONKIOSK_DEMO}" class="btn btn-ghost" target="_blank" rel="noopener">Voir la démo</a>
+  </div>
+  <div class="hero-meta reveal d2">
+    <span><svg aria-hidden="true"><use href="#i-check"/></svg>Dès 4,99 € par mois</span>
+    <span><svg aria-hidden="true"><use href="#i-check"/></svg>Ordinateur et téléphone</span>
+    <span><svg aria-hidden="true"><use href="#i-check"/></svg>Sans engagement</span>
+  </div>
+  <div class="p-showcase reveal d3">
+    <div class="browser">
+      <div class="browser-bar"><i></i><i></i><i></i><span class="url">MonKiosk</span></div>
+      <img class="zoomable" data-zoom src="img/{m['shot']}" alt="{m['shot_alt']}" width="1600" height="1000">
+    </div>
+  </div>
+</div>
+
+<section class="band" style="margin-top: 72px">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Pensé pour le quotidien {m['de']}</h2>
+      <p>Les postes de votre équipe ({m['postes']}…) se créent en quelques clics, chacun avec sa couleur dans le planning.</p>
+    </div>
+    <div class="features">{pains}</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split">
+    <div class="reveal">
+      <span class="eyebrow">Tout au même endroit</span>
+      <h2>Et tout le reste de MonKiosk</h2>
+      <ul class="checks">
+        <li><strong>Planning et alertes légales</strong> : repos, heures sup et contrats vérifiés pour vous.</li>
+        <li><strong>Congés, annonces et messagerie</strong> pour toute l'équipe.</li>
+        <li><strong>Checklists et hygiène</strong> : ouverture, fermeture et relevés de température.</li>
+        <li><strong>Stock et ventes</strong>, avec les statistiques et prévisions dans la formule Pro.</li>
+      </ul>
+      <div class="actions" style="margin-top: 28px">
+        <a href="monkiosk.html" class="btn btn-ghost">Découvrir MonKiosk</a>
+        <a href="tarifs.html#quiz" class="link-arrow">Quelle formule pour moi ?<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+    <div class="phones reveal d1">
+      <div class="phone"><span class="screen"><img src="img/monkiosk-mobile-accueil.webp" alt="L'accueil de MonKiosk sur téléphone" loading="lazy" width="600" height="1298"></span></div>
+      <div class="phone"><span class="screen"><img src="img/monkiosk-mobile-planning.webp" alt="Le planning de MonKiosk sur téléphone" loading="lazy" width="600" height="1298"></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Un prix qui suit votre équipe</h2>
+      <p>Un prix par commerce, plus un petit montant par salarié. 14 jours gratuits sur toutes les formules.</p>
+    </div>
+    <div class="pricing-band reveal">
+      {monkiosk_plans('fr')}
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head reveal"><h2>À lire aussi</h2></div>
+    <div class="help-cards">
+      <a class="help-card reveal" href="guide-regles-planning.html"><span class="ico"><svg aria-hidden="true"><use href="#i-shield"/></svg></span><h3>Les règles du planning</h3><p>Repos, pauses et durées maximales : ce que dit le Code du travail.</p><span class="link-arrow">Lire le guide<svg aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+      <a class="help-card reveal d1" href="guide-temperatures-hygiene.html"><span class="ico"><svg aria-hidden="true"><use href="#i-thermo"/></svg></span><h3>Températures et hygiène</h3><p>Les températures à respecter et comment tenir vos relevés.</p><span class="link-arrow">Lire le guide<svg aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+      <div class="help-card reveal d2"><span class="ico"><svg aria-hidden="true"><use href="#i-users"/></svg></span><h3>Autres métiers</h3><ul style="margin:0; padding-left: 18px; display:grid; gap:6px">{others}</ul></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="cta-band reveal">
+    <img class="deco a" src="brand/monkiosk-logo.svg" alt="">
+    <img class="deco b" src="brand/monkiosk-logo.svg" alt="">
+    <h2>Essayez MonKiosk dans {m['votre']}</h2>
+    <p>14 jours gratuits, sans engagement. Ou explorez d'abord la démo, sans inscription.</p>
+    <div class="actions">
+      <a href="{MONKIOSK_APP}" class="btn btn-light"><span class="shine"></span>Commencer l'essai gratuit<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a href="{MONKIOSK_DEMO}" class="btn btn-outline-light" target="_blank" rel="noopener">Voir la démo</a>
+    </div>
+  </div>
+</div>"""
+    meta = {"title": m["title"], "description": m["desc"], "current": "monkiosk", "jsonld": "monkiosk", "og": "og-monkiosk.png"}
+    return meta, body
+
+
+# ---------------------------------------------------------------------------
 # En-tête, pied de page
 # ---------------------------------------------------------------------------
 def prefix(lang):
@@ -655,6 +815,7 @@ def main():
     srcs = sources()
     available = {lang: {p.name for p in files} for lang, files in srcs.items()}
     available["fr"] |= ROOT_ONLY
+    available["fr"] |= {m["slug"] for m in METIERS}
     sitemap = []
     for lang, files in srcs.items():
         dest = OUT if lang == "fr" else OUT / lang
@@ -676,6 +837,12 @@ def main():
             if not meta.get("noindex"):
                 sitemap.append(prefix(lang) + ("" if src.name == "index.html" else src.name))
             print("écrit", ("" if lang == "fr" else lang + "/") + src.name)
+    for m in METIERS:
+        meta, body = metier_page(m)
+        html = absolutize(page(meta, body, "fr", m["slug"], available), "fr", available)
+        (OUT / m["slug"]).write_text(html, encoding="utf-8")
+        sitemap.append("/" + m["slug"])
+        print("écrit", m["slug"])
     for legal in ["mentions-legales.html", "conditions.html", "confidentialite.html"]:
         sitemap.append("/" + legal)
     urls = "".join(f"  <url><loc>{SITE_URL}{p}</loc></url>\n" for p in sitemap)

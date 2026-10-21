@@ -562,3 +562,43 @@ section { padding: 96px 0; }
 .quiz-price [data-total] { font: 800 34px var(--display); color: var(--ink); }
 .link-btn { border: 0; background: none; font: 600 15px var(--body); color: var(--muted); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; min-height: 44px; padding: 0 8px; }
 .link-btn:hover { color: var(--ink); }
+
+/* ---------- guides (articles) ---------- */
+.prose-wrap { max-width: 820px; padding-top: 48px; }
+.crumbs { display: flex; gap: 8px; font-size: 15px; color: var(--muted); margin-bottom: 28px; flex-wrap: wrap; }
+.crumbs a { color: var(--brick-dark); text-decoration: none; font-weight: 600; }
+.crumbs a:hover { text-decoration: underline; }
+.prose-head h1 { font-size: clamp(36px, 5.4vw, 56px); }
+.prose-head .lead { margin-bottom: 12px; }
+.prose-meta { color: var(--muted); font-size: 15px; margin: 0 0 40px; }
+.prose { font-size: 18px; line-height: 1.75; }
+.prose h2 { font-size: clamp(26px, 3.4vw, 32px); margin: 48px 0 14px; }
+.prose p, .prose li { color: var(--ink); opacity: .88; }
+.prose ul { padding-left: 22px; display: grid; gap: 6px; }
+.prose a { color: var(--brick-dark); text-underline-offset: 3px; }
+.callout { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 24px 28px; margin: 28px 0; }
+.callout > strong { display: block; font-family: var(--display); font-size: 21px; margin-bottom: 8px; }
+.callout ul { margin: 0; }
+.callout.mk { display: flex; gap: 20px; align-items: flex-start; background: var(--peach); border-color: transparent; }
+.callout.mk img { width: 56px; height: 56px; flex: none; }
+.callout.mk strong { display: block; font-family: var(--display); font-size: 21px; }
+.callout.mk p { margin: 6px 0 10px; }
+.prose-table { margin: 8px 0 12px; }
+.prose-table td { text-align: right; font-weight: 600; white-space: nowrap; }
+.sources { font-size: 15px; }
+.disclaimer { font-size: 15px; color: var(--muted); margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line); }
+@media (max-width: 600px) { .callout.mk { flex-direction: column; } .prose { font-size: 17px; } }
+
+/* ---------- métiers ---------- */
+.metier-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.metier { display: flex; flex-direction: column; gap: 8px; padding: 24px; border-radius: 20px; background: var(--surface); border: 1px solid var(--line); text-decoration: none; transition: transform .3s var(--ease), border-color .3s, box-shadow .3s; }
+.metier:hover { transform: translateY(-4px); border-color: var(--brick-light); box-shadow: 0 18px 40px rgba(29,27,46,.08); }
+.metier .ico { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--peach); color: var(--brick-dark); margin-bottom: 6px; }
+.metier .ico svg { width: 22px; height: 22px; }
+.metier strong { font-family: var(--display); font-size: 19px; }
+.metier span:last-child { color: var(--muted); font-size: 15px; }
+@media (max-width: 960px) { .metier-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .metier-grid { grid-template-columns: 1fr; } }
+.metier-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 28px; }
+.metier-links a { padding: 10px 18px; border-radius: 999px; font-weight: 600; text-decoration: none; color: var(--brick-dark); background: var(--peach); transition: transform .2s var(--ease); }
+.metier-links a:hover { transform: translateY(-2px); }

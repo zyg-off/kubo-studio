@@ -225,6 +225,29 @@
     show("month");
   });
 
+
+  // Vidéo de démo : lecture quand elle est visible, bouton pause
+  $$("[data-video]").forEach(function (wrap) {
+    var v = $("video", wrap), btn = $(".video-btn", wrap), userPaused = reduce;
+    var labels = { fr: ["Mettre la vidéo en pause", "Lire la vidéo"], en: ["Pause the video", "Play the video"], pt: ["Pausar o vídeo", "Reproduzir o vídeo"] }[document.documentElement.lang] || ["Pause", "Play"];
+    var sync = function () {
+      var paused = v.paused;
+      wrap.classList.toggle("paused", paused);
+      btn.setAttribute("aria-label", paused ? labels[1] : labels[0]);
+    };
+    v.addEventListener("play", sync); v.addEventListener("pause", sync);
+    btn.addEventListener("click", function () {
+      if (v.paused) { userPaused = false; v.play(); } else { userPaused = true; v.pause(); }
+    });
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (en) {
+        if (en[0].isIntersecting) { if (!userPaused) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); } }
+        else v.pause();
+      }, { threshold: 0.1 }).observe(wrap);
+    }
+    sync();
+  });
+
   // FAQ deep link: open the targeted question
   if (location.hash) {
     var target = document.getElementById(location.hash.slice(1));

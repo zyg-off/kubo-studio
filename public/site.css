@@ -518,3 +518,12 @@ section { padding: 96px 0; }
 .nav-links .lang-pick a:hover { color: var(--ink); background: var(--hover); }
 .nav-links .lang-pick a[aria-current="true"] { background: var(--ink); color: var(--bg); }
 @media (max-width: 900px) { .lang-pick { margin: 8px 0 0; align-self: center; } .nav-links .lang-pick a { padding: 8px 14px; } }
+
+/* ---------- demo video ---------- */
+.video-wrap { position: relative; background: var(--chrome); }
+.video-wrap video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; }
+.video-btn { position: absolute; right: 14px; top: 14px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(29,27,46,.75); color: #fff; display: grid; place-items: center; cursor: pointer; backdrop-filter: blur(6px); transition: background .2s, transform .2s; }
+.video-btn:hover { background: rgba(29,27,46,.92); transform: scale(1.06); }
+.video-btn .i-play { display: none; }
+.video-wrap.paused .video-btn .i-play { display: block; }
+.video-wrap.paused .video-btn .i-pause { display: none; }

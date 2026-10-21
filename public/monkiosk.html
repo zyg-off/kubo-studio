@@ -63,7 +63,13 @@
   <div class="p-showcase reveal d3">
     <div class="browser">
       <div class="browser-bar"><i></i><i></i><i></i><span class="url">MonKiosk · Au Pain Doré</span></div>
-      <img class="zoomable" data-zoom src="/img/monkiosk-accueil.webp" alt="L'accueil de MonKiosk : les points du jour à traiter" width="1600" height="1000">
+      <div class="video-wrap" data-video>
+        <video muted loop playsinline preload="metadata" poster="/video/monkiosk-demo-poster.webp" width="1280" height="800" aria-label="Démonstration de MonKiosk : accueil, planning, tâches, stock et ventes">
+          <source src="/video/monkiosk-demo.webm" type="video/webm">
+          <source src="/video/monkiosk-demo.mp4" type="video/mp4">
+        </video>
+        <button type="button" class="video-btn" aria-label="Mettre la vidéo en pause"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path class="i-pause" d="M7 4v12M13 4v12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path class="i-play" d="M6.5 4.5v11l9-5.5z" fill="currentColor"/></svg></button>
+      </div>
     </div>
     <div class="phone float"><span class="screen"><img src="/img/monkiosk-mobile-planning.webp" alt="Le planning de MonKiosk sur téléphone" width="600" height="1298"></span></div>
   </div>

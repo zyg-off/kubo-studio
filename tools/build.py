@@ -25,6 +25,8 @@ MONKIOSK_APP = "https://zyg-off.github.io/MonKiosk/"
 MONKIOSK_PC = "https://github.com/zyg-off/MonKiosk/releases/latest/download/MonKiosk-Installer.exe"
 PECULE_DOWNLOAD = "https://github.com/zyg-off/pecule/releases/latest/download/Pecule-Setup.exe"
 EMAIL = "kubostudio.contact@gmail.com"
+# Clé publique Web3Forms (formulaire de contact). Vide : le formulaire ouvre la messagerie du visiteur.
+WEB3FORMS_KEY = ""
 
 LINKS = {
     "CHECKOUT_PECULE_PRO": CHECKOUT_PECULE_PRO,
@@ -595,6 +597,46 @@ def metier_page(m):
 
 
 # ---------------------------------------------------------------------------
+# Formulaire de contact
+# ---------------------------------------------------------------------------
+FORM_T = {
+    "fr": {"name": "Votre nom", "email": "Votre e-mail", "subject": "Sujet", "message": "Votre message",
+           "subjects": ["Une question", "Aide sur MonKiosk", "Aide sur Pécule", "Abonnement ou remboursement", "Autre"],
+           "send": "Envoyer le message", "sending": "Envoi…", "ok": "Merci ! Votre message est bien parti. Nous vous répondons rapidement.",
+           "err": "L'envoi n'a pas fonctionné. Réessayez, ou écrivez-nous directement par e-mail.", "required": "Merci de remplir tous les champs.",
+           "privacy": "Vos informations servent uniquement à vous répondre.", "privacy_link": "En savoir plus"},
+    "en": {"name": "Your name", "email": "Your e-mail", "subject": "Subject", "message": "Your message",
+           "subjects": ["A question", "Help with MonKiosk", "Help with Pécule", "Subscription or refund", "Other"],
+           "send": "Send message", "sending": "Sending…", "ok": "Thank you! Your message has been sent. We'll reply soon.",
+           "err": "Sending failed. Please try again, or e-mail us directly.", "required": "Please fill in every field.",
+           "privacy": "Your details are only used to reply to you.", "privacy_link": "Learn more"},
+    "pt": {"name": "O seu nome", "email": "O seu e-mail", "subject": "Assunto", "message": "A sua mensagem",
+           "subjects": ["Uma pergunta", "Ajuda com o MonKiosk", "Ajuda com o Pécule", "Subscrição ou reembolso", "Outro"],
+           "send": "Enviar mensagem", "sending": "A enviar…", "ok": "Obrigado! A sua mensagem foi enviada. Respondemos em breve.",
+           "err": "O envio falhou. Tente de novo, ou escreva-nos diretamente por e-mail.", "required": "Preencha todos os campos, por favor.",
+           "privacy": "Os seus dados servem apenas para lhe responder.", "privacy_link": "Saber mais"},
+}
+
+
+def contact_form(lang="fr"):
+    f = FORM_T[lang]
+    opts = "".join(f"<option>{o}</option>" for o in f["subjects"])
+    return f"""<form class="contact-form" data-contact data-key="{WEB3FORMS_KEY}" data-to="{EMAIL}" novalidate
+        data-msg-ok="{f['ok']}" data-msg-err="{f['err']}" data-msg-req="{f['required']}" data-msg-sending="{f['sending']}">
+        <div class="field-row">
+          <div class="field"><label for="cf-name">{f['name']}</label><input id="cf-name" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="cf-email">{f['email']}</label><input id="cf-email" name="email" type="email" autocomplete="email" required></div>
+        </div>
+        <div class="field"><label for="cf-subject">{f['subject']}</label><select id="cf-subject" name="subject">{opts}</select></div>
+        <div class="field"><label for="cf-message">{f['message']}</label><textarea id="cf-message" name="message" rows="5" required></textarea></div>
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit" class="btn btn-primary"><span class="shine"></span>{f['send']}<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        <p class="form-status" role="status" aria-live="polite"></p>
+        <p class="form-note">{f['privacy']} <a href="confidentialite.html">{f['privacy_link']}</a></p>
+      </form>"""
+
+
+# ---------------------------------------------------------------------------
 # En-tête, pied de page
 # ---------------------------------------------------------------------------
 def prefix(lang):
@@ -826,7 +868,8 @@ def main():
             meta = dict(line.split(": ", 1) for line in m.group(1).splitlines())
             body = text[m.end():]
             links = dict(LINKS, MONKIOSK_PLANS=monkiosk_plans(lang), PECULE_PLANS=pecule_cards(lang),
-                         MONKIOSK_COMPARE=monkiosk_compare(lang), MONKIOSK_QUIZ=monkiosk_quiz(lang))
+                         MONKIOSK_COMPARE=monkiosk_compare(lang), MONKIOSK_QUIZ=monkiosk_quiz(lang),
+                         CONTACT_FORM=contact_form(lang))
             for k, v in links.items():
                 body = body.replace("{{" + k + "}}", v)
             left = re.findall(r"\{\{[A-Z_]+\}\}", body)

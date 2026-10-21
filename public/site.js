@@ -294,6 +294,111 @@
     input.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); show(1); } });
   });
 
+
+  // Nouveautés : versions publiées sur GitHub, affichées en direct
+  $$("[data-news]").forEach(function (box) {
+    var lang = document.documentElement.lang || "fr";
+    var L = {
+      fr: { more: "Afficher plus", version: "Version", on: "le", empty: "Aucune version pour le moment.", generic: "Améliorations et corrections." },
+      en: { more: "Show more", version: "Version", on: "on", empty: "No releases yet.", generic: "Improvements and fixes." },
+      pt: { more: "Mostrar mais", version: "Versão", on: "em", empty: "Ainda sem versões.", generic: "Melhorias e correções." }
+    }[lang] || {};
+    var list = $(".news-list", box), more = $("[data-more]", box), err = $(".news-error", box);
+    var repos = box.getAttribute("data-repos").split(",").map(function (r) { var p = r.split(":"); return { repo: p[0], name: p[1], logo: p[2] }; });
+    var items = [], filter = "all", shown = 6;
+    var esc = function (t) { return String(t).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
+    var inline = function (t) {
+      return esc(t)
+        .replace(/\*\*(.+?)\*\*/g, "<b>$1</b>")
+        .replace(/`([^`]+)`/g, "<code>$1</code>")
+        .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" rel="noopener">$1</a>');
+    };
+    var md = function (src, name, tag) {
+      var out = [], inList = false;
+      src = (src || "").replace(/\r/g, "").split("\n").filter(function (l) { return !/full changelog/i.test(l) && !/^\*\*new contributors\*\*/i.test(l.trim()); }).join("\n").trim();
+      if (!src) {
+        var n = (name || "").replace(/^v?[\d.]+\s*[:·–-]?\s*/, "").trim();
+        return "<p>" + (n && n !== tag ? inline(n) : L.generic) + "</p>";
+      }
+      src.split("\n").forEach(function (line) {
+        var l = line.trim();
+        if (/^[-*] /.test(l)) { if (!inList) { out.push("<ul>"); inList = true; } out.push("<li>" + inline(l.slice(2)) + "</li>"); return; }
+        if (inList) { out.push("</ul>"); inList = false; }
+        if (!l) return;
+        if (/^## /.test(l)) return; // le titre de la version est déjà affiché
+        if (/^#{3,6} /.test(l)) { out.push("<h4>" + inline(l.replace(/^#+ /, "")) + "</h4>"); return; }
+        out.push("<p>" + inline(l) + "</p>");
+      });
+      if (inList) out.push("</ul>");
+      return out.join("");
+    };
+    var dateFmt = function (iso) {
+      try { return new Date(iso).toLocaleDateString({ fr: "fr-FR", en: "en-GB", pt: "pt-PT" }[lang] || "fr-FR", { day: "numeric", month: "long", year: "numeric" }); }
+      catch (e) { return iso.slice(0, 10); }
+    };
+    var render = function () {
+      var vis = items.filter(function (it) { return filter === "all" || it.app.name === filter; });
+      if (!vis.length) { list.innerHTML = '<li class="news-loading">' + L.empty + "</li>"; more.hidden = true; return; }
+      list.innerHTML = vis.slice(0, shown).map(function (it) {
+        return '<li class="news-item reveal in"><div class="news-head"><img src="' + it.app.logo + '" alt=""><div><strong>' + esc(it.app.name) + " " + esc(it.tag.replace(/^v/, "")) +
+          '</strong><time datetime="' + esc(it.date) + '">' + dateFmt(it.date) + '</time></div></div><div class="news-body">' + md(it.body, it.name, it.tag) + "</div></li>";
+      }).join("");
+      more.hidden = vis.length <= shown;
+    };
+    Promise.all(repos.map(function (app) {
+      return fetch("https://api.github.com/repos/" + app.repo + "/releases?per_page=20", { headers: { Accept: "application/vnd.github+json" } })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(function (rel) { return rel.filter(function (x) { return !x.draft && !x.prerelease; }).map(function (x) { return { app: app, tag: x.tag_name, name: x.name, date: x.published_at, body: x.body }; }); })
+        .catch(function () { return null; });
+    })).then(function (res) {
+      if (res.every(function (r) { return r === null; })) { list.innerHTML = ""; err.hidden = false; return; }
+      items = [].concat.apply([], res.filter(Boolean)).sort(function (a, b) { return a.date < b.date ? 1 : -1; });
+      render();
+    });
+    $$("[data-filter]", box).forEach(function (b) {
+      b.addEventListener("click", function () {
+        filter = b.getAttribute("data-filter"); shown = 6;
+        $$("[data-filter]", box).forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+        render();
+      });
+    });
+    more.textContent = L.more;
+    more.addEventListener("click", function () { shown += 6; render(); });
+  });
+
+
+  // Formulaire de contact : Web3Forms si une clé est réglée, sinon la messagerie du visiteur
+  $$("[data-contact]").forEach(function (form) {
+    var status = $(".form-status", form), btn = $("button[type=submit]", form), label = btn.lastChild && btn.childNodes[1];
+    var say = function (msg, ok) { status.textContent = msg; status.className = "form-status " + (ok ? "ok" : "bad"); };
+    form.addEventListener("input", function () { if (status.classList.contains("bad")) { status.textContent = ""; status.className = "form-status"; } });
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (form.botcheck.checked) return;
+      var name = form.name.value.trim(), email = form.email.value.trim(), msg = form.message.value.trim(), subject = form.subject.value;
+      if (!name || !email || !msg || !form.email.checkValidity()) {
+        say(form.getAttribute("data-msg-req"), false);
+        (!name ? form.name : !email || !form.email.checkValidity() ? form.email : form.message).focus();
+        return;
+      }
+      var key = form.getAttribute("data-key");
+      if (!key) {
+        var body = msg + "\n\n— " + name + " (" + email + ")";
+        location.href = "mailto:" + form.getAttribute("data-to") + "?subject=" + encodeURIComponent("[Site] " + subject) + "&body=" + encodeURIComponent(body);
+        return;
+      }
+      btn.disabled = true; say(form.getAttribute("data-msg-sending"), true);
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ access_key: key, subject: "[Kubo Studio] " + subject, from_name: "Site Kubo Studio", name: name, email: email, message: msg, replyto: email })
+      }).then(function (r) { return r.json(); }).then(function (d) {
+        if (d && d.success) { form.reset(); say(form.getAttribute("data-msg-ok"), true); }
+        else say(form.getAttribute("data-msg-err"), false);
+      }).catch(function () { say(form.getAttribute("data-msg-err"), false); })
+        .then(function () { btn.disabled = false; });
+    });
+  });
+
   // FAQ deep link: open the targeted question
   if (location.hash) {
     var target = document.getElementById(location.hash.slice(1));

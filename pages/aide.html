@@ -103,20 +103,16 @@ faq_ld: oui
 
 <section id="contact" style="padding-top: 0">
   <div class="wrap">
-    <div class="contact-box reveal">
+    <div class="contact-box contact-form-box reveal">
       <div>
         <span class="eyebrow">Contact</span>
         <h2>Vous n'avez pas trouvé ?</h2>
-        <p class="muted" style="font-size: 19px; margin: 14px 0 0">Un souci, une idée, une demande de remboursement : écrivez-nous, on vous répond directement.</p>
-      </div>
-      <div>
-        <span class="tag">Écrivez-nous</span>
+        <p class="muted" style="font-size: 19px; margin: 14px 0 24px">Un souci, une idée, une demande de remboursement : écrivez-nous, on vous répond directement.</p>
+        <span class="tag">Ou par e-mail</span>
         <a class="contact-mail" href="mailto:{{EMAIL}}">{{EMAIL}}</a>
-        <div class="actions">
-          <a class="btn btn-primary" href="mailto:{{EMAIL}}"><span class="shine"></span>Envoyer un e-mail<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          <button class="copy-btn" type="button" data-copy="{{EMAIL}}">Copier l'adresse</button>
-        </div>
+        <button class="copy-btn" type="button" data-copy="{{EMAIL}}">Copier l'adresse</button>
       </div>
+      {{CONTACT_FORM}}
     </div>
   </div>
 </section>

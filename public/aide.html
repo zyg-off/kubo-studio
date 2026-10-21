@@ -145,20 +145,28 @@
 
 <section id="contact" style="padding-top: 0">
   <div class="wrap">
-    <div class="contact-box reveal">
+    <div class="contact-box contact-form-box reveal">
       <div>
         <span class="eyebrow">Contact</span>
         <h2>Vous n'avez pas trouvé ?</h2>
-        <p class="muted" style="font-size: 19px; margin: 14px 0 0">Un souci, une idée, une demande de remboursement : écrivez-nous, on vous répond directement.</p>
-      </div>
-      <div>
-        <span class="tag">Écrivez-nous</span>
+        <p class="muted" style="font-size: 19px; margin: 14px 0 24px">Un souci, une idée, une demande de remboursement : écrivez-nous, on vous répond directement.</p>
+        <span class="tag">Ou par e-mail</span>
         <a class="contact-mail" href="mailto:kubostudio.contact@gmail.com">kubostudio.contact@gmail.com</a>
-        <div class="actions">
-          <a class="btn btn-primary" href="mailto:kubostudio.contact@gmail.com"><span class="shine"></span>Envoyer un e-mail<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          <button class="copy-btn" type="button" data-copy="kubostudio.contact@gmail.com">Copier l'adresse</button>
-        </div>
+        <button class="copy-btn" type="button" data-copy="kubostudio.contact@gmail.com">Copier l'adresse</button>
       </div>
+      <form class="contact-form" data-contact data-key="" data-to="kubostudio.contact@gmail.com" novalidate
+        data-msg-ok="Merci ! Votre message est bien parti. Nous vous répondons rapidement." data-msg-err="L'envoi n'a pas fonctionné. Réessayez, ou écrivez-nous directement par e-mail." data-msg-req="Merci de remplir tous les champs." data-msg-sending="Envoi…">
+        <div class="field-row">
+          <div class="field"><label for="cf-name">Votre nom</label><input id="cf-name" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="cf-email">Votre e-mail</label><input id="cf-email" name="email" type="email" autocomplete="email" required></div>
+        </div>
+        <div class="field"><label for="cf-subject">Sujet</label><select id="cf-subject" name="subject"><option>Une question</option><option>Aide sur MonKiosk</option><option>Aide sur Pécule</option><option>Abonnement ou remboursement</option><option>Autre</option></select></div>
+        <div class="field"><label for="cf-message">Votre message</label><textarea id="cf-message" name="message" rows="5" required></textarea></div>
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit" class="btn btn-primary"><span class="shine"></span>Envoyer le message<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        <p class="form-status" role="status" aria-live="polite"></p>
+        <p class="form-note">Vos informations servent uniquement à vous répondre. <a href="/confidentialite.html">En savoir plus</a></p>
+      </form>
     </div>
   </div>
 </section>

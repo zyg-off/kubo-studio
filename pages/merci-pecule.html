@@ -6,6 +6,11 @@ body_class: pecule-theme
 noindex: oui
 -->
 <div class="thanks">
+  <div class="lang-switch" role="group" aria-label="Langue">
+    <button type="button" data-lang="fr" aria-pressed="true">Français</button>
+    <button type="button" data-lang="en" aria-pressed="false">English</button>
+    <button type="button" data-lang="pt" aria-pressed="false">Português</button>
+  </div>
   <img class="app-logo" src="brand/pecule-logo.png" alt="">
   <span class="eyebrow mint" data-t="badge">Paiement confirmé</span>
   <h1 data-t="title">Merci, et bienvenue dans <span class="accent-mint">Pécule Pro</span></h1>
@@ -53,19 +58,35 @@ noindex: oui
         ref: "Referência da encomenda: "
       }
     };
-    var lang = (navigator.language || "fr").slice(0, 2), t = T[lang];
-    if (t) {
-      document.documentElement.lang = lang;
+    // Le français par défaut ; les boutons (ou ?lang=en / ?lang=pt) changent la langue
+    var FR = {};
+    document.querySelectorAll("[data-t]").forEach(function (e) {
+      FR[e.getAttribute("data-t")] = e.classList.contains("btn") ? e.lastChild.textContent : e.innerHTML;
+    });
+    FR.ref = "Référence de la commande : ";
+    T.fr = FR;
+    var current = "fr";
+    function setLang(lang) {
+      var t = T[lang] || T.fr;
+      current = T[lang] ? lang : "fr";
+      document.documentElement.lang = current;
       document.querySelectorAll("[data-t]").forEach(function (e) {
         var v = t[e.getAttribute("data-t")];
         if (!v) return;
         if (e.classList.contains("btn")) { e.lastChild.textContent = v; } else { e.innerHTML = v; }
       });
-      document.title = t.title.replace(/<[^>]+>/g, "") + " · Pécule Pro";
+      document.title = (current === "fr" ? "Merci" : t.title.replace(/<[^>]+>/g, "").split(",")[0]) + " · Pécule Pro";
+      document.querySelectorAll("[data-lang]").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-lang") === current ? "true" : "false"); });
+      showRef();
     }
-    var id = new URLSearchParams(location.search).get("checkout_id");
-    if (id && id.indexOf("{") === -1) {
-      document.getElementById("ref").textContent = (t ? t.ref : "Référence de la commande : ") + id.slice(0, 40);
+    var params = new URLSearchParams(location.search);
+    var id = params.get("checkout_id");
+    function showRef() {
+      if (id && id.indexOf("{") === -1) document.getElementById("ref").textContent = T[current].ref + id.slice(0, 40);
     }
+    document.querySelectorAll("[data-lang]").forEach(function (b) {
+      b.addEventListener("click", function () { setLang(b.getAttribute("data-lang")); });
+    });
+    setLang(params.get("lang") || "fr");
   })();
 </script>

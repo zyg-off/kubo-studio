@@ -396,3 +396,7 @@ section { padding: 96px 0; }
 .thanks .small { font-size: 15px; color: var(--muted); margin: 24px 0 0; }
 .thanks .ref { font-size: 14px; color: #8A879A; margin-top: 10px; overflow-wrap: anywhere; }
 @media (max-width: 520px) { .steps { padding: 4px 20px; } }
+.lang-switch { display: inline-flex; gap: 4px; padding: 4px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; margin-bottom: 28px; }
+.lang-switch button { min-height: 36px; padding: 6px 14px; border: 0; border-radius: 999px; background: transparent; font: 600 14px var(--body); color: var(--muted); cursor: pointer; }
+.lang-switch button:hover { color: var(--ink); }
+.lang-switch button[aria-pressed="true"] { background: var(--mint-dark); color: #fff; }

@@ -26,7 +26,7 @@ MONKIOSK_PC = "https://github.com/zyg-off/MonKiosk/releases/latest/download/MonK
 PECULE_DOWNLOAD = "https://github.com/zyg-off/pecule/releases/latest/download/Pecule-Setup.exe"
 EMAIL = "kubostudio.contact@gmail.com"
 # Clé publique Web3Forms (formulaire de contact). Vide : le formulaire ouvre la messagerie du visiteur.
-WEB3FORMS_KEY = ""
+WEB3FORMS_KEY = "09b103a2-131c-4e62-84a9-598945456b56"
 
 LINKS = {
     "CHECKOUT_PECULE_PRO": CHECKOUT_PECULE_PRO,

@@ -248,6 +248,52 @@
     sync();
   });
 
+
+  // Quiz « Quelle formule pour moi ? »
+  $$("[data-quiz]").forEach(function (quiz) {
+    var steps = $$(".quiz-step", quiz), results = $$(".quiz-result", quiz), bar = $(".quiz-bar b", quiz);
+    var input = $("#quiz-n", quiz), answers = {}, cur = 0;
+    var one = quiz.getAttribute("data-emp"), many = quiz.getAttribute("data-emps");
+    var show = function (i) {
+      cur = i;
+      steps.forEach(function (st, j) { st.hidden = j !== i; });
+      results.forEach(function (r) { r.hidden = true; });
+      bar.style.width = ((i + 1) / (steps.length + 1) * 100) + "%";
+      var first = steps[i].querySelector("input, .choice, [data-next]");
+      if (first && i > 0) first.focus();
+    };
+    var finish = function () {
+      var n = Math.max(1, Math.min(200, Math.round(+input.value || 1)));
+      var key = answers.premium ? "premium" : (answers.staff || answers.manage) ? "pro" : "essentiel";
+      steps.forEach(function (st) { st.hidden = true; });
+      bar.style.width = "100%";
+      results.forEach(function (r) {
+        var on = r.getAttribute("data-result") === key;
+        r.hidden = !on;
+        if (on) {
+          var t = Math.round((+r.getAttribute("data-base") + n * +r.getAttribute("data-per")) * 100) / 100;
+          $("[data-total]", r).textContent = fmt(t);
+          $("[data-n]", r).textContent = n;
+          $("[data-word]", r).textContent = n > 1 ? many : one;
+          $("h3", r).setAttribute("tabindex", "-1"); $("h3", r).focus();
+        }
+      });
+    };
+    $$(".num-btn", quiz).forEach(function (b) {
+      b.addEventListener("click", function () { input.value = Math.max(1, Math.min(200, (+input.value || 0) + +b.getAttribute("data-delta"))); });
+    });
+    $$("[data-next]", quiz).forEach(function (b) { b.addEventListener("click", function () { show(cur + 1); }); });
+    $$("[data-back]", quiz).forEach(function (b) { b.addEventListener("click", function () { show(cur - 1); }); });
+    $$(".choice", quiz).forEach(function (b) {
+      b.addEventListener("click", function () {
+        answers[b.getAttribute("data-answer")] = b.getAttribute("data-value") === "1";
+        if (cur + 1 < steps.length) show(cur + 1); else finish();
+      });
+    });
+    $$("[data-restart]", quiz).forEach(function (b) { b.addEventListener("click", function () { answers = {}; show(0); input.focus(); }); });
+    input.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); show(1); } });
+  });
+
   // FAQ deep link: open the targeted question
   if (location.hash) {
     var target = document.getElementById(location.hash.slice(1));

@@ -220,6 +220,100 @@
   </div>
 </section>
 
+<section id="quiz" class="band">
+  <div class="wrap quiz-wrap">
+    <div class="reveal">
+      <span class="eyebrow">Pas sûr ?</span>
+      <h2>Quelle formule pour moi ?</h2>
+      <p class="lead" style="margin-bottom: 0">Quatre questions, et on vous conseille la bonne formule, avec son prix exact pour votre équipe.</p>
+    </div>
+    <div class="reveal d1"><div class="quiz" data-quiz data-emp="salarié" data-emps="salariés" aria-live="polite">
+    <div class="quiz-bar" aria-hidden="true"><b></b></div>
+    <fieldset class="quiz-step" data-step="0">
+      <legend><span class="quiz-count">Question 1 sur 4</span>Combien de salariés dans votre équipe ?</legend>
+      <div class="quiz-num">
+        <button type="button" class="num-btn" data-delta="-1" aria-label="−1">−</button>
+        <input type="number" id="quiz-n" min="1" max="200" value="5" inputmode="numeric" aria-label="Combien de salariés dans votre équipe ?">
+        <button type="button" class="num-btn" data-delta="1" aria-label="+1">+</button>
+      </div>
+      <div class="quiz-nav"><button type="button" class="btn btn-primary" data-next>Suivant<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
+    </fieldset><fieldset class="quiz-step" data-step="1" hidden>
+      <legend><span class="quiz-count">Question 2 sur 4</span>Vos salariés doivent-ils voir leur planning sur leur téléphone, ou badger leurs heures ?</legend>
+      <div class="quiz-choices">
+        <button type="button" class="choice" data-answer="staff" data-value="1">Oui</button>
+        <button type="button" class="choice" data-answer="staff" data-value="0">Non</button>
+      </div>
+      <div class="quiz-nav"><button type="button" class="btn btn-ghost btn-small" data-back>Retour</button></div>
+    </fieldset><fieldset class="quiz-step" data-step="2" hidden>
+      <legend><span class="quiz-count">Question 3 sur 4</span>Voulez-vous suivre le coût salarial, la rentabilité, ou préparer la paie pour votre comptable ?</legend>
+      <div class="quiz-choices">
+        <button type="button" class="choice" data-answer="manage" data-value="1">Oui</button>
+        <button type="button" class="choice" data-answer="manage" data-value="0">Non</button>
+      </div>
+      <div class="quiz-nav"><button type="button" class="btn btn-ghost btn-small" data-back>Retour</button></div>
+    </fieldset><fieldset class="quiz-step" data-step="3" hidden>
+      <legend><span class="quiz-count">Question 4 sur 4</span>Avez-vous plusieurs boutiques, ou besoin de ranger les documents des salariés ou d'une tablette en boutique ?</legend>
+      <div class="quiz-choices">
+        <button type="button" class="choice" data-answer="premium" data-value="1">Oui</button>
+        <button type="button" class="choice" data-answer="premium" data-value="0">Non</button>
+      </div>
+      <div class="quiz-nav"><button type="button" class="btn btn-ghost btn-small" data-back>Retour</button></div>
+    </fieldset>
+    <div class="quiz-result" data-result="essentiel" data-base="4.99" data-per="3.0" hidden>
+      <span class="eyebrow">Notre conseil</span>
+      <h3>MonKiosk Essentiel</h3>
+      <p>Vous avez besoin de l'essentiel : planning, congés, checklists, hygiène, stock et ventes.</p>
+      <p class="quiz-price"><span data-total>19,99 €</span> / mois <span class="muted">· Pour <span data-n>5</span> <span data-word>salariés</span></span></p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://zyg-off.github.io/MonKiosk/"><span class="shine"></span>Essayer 14 jours gratuits<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-ghost" href="#comparatif">Voir le comparatif</a>
+        <button type="button" class="link-btn" data-restart>Recommencer</button>
+      </div>
+    </div><div class="quiz-result" data-result="pro" data-base="29.0" data-per="2.5" hidden>
+      <span class="eyebrow">Notre conseil</span>
+      <h3>MonKiosk Pro</h3>
+      <p>Vos salariés ont leur propre accès, et vous suivez les coûts et la rentabilité.</p>
+      <p class="quiz-price"><span data-total>41,50 €</span> / mois <span class="muted">· Pour <span data-n>5</span> <span data-word>salariés</span></span></p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://zyg-off.github.io/MonKiosk/"><span class="shine"></span>Essayer 14 jours gratuits<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-ghost" href="#comparatif">Voir le comparatif</a>
+        <button type="button" class="link-btn" data-restart>Recommencer</button>
+      </div>
+    </div><div class="quiz-result" data-result="premium" data-base="49.0" data-per="2.0" hidden>
+      <span class="eyebrow">Notre conseil</span>
+      <h3>MonKiosk Premium</h3>
+      <p>Vous avez besoin de tout, y compris plusieurs boutiques, les documents salariés ou le mode tablette.</p>
+      <p class="quiz-price"><span data-total>59 €</span> / mois <span class="muted">· Pour <span data-n>5</span> <span data-word>salariés</span></span></p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://zyg-off.github.io/MonKiosk/"><span class="shine"></span>Essayer 14 jours gratuits<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-ghost" href="#comparatif">Voir le comparatif</a>
+        <button type="button" class="link-btn" data-restart>Recommencer</button>
+      </div>
+    </div>
+  </div></div>
+  </div>
+</section>
+
+<section id="comparatif">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Toutes les fonctions, formule par formule</h2>
+      <p>Les fonctions de chaque formule, telles qu'elles sont dans l'app.</p>
+    </div>
+    <div class="reveal"><div class="table-scroll">
+    <table class="compare compare-3">
+      <caption class="sr-only">Comparatif des formules MonKiosk</caption>
+      <thead><tr><th scope="col">Fonction</th><th scope="col">Essentiel</th><th scope="col" class=pro>Pro</th><th scope="col">Premium</th></tr></thead>
+      <tbody>
+        <tr class="cmp-price"><th scope="row">Prix</th><td><b>4,99 €</b><span class="cmp-sub">+ 3 € par salarié</span></td><td><b>29 €</b><span class="cmp-sub">+ 2,50 € par salarié</span></td><td><b>49 €</b><span class="cmp-sub">+ 2 € par salarié</span></td></tr>
+        <tr class="cmp-group"><th scope="rowgroup" colspan="4">Organiser l'équipe</th></tr><tr><th scope="row">Planning de l'équipe</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr><tr><th scope="row">Alertes légales (repos, heures sup, contrats)</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr><tr><th scope="row">Semaines types</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr><tr><th scope="row">Congés et absences</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr><tr><th scope="row">Disponibilités des salariés</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr><tr><th scope="row">Échanges de créneaux</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr><tr><th scope="row">Annonces et messagerie d'équipe</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr><tr><th scope="row">Espace salarié (chacun voit son planning)</th><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Non inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr><tr><th scope="row">Badgeuse avec le code du jour</th><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Non inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr><tr><th scope="row">Documents salariés (contrats, fiches de paie)</th><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Non inclus</span></td><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Non inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr><tr class="cmp-group"><th scope="rowgroup" colspan="4">Boutique et hygiène</th></tr><tr><th scope="row">Checklists d'ouverture et de fermeture</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr><tr><th scope="row">Relevés de température</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr><tr><th scope="row">Rappels si un relevé est oublié</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr><tr><th scope="row">Signalements (panne, casse, hygiène)</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr><tr><th scope="row">Registre d'hygiène en PDF</th><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Non inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr><tr><th scope="row">Mode tablette en boutique</th><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Non inclus</span></td><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Non inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr><tr class="cmp-group"><th scope="rowgroup" colspan="4">Stock et ventes</th></tr><tr><th scope="row">Stock et liste de commande</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr><tr><th scope="row">Pertes et invendus</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr><tr><th scope="row">Ventes (chiffre d'affaires, panier moyen)</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr><tr><th scope="row">Statistiques mensuelles</th><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Non inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr><tr><th scope="row">Prévisions de ventes et effectif conseillé</th><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Non inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr><tr class="cmp-group"><th scope="rowgroup" colspan="4">Gestion</th></tr><tr><th scope="row">Coût salarial du planning</th><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Non inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr><tr><th scope="row">Rentabilité par semaine et par mois</th><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Non inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr><tr><th scope="row">Export pour l'expert-comptable</th><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Non inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr><tr><th scope="row">Boutiques regroupées (plusieurs commerces)</th><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Non inclus</span></td><td class="no"><span aria-hidden="true">—</span><span class="sr-only">Non inclus</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only">Inclus</span></td></tr>
+      </tbody>
+    </table>
+  </div></div>
+  </div>
+</section>
+
+
 <section style="padding-top: 0">
   <div class="wrap">
     <div class="section-head center reveal"><h2>Questions fréquentes</h2></div>

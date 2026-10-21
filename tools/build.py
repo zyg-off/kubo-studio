@@ -267,6 +267,174 @@ def pecule_cards(lang="fr"):
 
 
 # ---------------------------------------------------------------------------
+# Comparatif détaillé des formules MonKiosk (repris des modules de l'app)
+# formule minimale : "e" Essentiel, "p" Pro, "m" Premium
+# ---------------------------------------------------------------------------
+MONKIOSK_MODULES = [
+    ("group", {"fr": "Organiser l'équipe", "en": "Organise your team", "pt": "Organizar a equipa"}),
+    ("e", {"fr": "Planning de l'équipe", "en": "Team schedule", "pt": "Horário da equipa"}),
+    ("e", {"fr": "Alertes légales (repos, heures sup, contrats)", "en": "Legal alerts (rest, overtime, contracts)", "pt": "Alertas legais (descanso, horas extra, contratos)"}),
+    ("e", {"fr": "Semaines types", "en": "Template weeks", "pt": "Semanas-tipo"}),
+    ("e", {"fr": "Congés et absences", "en": "Leave and absences", "pt": "Férias e ausências"}),
+    ("e", {"fr": "Disponibilités des salariés", "en": "Staff availability", "pt": "Disponibilidades dos funcionários"}),
+    ("e", {"fr": "Échanges de créneaux", "en": "Shift swaps", "pt": "Trocas de turnos"}),
+    ("e", {"fr": "Annonces et messagerie d'équipe", "en": "Announcements and team chat", "pt": "Avisos e mensagens da equipa"}),
+    ("p", {"fr": "Espace salarié (chacun voit son planning)", "en": "Employee space (everyone sees their schedule)", "pt": "Área do funcionário (cada um vê o seu horário)"}),
+    ("p", {"fr": "Badgeuse avec le code du jour", "en": "Time clock with the daily code", "pt": "Ponto com o código do dia"}),
+    ("m", {"fr": "Documents salariés (contrats, fiches de paie)", "en": "Employee documents (contracts, payslips)", "pt": "Documentos (contratos, recibos)"}),
+    ("group", {"fr": "Boutique et hygiène", "en": "Shop and hygiene", "pt": "Loja e higiene"}),
+    ("e", {"fr": "Checklists d'ouverture et de fermeture", "en": "Opening and closing checklists", "pt": "Checklists de abertura e fecho"}),
+    ("e", {"fr": "Relevés de température", "en": "Temperature logs", "pt": "Registos de temperatura"}),
+    ("e", {"fr": "Rappels si un relevé est oublié", "en": "Reminders when a log is missed", "pt": "Lembretes se faltar um registo"}),
+    ("e", {"fr": "Signalements (panne, casse, hygiène)", "en": "Issue reports (breakdown, breakage, hygiene)", "pt": "Ocorrências (avaria, quebra, higiene)"}),
+    ("p", {"fr": "Registre d'hygiène en PDF", "en": "Hygiene log as PDF", "pt": "Registo de higiene em PDF"}),
+    ("m", {"fr": "Mode tablette en boutique", "en": "In-store tablet mode", "pt": "Modo tablet na loja"}),
+    ("group", {"fr": "Stock et ventes", "en": "Stock and sales", "pt": "Stock e vendas"}),
+    ("e", {"fr": "Stock et liste de commande", "en": "Stock and order list", "pt": "Stock e lista de encomendas"}),
+    ("e", {"fr": "Pertes et invendus", "en": "Waste and unsold goods", "pt": "Perdas e sobras"}),
+    ("e", {"fr": "Ventes (chiffre d'affaires, panier moyen)", "en": "Sales (revenue, average basket)", "pt": "Vendas (faturação, cesto médio)"}),
+    ("p", {"fr": "Statistiques mensuelles", "en": "Monthly statistics", "pt": "Estatísticas mensais"}),
+    ("p", {"fr": "Prévisions de ventes et effectif conseillé", "en": "Sales forecasts and staffing advice", "pt": "Previsões de vendas e equipa aconselhada"}),
+    ("group", {"fr": "Gestion", "en": "Management", "pt": "Gestão"}),
+    ("p", {"fr": "Coût salarial du planning", "en": "Payroll cost of the schedule", "pt": "Custo salarial do horário"}),
+    ("p", {"fr": "Rentabilité par semaine et par mois", "en": "Weekly and monthly profitability", "pt": "Rentabilidade semanal e mensal"}),
+    ("p", {"fr": "Export pour l'expert-comptable", "en": "Export for your accountant", "pt": "Exportação para o contabilista"}),
+    ("m", {"fr": "Boutiques regroupées (plusieurs commerces)", "en": "Multi-shop dashboard", "pt": "Lojas agrupadas (vários negócios)"}),
+]
+
+CMP = {
+    "fr": {"feature": "Fonction", "price": "Prix", "per_emp": "par salarié", "yes": "Inclus", "no": "Non inclus", "caption": "Comparatif des formules MonKiosk"},
+    "en": {"feature": "Feature", "price": "Price", "per_emp": "per employee", "yes": "Included", "no": "Not included", "caption": "MonKiosk plans compared"},
+    "pt": {"feature": "Função", "price": "Preço", "per_emp": "por funcionário", "yes": "Incluído", "no": "Não incluído", "caption": "Comparação das fórmulas MonKiosk"},
+}
+
+
+def monkiosk_compare(lang="fr"):
+    c = CMP[lang]
+    order = {"e": 0, "p": 1, "m": 2}
+    heads = "".join(f'<th scope="col"{" class=pro" if f.get("featured") else ""}>{f["name"]}</th>' for f in MONKIOSK_FORMULES)
+    price_row = "".join(f'<td><b>{eur(f["base"], lang)}</b><span class="cmp-sub">+ {eur(f["per"], lang)} {c["per_emp"]}</span></td>' for f in MONKIOSK_FORMULES)
+    rows = []
+    for level, label in MONKIOSK_MODULES:
+        if level == "group":
+            rows.append(f'<tr class="cmp-group"><th scope="rowgroup" colspan="4">{label[lang]}</th></tr>')
+            continue
+        cells = ""
+        for i in range(3):
+            ok = i >= order[level]
+            cells += f'<td class="{"yes" if ok else "no"}"><span aria-hidden="true">{"✓" if ok else "—"}</span><span class="sr-only">{c["yes"] if ok else c["no"]}</span></td>'
+        rows.append(f'<tr><th scope="row">{label[lang]}</th>{cells}</tr>')
+    return f"""<div class="table-scroll">
+    <table class="compare compare-3">
+      <caption class="sr-only">{c['caption']}</caption>
+      <thead><tr><th scope="col">{c['feature']}</th>{heads}</tr></thead>
+      <tbody>
+        <tr class="cmp-price"><th scope="row">{c['price']}</th>{price_row}</tr>
+        {"".join(rows)}
+      </tbody>
+    </table>
+  </div>"""
+
+
+# ---------------------------------------------------------------------------
+# Quiz « Quelle formule pour moi ? »
+# ---------------------------------------------------------------------------
+QUIZ = {
+    "fr": {
+        "q_emp": "Combien de salariés dans votre équipe ?",
+        "qs": [
+            ("staff", "Vos salariés doivent-ils voir leur planning sur leur téléphone, ou badger leurs heures ?"),
+            ("manage", "Voulez-vous suivre le coût salarial, la rentabilité, ou préparer la paie pour votre comptable ?"),
+            ("premium", "Avez-vous plusieurs boutiques, ou besoin de ranger les documents des salariés ou d'une tablette en boutique ?"),
+        ],
+        "yes": "Oui", "no": "Non", "next": "Suivant", "back": "Retour", "step": "Question", "of": "sur",
+        "result": "Notre conseil", "for": "Pour", "emps": "salariés", "emp": "salarié", "month": "/ mois",
+        "why": {
+            "essentiel": "Vous avez besoin de l'essentiel : planning, congés, checklists, hygiène, stock et ventes.",
+            "pro": "Vos salariés ont leur propre accès, et vous suivez les coûts et la rentabilité.",
+            "premium": "Vous avez besoin de tout, y compris plusieurs boutiques, les documents salariés ou le mode tablette.",
+        },
+        "cta": "Essayer 14 jours gratuits", "restart": "Recommencer", "compare": "Voir le comparatif",
+    },
+    "en": {
+        "q_emp": "How many employees on your team?",
+        "qs": [
+            ("staff", "Should your employees see their schedule on their phone, or clock in?"),
+            ("manage", "Do you want to track payroll cost and profitability, or prepare payroll for your accountant?"),
+            ("premium", "Do you have several shops, or need employee documents or an in-store tablet?"),
+        ],
+        "yes": "Yes", "no": "No", "next": "Next", "back": "Back", "step": "Question", "of": "of",
+        "result": "Our advice", "for": "For", "emps": "employees", "emp": "employee", "month": "/ month",
+        "why": {
+            "essentiel": "You need the essentials: schedule, leave, checklists, hygiene, stock and sales.",
+            "pro": "Your employees get their own access, and you track costs and profitability.",
+            "premium": "You need everything, including several shops, employee documents or tablet mode.",
+        },
+        "cta": "Try free for 14 days", "restart": "Start again", "compare": "See the comparison",
+    },
+    "pt": {
+        "q_emp": "Quantos funcionários tem a sua equipa?",
+        "qs": [
+            ("staff", "Os seus funcionários devem ver o horário no telemóvel, ou registar o ponto?"),
+            ("manage", "Quer acompanhar o custo salarial e a rentabilidade, ou preparar os salários para o contabilista?"),
+            ("premium", "Tem várias lojas, ou precisa de guardar documentos dos funcionários ou de um tablet na loja?"),
+        ],
+        "yes": "Sim", "no": "Não", "next": "Seguinte", "back": "Voltar", "step": "Pergunta", "of": "de",
+        "result": "O nosso conselho", "for": "Para", "emps": "funcionários", "emp": "funcionário", "month": "/ mês",
+        "why": {
+            "essentiel": "Precisa do essencial: horários, férias, checklists, higiene, stock e vendas.",
+            "pro": "Os seus funcionários têm acesso próprio, e acompanha os custos e a rentabilidade.",
+            "premium": "Precisa de tudo, incluindo várias lojas, documentos dos funcionários ou o modo tablet.",
+        },
+        "cta": "Experimentar 14 dias grátis", "restart": "Recomeçar", "compare": "Ver a comparação",
+    },
+}
+
+
+def monkiosk_quiz(lang="fr"):
+    q = QUIZ[lang]
+    total = len(q["qs"]) + 1
+    plans = {f["key"]: f for f in MONKIOSK_FORMULES}
+    steps = [f"""<fieldset class="quiz-step" data-step="0">
+      <legend><span class="quiz-count">{q['step']} 1 {q['of']} {total}</span>{q['q_emp']}</legend>
+      <div class="quiz-num">
+        <button type="button" class="num-btn" data-delta="-1" aria-label="−1">−</button>
+        <input type="number" id="quiz-n" min="1" max="200" value="5" inputmode="numeric" aria-label="{q['q_emp']}">
+        <button type="button" class="num-btn" data-delta="1" aria-label="+1">+</button>
+      </div>
+      <div class="quiz-nav"><button type="button" class="btn btn-primary" data-next>{q['next']}<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
+    </fieldset>"""]
+    for i, (key, text) in enumerate(q["qs"], start=1):
+        steps.append(f"""<fieldset class="quiz-step" data-step="{i}" hidden>
+      <legend><span class="quiz-count">{q['step']} {i + 1} {q['of']} {total}</span>{text}</legend>
+      <div class="quiz-choices">
+        <button type="button" class="choice" data-answer="{key}" data-value="1">{q['yes']}</button>
+        <button type="button" class="choice" data-answer="{key}" data-value="0">{q['no']}</button>
+      </div>
+      <div class="quiz-nav"><button type="button" class="btn btn-ghost btn-small" data-back>{q['back']}</button></div>
+    </fieldset>""")
+    results = []
+    for key in ["essentiel", "pro", "premium"]:
+        f = plans[key]
+        results.append(f"""<div class="quiz-result" data-result="{key}" data-base="{f['base']}" data-per="{f['per']}" hidden>
+      <span class="eyebrow">{q['result']}</span>
+      <h3>MonKiosk {f['name']}</h3>
+      <p>{q['why'][key]}</p>
+      <p class="quiz-price"><span data-total>{eur(f['base'] + 5 * f['per'], lang)}</span> {q['month']} <span class="muted">· {q['for']} <span data-n>5</span> <span data-word>{q['emps']}</span></span></p>
+      <div class="actions">
+        <a class="btn btn-primary" href="{MONKIOSK_APP}"><span class="shine"></span>{q['cta']}<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-ghost" href="#comparatif">{q['compare']}</a>
+        <button type="button" class="link-btn" data-restart>{q['restart']}</button>
+      </div>
+    </div>""")
+    return f"""<div class="quiz" data-quiz data-emp="{q['emp']}" data-emps="{q['emps']}" aria-live="polite">
+    <div class="quiz-bar" aria-hidden="true"><b></b></div>
+    {"".join(steps)}
+    {"".join(results)}
+  </div>"""
+
+
+# ---------------------------------------------------------------------------
 # En-tête, pied de page
 # ---------------------------------------------------------------------------
 def prefix(lang):
@@ -496,7 +664,8 @@ def main():
             m = re.match(r"<!--\n(.*?)\n-->\n", text, re.S)
             meta = dict(line.split(": ", 1) for line in m.group(1).splitlines())
             body = text[m.end():]
-            links = dict(LINKS, MONKIOSK_PLANS=monkiosk_plans(lang), PECULE_PLANS=pecule_cards(lang))
+            links = dict(LINKS, MONKIOSK_PLANS=monkiosk_plans(lang), PECULE_PLANS=pecule_cards(lang),
+                         MONKIOSK_COMPARE=monkiosk_compare(lang), MONKIOSK_QUIZ=monkiosk_quiz(lang))
             for k, v in links.items():
                 body = body.replace("{{" + k + "}}", v)
             left = re.findall(r"\{\{[A-Z_]+\}\}", body)
